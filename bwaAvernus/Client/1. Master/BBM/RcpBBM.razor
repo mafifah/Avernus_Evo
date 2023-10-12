@@ -1,0 +1,94 @@
+﻿@inherits ConMaster_1<uimT0BBM, svcBBM>
+@namespace bwaAvernus._1._Master
+@using bwaAvernus.Shared._1._Master;
+@{
+	base.BuildRenderTree(__builder);
+	RfDetil = 
+	@<DxFormLayout CssClass="custom-form-layout">
+		<DxFormLayoutItem @ref="FliBBM" Caption="BBM" ColSpanMd="12">
+            <DxTextBox @ref="TxbBBM"
+            Text = "@DtRekapitulasi_Terseleksi.BBM"
+			TextExpression="@(() => DtRekapitulasi_Terseleksi.BBM)" 
+            TextChanged="@(async (valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.BBM), valueBaru))"
+			/>
+		</DxFormLayoutItem>
+		<DxFormLayoutItem @ref="FliKeterangan" Caption="Keterangan" ColSpanMd="12">
+            <DxTextBox Text="@DtRekapitulasi_Terseleksi.Keterangan" @ref="TxbKeterangan"
+                       TextExpression="@(() => DtRekapitulasi_Terseleksi.Keterangan)"
+                       TextChanged="@(async (valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Keterangan), valueBaru))" />
+		</DxFormLayoutItem>
+
+		@*<DxFormLayoutItem @ref="FliHarga" Caption="Harga" ColSpanMd="12">
+			<DxSpinEdit @ref="SpeHarga" InputId="0.0, 4.6" tabindex="1"
+			ValueChanged="@((decimal? newValue) => OnHargaValueChanged(newValue))" 
+			/>
+		</DxFormLayoutItem>*@
+		<DxFormLayoutTabPages RenderMode="DevExpress.Blazor.TabsRenderMode.AllTabs" ScrollMode="TabsScrollMode.Auto" CssClass="font_1">
+            <DxFormLayoutTabPage Caption="Histori Harga BBM">
+				<br>
+                    @*<DxGrid @ref="@GrdHargaBBM"
+                        Data="@(DtGrdHargaBBM.Adapt<IList<uimT4HargaBBM>>())"
+                        KeyFieldName="@nameof(uimT4HargaBBM.IdHargaBBM)"
+                        CustomizeElement="GrdDetil_CustomizeElement"                       
+                        CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT4HargaBBM>)"
+                        EditModelSaving="@(GrdDetil_EditModelSaving<uimT4HargaBBM, T4HargaBBM>)"
+                        EditMode="GridEditMode.EditForm"
+                        EditNewRowPosition="GridEditNewRowPosition.Bottom"
+                        SelectionMode="GridSelectionMode.Single"
+                            @oncontextmenu:preventDefault>
+                        <Columns>
+                            <DxGridCommandColumn Width="10px">
+                                <HeaderTemplate>
+                                    <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdHargaBBM.StartEditNewRowAsync())"></a>
+                                </HeaderTemplate>
+                                <CellDisplayTemplate>
+                                   <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdHargaBBM.StartEditRowAsync(context.VisibleIndex))"></a>
+                                </CellDisplayTemplate>
+                            </DxGridCommandColumn>
+                            <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
+                                <CellDisplayTemplate>
+                                    @(context.VisibleIndex + 1)
+                                </CellDisplayTemplate>
+                            </DxGridDataColumn>
+                            <DxGridDataColumn FieldName="@nameof(uimT4HargaBBM.WaktuInsert)" DisplayFormat="d" Caption="Tanggal" />
+                            <DxGridDataColumn FieldName="@nameof(uimT4HargaBBM.Harga)" Caption="Harga" />
+                        </Columns>
+                        <EditFormTemplate Context="ctxHargaBBM">
+                            @{
+                                var edm = (uimT4HargaBBM)ctxHargaBBM.EditModel;
+                            }
+                            <DxFormLayout>
+                                <DxFormLayoutItem Caption="Harga">
+                                    <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.Harga"/>
+                                </DxFormLayoutItem>
+                            </DxFormLayout>
+                        </EditFormTemplate>
+                    </DxGrid>*@
+                <PthGridView PthGrid="@GrdHargaBBM" DsGrid="@(DtGrdHargaBBM.Adapt<IList<uimT4HargaBBM>>())" TData="uimT4HargaBBM">
+                    <Grid_Kolom>
+                        <DxGridCommandColumn Width="10px">
+                            <HeaderTemplate>
+                                <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdHargaBBM.StartEditNewRowAsync())"></a>
+                            </HeaderTemplate>
+                            <CellDisplayTemplate>
+                                <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdHargaBBM.StartEditRowAsync(context.VisibleIndex))"></a>
+                            </CellDisplayTemplate>
+                        </DxGridCommandColumn>
+                        <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
+                            <CellDisplayTemplate>
+                                @(context.VisibleIndex + 1)
+                            </CellDisplayTemplate>
+                        </DxGridDataColumn>
+                        <DxGridDataColumn FieldName="@nameof(uimT4HargaBBM.WaktuInsert)" DisplayFormat="d" Caption="Tanggal" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4HargaBBM.Harga)" Caption="Harga" />
+                    </Grid_Kolom>
+                </PthGridView>
+            </DxFormLayoutTabPage>
+			<DxFormLayoutTabPage Caption="Grafik Harga BBM">
+            </DxFormLayoutTabPage>
+        </DxFormLayoutTabPages>
+	</DxFormLayout>;
+}
+@code {
+
+}

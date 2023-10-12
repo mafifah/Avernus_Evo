@@ -1,0 +1,46 @@
+﻿@page "/"
+@namespace bwaCrixalis.Client._0._Utilitas
+@using Grpc.Net.Client.Web;
+@using Grpc.Net.Client;
+@inherits PthRcpSetAwal
+
+@{
+	base.BuildRenderTree(__builder);
+}
+
+@code
+{
+	protected override async void OnInitialized()
+	{
+		//base.OnInitialized();
+		AlamatAPI = "https://localhost:7243";
+		//AlamatAPI = "https://ascrixalis-evo.azurewebsites.net/";
+		URL_AzureBlobStorage = "https://sdatafile.blob.core.windows.net/fortiscentral";
+		IdCompany = "ABC";
+		await LSS.SetItemAsync("APIAddress", AlamatAPI);
+		await LSS.SetItemAsync("CompanyName", "Fortis Central");
+		await LSS.SetItemAsync("CompanyBlob", URL_AzureBlobStorage);
+		await LSS.SetItemAsync("CompanyInitial", "BKA");
+		await LSS.SetItemAsync("CompanyID", "BKA");
+
+		if (!string.IsNullOrEmpty(AlamatAPI))
+		{
+            var handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+            ClientChannel = GrpcChannel.ForAddress(AlamatAPI, new GrpcChannelOptions
+            {
+                HttpClient = new HttpClient(handler)
+            });
+			TampilkanLogin = true;
+            TampilkanSetAwal = false;
+            NM.NavigateTo("Login");
+		}
+	}
+	public override async void ProsesSimpan()
+	{
+		base.ProsesSimpan();
+	}
+	public override void CloseApp()
+	{
+		//Application.Current.Quit();
+	}
+}

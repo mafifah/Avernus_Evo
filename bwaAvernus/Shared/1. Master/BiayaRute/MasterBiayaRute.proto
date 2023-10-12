@@ -1,0 +1,297 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "bwaAvernus.Shared._1._Master";
+package MasterBiayaRutePackage;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// Definisikan BiayaRute service.
+service svpMasterBiayaRute {
+	rpc GetRute (RqsPtmRute) returns (RplPtmRute);
+	rpc GetRute_BiayaRute (RqsBiayaRute) returns (RplBiayaRute);
+	rpc GetRute_BiayaRuteTonase (RqsBiayaRute) returns (RplBiayaRuteTonase);
+	rpc GetRute_HargaRuteTonase (RqsBiayaRute) returns (RplHargaRuteTonase);
+    
+	rpc UpdateBiayaRute (RqsUpdateBiayaRute) returns (RplWriteBiayaRute);
+
+    rpc GetDraftBiayaRute (RqsGetDraftBiayaRute) returns (RplGetDraftBiayaRute);
+    rpc SetDraftBiayaRute (RqsSetDraftBiayaRute) returns (RplSetDraftBiayaRute);
+}
+
+
+message PtmBiayaRuteTonase {
+    optional string IdBiayaRuteTonase = 1;
+    optional string IdBiayaRute = 2;
+    optional string IdCompany = 3;
+    optional int64 IdJenisArmada = 4;
+    optional string IdRute = 5;
+    optional int32 BatasAwal = 6;
+    optional int32 BatasAkhir = 7;
+    optional double Harga = 8;
+    optional bool Status = 9;
+
+    // Field Default dari Client
+    optional string IdCreator = 201;
+    optional string IdOperator = 202;
+    optional string IdValidator = 203;
+    optional string Synchronise = 204;
+
+    
+}
+
+message PtmHargaRuteTonase {
+    optional string IdBiayaRuteTonase = 1;
+    optional string IdBiayaRute = 2;
+    optional string IdCompany = 3;
+    optional int64 IdJenisArmada = 4;
+    optional string IdRute = 5;
+    optional int32 BatasAwal = 6;
+    optional int32 BatasAkhir = 7;
+    optional double Harga = 8;
+    optional bool Status = 9;
+
+    // Field Default dari Client
+    optional string IdCreator = 201;
+    optional string IdOperator = 202;
+    optional string IdValidator = 203;
+    optional string Synchronise = 204;
+}
+
+message PtmBiayaRute_JenisArmada
+{
+  optional string IdJenisArmada = 1;
+  optional string Jenis = 2;
+  optional string Alias = 3;
+  optional int32 TonaseMinimal = 4;
+  optional int32 TonaseStandar = 5;
+  optional string Definisi = 6;
+  optional string KodeSplit = 7;
+  optional bool StatusOperasional = 8;
+  optional bool Status = 9;
+}
+
+message PtmBiayaRute {
+    optional string IdBiayaRute = 1;
+    optional string IdCompany = 2;
+    optional string IdRute = 3;
+    optional string IdJenisArmada = 4;
+    optional int32 Tonase = 5;
+    optional int64 IdSPBU = 6;
+    optional int32 BBMVolume = 7;
+    optional string BBMMetode = 8;
+    optional double SanguTonase = 9;
+    optional double SanguRitase = 10;
+    optional double Deposit = 11;
+    optional double Komisi = 12;
+    optional double BiayaLain = 13;
+    optional double Bonus = 14;
+    optional string ProsentaseDeposit = 15;
+    optional string ProsentaseSanguTonase = 16;
+    optional double HargaTonase = 17;
+    optional double HargaRitase = 18;
+    optional string JenisHargaDefault = 19;
+    optional PtmRute T3Rute = 20;
+
+    //Field Default dari Client
+    optional string IdCreator = 201;
+    optional string IdOperator = 202;
+    optional string IdValidator = 203;
+    optional string Synchronise = 204;
+
+    repeated PtmBiayaRuteTonase ListT4BiayaRuteTonase = 302;
+    repeated PtmHargaRuteTonase ListT4HargaRuteTonase = 303;
+    PtmBiayaRute_JenisArmada T0JenisArmada = 304;
+}
+
+message PtmBiayaRute_AlamatCustomer
+{
+    string IdAlamatCustomer = 1;
+    optional string IdCustomer = 2;
+    google.protobuf.Int64Value IdKota = 3;
+    google.protobuf.Int64Value IdKecamatan = 4;
+    google.protobuf.Int64Value IdKelurahan = 5;
+    optional string JenisAlamat = 6;
+    optional string Alamat = 7;
+    optional string KodePos = 8;
+    optional string Koordinat = 9;
+    optional string Phone1 = 10;
+    optional string Phone2 = 11;
+    optional string FaxPhone1 = 12;
+    optional string FaxPhone2 = 13;
+    optional bool StatusUtama = 14;
+    optional bool Status = 15;
+    
+    optional string WaktuInsert = 201;
+    optional string WaktuUpdate = 202;
+    optional string IdCreator = 203;
+    optional string IdOperator = 204;
+    optional string IdValidator = 205;
+    optional string Synchronise = 206;
+}
+message RplBiayaRute {
+    repeated PtmBiayaRute RpfBiayaRute = 1;
+}
+
+message RplBiayaRuteTonase{
+    repeated PtmBiayaRuteTonase RpfBiayaRuteTonase = 1;
+}
+
+message RplHargaRuteTonase{
+    repeated PtmHargaRuteTonase RpfHargaRuteTonase = 1;
+}
+
+message RqsBiayaRute {
+    string IdRute = 1;
+}
+
+
+message PtmKota {
+    optional string Kota = 1;
+}
+
+message PtmTujuanBongkar{
+    optional string IdTujuanBongkar = 1;
+    optional string IdRute = 2;
+    optional string IdCustomer = 3;
+    optional string Penerima = 5;
+    optional string Alamat = 6;
+    optional string Phone1 = 7;
+    optional string Phone2 = 8;
+    optional string IdKota = 9;
+    optional PtmKota T2Kota = 10;
+
+    //Field Default dari Client
+    optional string IdCreator = 201;
+    optional string IdOperator = 202;
+    optional string IdValidator = 203;
+    optional string Synchronise = 204;
+}
+
+message PtmRute
+{
+    optional string IdRute = 1;
+    optional string IdAlamatCustomer = 2;
+    optional string IdPenyeliaCustomer = 3;
+    optional string Rute = 4;
+    optional string Alias = 5;
+    optional string Jenis = 6;
+    optional int32 EstimasiWaktu = 7;
+    optional int32 EstimasiJarak = 8;
+    optional string Muatan = 9;
+    optional bool StatusRutePaket = 10;
+    
+	//Default BaseModelMasterHeader
+    optional string Tag = 201;
+    optional bool Status = 202;
+    optional string WaktuInsert = 203;
+    optional string WaktuUpdate = 204;
+    optional string IdLogHeader = 205;
+    optional string IdCreator = 206;
+    optional string IdOperator = 207;
+    optional string IdValidator = 208;
+    optional string State = 209;
+    optional string Synchronise = 210;
+
+    //Detil
+    repeated PtmTujuanBongkar ListT4TujuanBongkar = 301;
+    PtmBiayaRute_AlamatCustomer T2AlamatCustomer = 302;
+}
+
+message RplPtmRute {
+    repeated PtmRute RpfRute = 1;
+}
+
+message RqsPtmRute {
+}
+
+message RqsUpdateBiayaRute {
+    optional string IdRute = 1;
+    optional string IdAlamatCustomer = 2;
+    optional string IdPenyeliaCustomer = 3;
+    optional string Rute = 4;
+    optional string Alias = 5;
+    optional string Jenis = 6;
+    optional int32 EstimasiWaktu = 7;
+    optional int32 EstimasiJarak = 8;
+    optional string Muatan = 9;
+    optional bool StatusRutePaket = 10;
+
+    //Field Default dari Client
+    optional string IdCreator = 201;
+    optional string IdOperator = 202;
+    optional string IdValidator = 203;
+    optional string Synchronise = 204;
+
+    repeated PtmBiayaRute ListT4BiayaRute = 301;
+}
+
+message RplWriteBiayaRute {
+	bool IsOK = 1;
+	string Result = 2;
+}
+
+message RqsGetDraftBiayaRute {
+    string IdRute = 1;
+    string IdUser = 2;
+}
+
+message RplGetDraftBiayaRute
+{
+    optional string IdRute = 1;
+    optional string IdAlamatCustomer = 2;
+    optional string IdPenyeliaCustomer = 3;
+    optional string Rute = 4;
+    optional string Alias = 5;
+    optional string Jenis = 6;
+    optional int32 EstimasiWaktu = 7;
+    optional int32 EstimasiJarak = 8;
+    optional string Muatan = 9;
+    optional bool StatusRutePaket = 10;
+    
+	//Default BaseModelMasterHeader
+    optional string Tag = 201;
+    optional bool Status = 202;
+    optional string WaktuInsert = 203;
+    optional string WaktuUpdate = 204;
+    optional string IdLogHeader = 205;
+    optional string IdCreator = 206;
+    optional string IdOperator = 207;
+    optional string IdValidator = 208;
+    optional string State = 209;
+    optional string Synchronise = 210;
+
+    //Detil
+    repeated PtmTujuanBongkar ListT4TujuanBongkar = 301;
+    repeated PtmBiayaRute ListT4BiayaRute = 302;
+}
+
+message RqsSetDraftBiayaRute
+{
+    optional string IdRute = 1;
+    optional string IdAlamatCustomer = 2;
+    optional string IdPenyeliaCustomer = 3;
+    optional string Rute = 4;
+    optional string Alias = 5;
+    optional string Jenis = 6;
+    optional int32 EstimasiWaktu = 7;
+    optional int32 EstimasiJarak = 8;
+    optional string Muatan = 9;
+    optional bool StatusRutePaket = 10;
+    
+    //Field Default dari Client
+    optional string IdCreator = 201;
+    optional string IdOperator = 202;
+    optional string IdValidator = 203;
+    optional string Synchronise = 204;
+
+    //Detil
+    repeated PtmTujuanBongkar ListT4TujuanBongkar = 301;
+    repeated PtmBiayaRute ListT4BiayaRute = 302;
+}
+
+message RplSetDraftBiayaRute{
+    bool IsOK = 1;
+	string Result = 2;
+}

@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Mapster" Version="7.3.0" />
+		<PackageReference Include="bunit.core" Version="1.20.8" />
+		<PackageReference Include="bunit.web" Version="1.20.8" />
+		<PackageReference Include="DevExpress.Blazor" Version="23.1.4" />
+		<PackageReference Include="FluentAssertions" Version="6.11.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.1" />
+		<PackageReference Include="Moq" Version="4.18.4" />
+		<PackageReference Include="xunit" Version="2.4.2" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="coverlet.collector" Version="6.0.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\bwaAvernus\Client\bwaAvernus.Client.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="1. Master\Crixalis\101. Karyawan\" />
+	  <Folder Include="1. Master\Crixalis\102. Supplier\" />
+	  <Folder Include="1. Master\Crixalis\103. Customer\" />
+	  <Folder Include="1. Master\Crixalis\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="bwaCrixalis.Shared">
+	    <HintPath>..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net7.0\bwaCrixalis.Shared.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Pantheon.Client">
+	    <HintPath>..\..\DevOps\Pantheon\Tests\UnitTest\Client\bin\Debug\net7.0\Pantheon.Client.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Pantheon.Client.Test">
+	    <HintPath>..\..\DevOps\Pantheon\Tests\UnitTest\Client\bin\Debug\net7.0\Pantheon.Client.Test.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Pantheon.Shared">
+	    <HintPath>..\..\DevOps\Pantheon\Tests\UnitTest\Client\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,237 @@
+﻿@inherits ConMaster_1<uimT3Rute, svcRute>
+@namespace bwaAvernus._1._Master
+@using bwaAvernus.Shared._1._Master;
+@using bwaCrixalis.Client._1._Master;
+@{
+	base.BuildRenderTree(__builder);
+	RfDetil = 
+	@<DxFormLayout CssClass="custom-form-layout">
+		<DxFormLayoutGroup Decoration="FormLayoutGroupDecoration.None" ColSpanMd="6">
+            <DxFormLayoutItem @ref="FliRute" Caption="Rute" ColSpanMd="12">
+                <DxTextBox @ref="TxbRute" InputId="ABC, AGA" tabindex="1"
+                           Text="@DtRekapitulasi_Terseleksi.Rute"
+                           TextChanged="@(async (valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Rute), valueBaru))"
+                           />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliAlias" Caption="Alias" ColSpanMd="12">
+                <DxTextBox @ref="TxbAlias" InputId="ABC, AGA" tabindex="2"
+                           Text="@DtRekapitulasi_Terseleksi.Alias" 
+                           TextExpression="@(() => DtRekapitulasi_Terseleksi.Alias)" 
+                           TextChanged="@(async (valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Alias), valueBaru))"
+                           />
+            </DxFormLayoutItem>
+            @*<DxFormLayoutItem @ref="FliJenisRute" Caption="Jenis" ColSpanMd="12">
+                <DxComboBox @ref="CmbJenisRute" InputId="Angkutan, Afvalan" tabindex="3"
+                Value="@DtRekapitulasi_Terseleksi.Jenis" ValueFieldName="Jenis" TextFieldName="Jenis"
+                ValueExpression="@(() => DtRekapitulasi_Terseleksi.Jenis)" 
+                ValueChanged="@(async (string valueBaru) => { await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Jenis), valueBaru); })"
+                Data="@DtJenisRute"/>
+            </DxFormLayoutItem>*@
+            <DxFormLayoutItem @ref="FliJenisRute" Caption="Jenis Rute" ColSpanMd="12">
+                <DxComboBox @ref="@CmbJenisRute" Data="@DtCmbJenisRute" @bind-Value="@DrCmbJenisRute"
+                            Text="@DtRekapitulasi_Terseleksi.Jenis" tabindex="3"
+                            TextExpression="@(() => DtRekapitulasi_Terseleksi.Jenis)"
+                            TextChanged="@(async (string valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Jenis), valueBaru))"
+                            TextFieldName="DataOption"
+                            CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            DropDownVisibleChanged="@((bool val) => CmbJenisRute_DropDownVisibleChanged(val))">
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliEstimasiJarak" Caption="Estimasi Jarak" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeEstimasiJarak" InputId="0.0, 8.0" tabindex="4"
+                    Value="@((decimal?)DtRekapitulasi_Terseleksi.EstimasiJarak)"
+                    ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.EstimasiJarak)"
+                    ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.EstimasiJarak), (int?)valueBaru))"/>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliEstimasiWaktu" Caption="Estimasi Waktu" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeEstimasiWaktu" InputId="0.0, 5.7" tabindex="5"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.EstimasiWaktu)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.EstimasiWaktu)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.EstimasiWaktu), (int?)valueBaru))"
+                            />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliJenisMuatan" Caption="Jenis Muatan" ColSpanMd="12">
+                <DxComboBox @ref="@CmbJenisMuatan" Data="@DtCmbJenisMuatan" @bind-Value="@DrCmbJenisMuatan"
+                            Text="@DtRekapitulasi_Terseleksi.Muatan" tabindex="6"
+                            TextExpression="@(() => DtRekapitulasi_Terseleksi.Muatan)"
+                            TextChanged="@(async (string valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Muatan), valueBaru))"
+                            TextFieldName="DataOption"
+                            CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            DropDownVisibleChanged="@((bool val) => CmbJenisMuatan_DropDownVisibleChanged(val))">
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliStatusRutePaket" Caption="Status Rute Paket" ColSpanMd="12">
+                <DxCheckBox @ref="ChbStatusRutePaket" tabindex="7"
+                    Checked="@((bool?)DtRekapitulasi_Terseleksi.StatusRutePaket)"
+                    CheckedExpression="@(() => (bool?)DtRekapitulasi_Terseleksi.StatusRutePaket)"
+                    CheckedChanged="@(async (bool? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.StatusRutePaket), valueBaru))"
+                />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliStatus" Caption="Status" ColSpanMd="12">
+                <DxCheckBox @ref="ChbStatus" tabindex="8"
+                    Checked="@((bool?)DtRekapitulasi_Terseleksi.Status)"
+                    CheckedExpression="@(() => (bool?)DtRekapitulasi_Terseleksi.Status)"
+                    CheckedChanged="@(async (bool? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Status), valueBaru))"
+                />
+            </DxFormLayoutItem>
+        </DxFormLayoutGroup>
+        <DxFormLayoutGroup Caption="Detil Muat/Stuffing/Loading" Decoration="FormLayoutGroupDecoration.Card" ColSpanMd="6">
+            <DxFormLayoutItem @ref="FliCustomer" Caption="Customer" ColSpanMd="12">
+                <DxComboBox @ref="@CmbCustomer" tabindex="9"
+                            Data="@DtCmbCustomer"
+                            @bind-Value="@DrCmbCustomer"
+                            TextFieldName="Nama"
+                            CssClass="cw-480 font_0"
+                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            DropDownVisibleChanged="@((bool valueBaru) => CmbCustomer_DropDownVisibleChanged(valueBaru))">
+                    <DxListEditorColumn FieldName="Prefix" Caption="Prefix" />
+                    <DxListEditorColumn FieldName="Nama" Caption="Nama" />
+                    <DxListEditorColumn FieldName="Kode" Caption="Kode" />
+                    <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
+                    <DxListEditorColumn FieldName="Alamat" Caption="Alamat" />
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliAlamatCustomer" Caption="Alamat" ColSpanMd="12">
+                <DxComboBox @ref="@CmbAlamatCustomer" tabindex="10"
+                            Data="@DtCmbAlamatCustomer"
+                            @bind-Value="@DrCmbAlamatCustomer"
+                            TextFieldName="Alamat"
+                            CssClass="cw-480 font_0"
+                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            DropDownVisibleChanged="@((bool valueBaru) => CmbAlamatCustomer_DropDownVisibleChanged(valueBaru))">
+                    <DxListEditorColumn FieldName="Alamat" Caption="Alamat" />
+                    <DxListEditorColumn FieldName="KodePos" Caption="Kode Pos" />
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Kota" ColSpanMd="12">
+                <RadzenLabel Text="@DtRekapitulasi_Terseleksi.T1CustomerInstansi?.T2Kota?.Kota" class="font_0" Style="margin-top:0.6vh !Important"></RadzenLabel>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Phone 1" ColSpanMd="12">
+                <RadzenLabel Text="@DtRekapitulasi_Terseleksi?.T1CustomerInstansi?.Phone1" class="font_0" Style="margin-top:0.6vh !Important"></RadzenLabel>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Phone 2" ColSpanMd="12">
+                <RadzenLabel Text="@DtRekapitulasi_Terseleksi?.T1CustomerInstansi?.Phone2" class="font_0" Style="margin-top:0.6vh !Important"></RadzenLabel>
+            </DxFormLayoutItem>
+        </DxFormLayoutGroup>
+        <DxFormLayoutGroup ColSpanMd="12" Caption="Detil Bongkar/Unstuffing">
+            <DxGrid @ref="@GrdTujuanBongkar" 
+                    Data="@(DtGrdTujuanBongkar.Adapt<IList<uimT4TujuanBongkar>>())"
+                    KeyFieldName="@nameof(uimT4TujuanBongkar.IdTujuanBongkar)"
+                    CustomizeElement="GrdDetil_CustomizeElement"
+                    CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT4TujuanBongkar>)"
+                    EditModelSaving="@(GrdDetil_EditModelSaving<uimT4TujuanBongkar, T4TujuanBongkar>)"
+                    EditMode="GridEditMode.EditForm"
+                    EditNewRowPosition="GridEditNewRowPosition.Bottom"
+                    SelectionMode="GridSelectionMode.Single"
+                    @oncontextmenu:preventDefault>
+                    <Columns>
+                        <DxGridCommandColumn Width="10px">
+                            <HeaderTemplate>
+                                <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdTujuanBongkar.StartEditNewRowAsync())"></a>
+                            </HeaderTemplate>
+                            <CellDisplayTemplate>
+                                <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdTujuanBongkar.StartEditRowAsync(context.VisibleIndex))"></a>
+                                <a class="fa-solid fa-trash-can text-decoration-none" @onclick="@(() =>  GrdDetil_OnHapus<uimT4TujuanBongkar, T4TujuanBongkar>((uimT4TujuanBongkar)context.DataItem))"></a>
+                            </CellDisplayTemplate>
+                        </DxGridCommandColumn>
+                        <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
+                            <CellDisplayTemplate>
+                                @(context.VisibleIndex + 1)
+                            </CellDisplayTemplate>
+                        </DxGridDataColumn>
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Penerima)" Caption="Penerima"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Alamat)" Caption="Alamat"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Kota)" Caption="Kota"/>
+                        @*<DxGridDataColumn Caption="Kota">
+                            <CellDisplayTemplate>
+                                @{
+                                    var data = context.DataItem as uimT4TujuanBongkar;
+                                    data.T2Kota = DtT2Kota.FirstOrDefault(x => x.IdKota == data.IdKota);
+                                }
+                                @data.Kota
+                            </CellDisplayTemplate>
+                        </DxGridDataColumn>*@
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Phone1)" Caption="Phone 1"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Phone2)" Caption="Phone 2"/>
+                    </Columns>
+                    <EditFormTemplate Context="ctxTujuanBongkar">
+                        @{
+                            var edm = (uimT4TujuanBongkar)ctxTujuanBongkar.EditModel;
+                        }
+                        <DxFormLayout>
+                            <DxFormLayoutItem Caption="Penerima">
+                                <DxTextBox @bind-Text="@edm.Penerima"/>
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Alamat">
+                                <DxTextBox @bind-Text="@edm.Alamat"/>
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Kota">
+                                <DxComboBox @bind-Value="@edm.IdKota" Data="@DtT2Kota" TData="uimT2Kota" TValue="long?"
+                                    ValueFieldName="IdKota" TextFieldName="Kota" EditFormat="{0} {1}"
+                                    DisplayFormat="{0} {1}" FilteringMode="DataGridFilteringMode.Contains" ListRenderMode="ListRenderMode.Virtual"
+                                    CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                                    SelectedItemChanged="@((uimT2Kota selectedItem) => OnKotaDipilih(selectedItem, edm))">
+                                    <DxListEditorColumn FieldName="Jenis" Caption="Jenis"/>
+                                    <DxListEditorColumn FieldName="Kota" Caption="Kota"/>
+                                </DxComboBox>
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Phone 1">
+                                <DxTextBox @bind-Text="@edm.Phone1"/>
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Phone 2">
+                                <DxTextBox @bind-Text="@edm.Phone2"/>
+                            </DxFormLayoutItem>
+                        </DxFormLayout>
+                    </EditFormTemplate>
+            </DxGrid>
+        </DxFormLayoutGroup>
+        <DxFormLayoutGroup ColSpanMd="12" Caption="Detil Dokumen Rute">
+            <DxGrid @ref="@GrdDokumenRute"
+                    Data="@(DtGrdDokumenRute.Adapt<IList<uimT5DokumenRute>>())"
+                    KeyFieldName="@nameof(uimT5DokumenRute.IdRute)"
+                    CustomizeElement="GrdDetil_CustomizeElement"
+                    CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT5DokumenRute>)"
+                    EditModelSaving="@(GrdDetil_EditModelSaving<uimT5DokumenRute, T5DokumenRute>)"
+                    EditMode="GridEditMode.EditForm"
+                    EditNewRowPosition="GridEditNewRowPosition.Bottom"
+                    SelectionMode="GridSelectionMode.Single"
+                    @oncontextmenu:preventDefault>
+                    <Columns>
+                        <DxGridCommandColumn Width="10px">
+                            <HeaderTemplate>
+                                @if (DtGrdDokumenRute.Adapt<IList<uimT4TujuanBongkar>>().Count() < 1)
+                                {
+                                    <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdDokumenRute.StartEditNewRowAsync())"></a>
+                                }else{
+                                    <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdDokumenRute.StartEditNewRowAsync())" hidden></a>
+                                }
+                            </HeaderTemplate>
+                            <CellDisplayTemplate>
+                                <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdDokumenRute.StartEditRowAsync(context.VisibleIndex))"></a>
+                                <a class="fa-solid fa-trash-can text-decoration-none" @onclick="@(() =>  GrdDetil_OnHapus<uimT5DokumenRute, T5DokumenRute>((uimT5DokumenRute)context.DataItem))"></a>
+                            </CellDisplayTemplate>
+                        </DxGridCommandColumn>
+                        <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
+                            <CellDisplayTemplate>
+                                @(context.VisibleIndex + 1)
+                            </CellDisplayTemplate>
+                        </DxGridDataColumn>
+                        <DxGridDataColumn FieldName="@nameof(uimT5DokumenRute.JenisDokumen)" Caption="Jenis Dokumen" />
+                    </Columns>
+                    <EditFormTemplate Context="ctxDokumenRute">
+                        @{
+                        var edm = (uimT5DokumenRute)ctxDokumenRute.EditModel;
+                        }
+                        <DxFormLayout>
+                            <DxFormLayoutItem Caption="Jenis Dokumen">
+                                <DxTextBox @bind-Text="@edm.JenisDokumen" />
+                            </DxFormLayoutItem>
+                        </DxFormLayout>
+                    </EditFormTemplate>
+            </DxGrid>
+        </DxFormLayoutGroup>
+	</DxFormLayout>;
+}
+@code {
+
+}

@@ -1,0 +1,201 @@
+﻿@inherits ConMaster_1<uimT3Rute, svcBiayaRute>
+@namespace bwaAvernus._1._Master
+@using bwaAvernus.Shared._1._Master;
+@{
+    base.BuildRenderTree(__builder);
+    RfDetil = 
+    @<DxFormLayout CssClass="custom-form-layout">
+        <DxFormLayoutGroup Decoration="FormLayoutGroupDecoration.None" ColSpanMd="6">
+                <DxFormLayoutItem @ref="FliRute" Caption="Rute" ColSpanMd="12">
+                    <DxTextBox @ref="TxbRute" InputId="ABC, AGA" Enabled="false" Text="@DtRekapitulasi_Terseleksi.Rute"/>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem @ref="FliAlias" Caption="Alias" ColSpanMd="12">
+                    <DxTextBox @ref="TxbAlias" InputId="ABC, AGA" tabindex="2" Enabled="false" Text="@DtRekapitulasi_Terseleksi.Alias"/>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem @ref="FliJenis" Caption="Jenis" ColSpanMd="12">
+                    <DxTextBox @ref="TxbJenis" InputId="ABC, AGA" tabindex="3" Enabled="false" Text="@DtRekapitulasi_Terseleksi.Jenis"/>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem @ref="FliEstimasiJarak" Caption="Estimasi Jarak" ColSpanMd="12">
+                    <DxSpinEdit @ref="SpeEstimasiJarak" InputId="0.0, 8.0" TabIndex="4" Enabled="false"
+                    Value="@((decimal?)DtRekapitulasi_Terseleksi.EstimasiJarak)"/>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem @ref="FliEstimasiWaktu" Caption="Estimasi Waktu" ColSpanMd="12">
+                    <DxSpinEdit @ref="SpeEstimasiWaktu" InputId="0.0, 5.7" tabindex="5" Enabled = "false"
+                    Value="@((decimal?)DtRekapitulasi_Terseleksi.EstimasiWaktu)"/>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem @ref="FliMuatan" Caption="Muatan" ColSpanMd="12">
+                    <DxTextBox @ref="TxbMuatan" InputId="ABC, AGA" tabindex="6" Enabled="false" Text="@DtRekapitulasi_Terseleksi.Muatan"/>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem @ref="@FliCabang" Caption="Cabang" ColSpanMd="12">
+                    <DxComboBox @ref="@CmbIdCompany"
+                                Data="@DtCmbIdCompany"
+                                @bind-Value="@DrCmbIdCompany"
+                                TextFieldName="IdCompany"
+                                CssClass="cw-480 font_0"
+                                DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                                DropDownVisibleChanged="@((bool valueBaru) => CmbIdCompany_DropDownVisibleChanged(valueBaru))"
+                                tabindex="1">
+                        <DxListEditorColumn FieldName="IdCompany" Caption="IdCompany" />
+                        <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
+                    </DxComboBox>
+                </DxFormLayoutItem>
+            </DxFormLayoutGroup>
+        <DxFormLayoutGroup Caption="Detil Muat/Stuffing/Loading" Decoration="FormLayoutGroupDecoration.Card" ColSpanMd="6">
+            <DxFormLayoutItem Caption="Customer" ColSpanMd="12">
+                <RadzenLabel Text="@DtRekapitulasi_Terseleksi.T1CustomerInstansi?.Nama" class="font_0" Style="margin-top:0.6vh !Important"></RadzenLabel>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="PIC" ColSpanMd="12">
+                <RadzenLabel Text="" class="font_0" Style="margin-top:0.6vh !Important"></RadzenLabel>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Alamat" ColSpanMd="12">
+                <RadzenLabel Text="@DtRekapitulasi_Terseleksi.T2AlamatCustomer?.Alamat" class="font_0" Style="margin-top:0.6vh !Important"></RadzenLabel>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Kota" ColSpanMd="12">
+                <RadzenLabel Text="@DtRekapitulasi_Terseleksi.T1CustomerInstansi?.T2Kota?.Kota" class="font_0" Style="margin-top:0.6vh !Important"></RadzenLabel>
+            </DxFormLayoutItem>
+        </DxFormLayoutGroup>
+        <DxFormLayoutGroup ColSpanMd="12" Caption="Detil Bongkar/Unstuffing">
+            <DxGrid Data="@(DtRekapitulasi_Terseleksi.ListT4TujuanBongkar.Adapt<IList<uimT4TujuanBongkar>>())"
+                    SelectionMode="GridSelectionMode.Single"
+                    @oncontextmenu:preventDefault>
+                    <Columns>
+                        <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
+                            <CellDisplayTemplate>
+                                @(context.VisibleIndex + 1)
+                            </CellDisplayTemplate>
+                        </DxGridDataColumn>
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Penerima)" Caption="Penerima"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Alamat)" Caption="Alamat"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Kota)" Caption="Kota"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Phone1)" Caption="Phone 1"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4TujuanBongkar.Phone2)" Caption="Phone 2"/>
+                    </Columns>
+            </DxGrid>
+        </DxFormLayoutGroup>
+        <DxFormLayoutGroup ColSpanMd="12" Caption="Detil Biaya">
+            <DxGrid @ref="@GrdBiayaRute" 
+                    Data="@(DtGrdBiayaRute.Adapt<IList<uimT4BiayaRute>>())"
+                    KeyFieldName="@nameof(uimT4BiayaRute.IdBiayaRute)"
+                    CustomizeElement="GrdDetil_CustomizeElement"
+                    CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT4BiayaRute>)"
+                    EditModelSaving="@(GrdDetil_EditModelSaving<uimT4BiayaRute, T4BiayaRute>)"
+                    EditMode="GridEditMode.EditForm"
+                    EditNewRowPosition="GridEditNewRowPosition.Bottom"
+                    SelectionMode="GridSelectionMode.Single"
+                    @oncontextmenu:preventDefault>
+                    <Columns>
+                        <DxGridCommandColumn Width="10px">
+                            <HeaderTemplate>
+                                <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdBiayaRute.StartEditNewRowAsync())" hidden></a>
+                            </HeaderTemplate>
+                            <CellDisplayTemplate>
+                                <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdBiayaRute.StartEditRowAsync(context.VisibleIndex))"></a>
+                            </CellDisplayTemplate>
+                        </DxGridCommandColumn>
+                        <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
+                            <CellDisplayTemplate>
+                                @(context.VisibleIndex + 1)
+                            </CellDisplayTemplate>
+                        </DxGridDataColumn>
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.JenisArmadaAlias)" Caption="Jenis Alias Armada" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.JenisArmada)" Caption="Jenis Armada"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.BBMMetode)" Caption="Metode"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.Tonase)" Caption="Tonase"/>
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.BBMVolume)" Caption="Vol. BBM" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.IdSPBU)" Caption="SPBU" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.SanguTonase)" Caption="Sangu Tonase" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.SanguRitase)" Caption="Sangu Ritase" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.Deposit)" Caption="Deposit" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.Komisi)" Caption="Komisi" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.BiayaLain)" Caption="Biaya Lain" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.ProsentaseDeposit)" Caption="% Deposit" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.ProsentaseSanguTonase)" Caption="% Sangu Tonase" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.HargaTonase)" Caption="Harga Tonase" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.HargaRitase)" Caption="Harga Ritase" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.JenisHargaDefault)" Caption="Jenis Harga Default" />
+                        <DxGridDataColumn FieldName="@nameof(uimT4BiayaRute.Bonus)" Caption="Bonus" />
+                    </Columns>
+                    <DetailRowTemplate>
+                        @{
+                            var data = context.DataItem as uimT4BiayaRute;
+                        }
+                        <DxTabs>
+                            <DxTabPage Text="Biaya Rute Tonase">
+                                <DxGrid Data="@(data.ListT4BiayaRuteTonase.Adapt<IList<uimT4BiayaRuteTonase>>())"
+                                        SelectionMode="GridSelectionMode.Single"
+                                        @oncontextmenu:preventDefault>
+                                        <Columns>
+                                            <DxGridDataColumn FieldName="@nameof(uimT4BiayaRuteTonase.BatasAwal)" Caption="Batas Awal (Kg)"/>
+                                            <DxGridDataColumn FieldName="@nameof(uimT4BiayaRuteTonase.BatasAkhir)" Caption="Batas Akhir (Kg)"/>
+                                            <DxGridDataColumn FieldName="@nameof(uimT4BiayaRuteTonase.Harga)" Caption="Harga / Kg"/>
+                                            <DxGridDataColumn FieldName="@nameof(uimT4BiayaRuteTonase.Status)" Caption="S"/>
+                                        </Columns>
+                                </DxGrid>
+                            </DxTabPage>
+                            <DxTabPage Text="Harga Rute Tonase">
+                                <DxGrid Data="@(data.ListT4HargaRuteTonase.Adapt<IList<uimT4HargaRuteTonase>>())"
+                                        SelectionMode="GridSelectionMode.Single"
+                                            @oncontextmenu:preventDefault>
+                                            <Columns>
+                                                <DxGridDataColumn FieldName="@nameof(uimT4HargaRuteTonase.BatasAwal)" Caption="Batas Awal (Kg)"/>
+                                                <DxGridDataColumn FieldName="@nameof(uimT4HargaRuteTonase.BatasAkhir)" Caption="Batas Akhir (Kg)"/>
+                                                <DxGridDataColumn FieldName="@nameof(uimT4HargaRuteTonase.Harga)" Caption="Harga / Kg"/>
+                                                <DxGridDataColumn FieldName="@nameof(uimT4HargaRuteTonase.Status)" Caption="S"/>
+                                            </Columns>
+                                    </DxGrid>
+                            </DxTabPage>
+                        </DxTabs>
+                    </DetailRowTemplate>
+                    <EditFormTemplate Context="ctxBiayaRute">
+                        @{
+                        var edm = (uimT4BiayaRute)ctxBiayaRute.EditModel;
+                        }
+                        <DxFormLayout>
+                            <DxFormLayoutItem Caption="BBM Metode" ColSpanMd="12">
+                                <DxTextBox @bind-Text="@edm.BBMMetode" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Tonase">
+                                    <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.Tonase"/>
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="SPBU">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.IdSPBU" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Vol. BBM">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.BBMVolume" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Sangu Tonase">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.SanguTonase" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Sangu Ritase">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.SanguRitase" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Deposit">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.Deposit" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Komisi">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.Komisi" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Biaya Lain">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.BiayaLain" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Harga Tonase">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.HargaTonase" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Harga Ritase">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.HargaRitase" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Jenis Harga Default">
+                                <DxTextBox @bind-Text="@edm.JenisHargaDefault" />
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Bonus">
+                                <DxSpinEdit InputId="0.0, 4.6" @bind-Value="@edm.Bonus" />
+                            </DxFormLayoutItem>
+                        </DxFormLayout>
+                    </EditFormTemplate>
+            </DxGrid>
+        </DxFormLayoutGroup>
+    </DxFormLayout>;
+}
+@code {
+
+}

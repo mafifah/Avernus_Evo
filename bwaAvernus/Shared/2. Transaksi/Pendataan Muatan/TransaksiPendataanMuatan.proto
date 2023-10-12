@@ -1,0 +1,193 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "bwaAvernus.Shared._2._Transaksi";
+package TransaksiPendataanMuatanPackage;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+// Definisikan PendataanMuatan service.
+service svpTransaksiPendataanMuatan {
+	rpc GetT7PenugasanArmada (RqsT7PenugasanArmada) returns (RplT7PenugasanArmada);
+	
+    
+}
+
+message RqsT7PenugasanArmada {
+
+}
+message PtmT6PenugasanArmada
+{
+    optional string IdPenugasanArmada = 1;
+    optional string IdRekening = 2;
+    optional string IdArmada = 3;
+    optional string IdJenisArmada = 4;
+    optional string IdBBM = 5;
+    optional string IdKaryawan_Sopir = 6;
+    optional string IdPiutangKaryawan = 7;
+    optional string Nopol = 8;
+    optional double Potongan = 9;
+    optional bool StatusPotongan = 10;
+    optional string StatusPerjalanan = 11;
+    optional string StatusDeposit = 12;
+    optional string Rekening_Rekening = 13;
+    optional string Armada_Inisial = 14;
+    optional string Armada_Nopol = 15;
+    optional string Armada_Merk = 16;
+    optional string JenisArmada_Jenis = 17;
+    optional string JenisArmada_Alias = 18;
+    optional string BBM_BBM = 19;
+    optional string Karyawan_Sopir_NamaPanggilan = 20;
+    optional string Karyawan_Sopir_AlamatTinggal = 21;
+    optional string Karyawan_Sopir_KodePosTinggal = 22;
+    optional string Karyawan_Sopir_KotaTinggal = 23;
+    optional string Karyawan_Sopir_Email = 24;
+    optional string Karyawan_Sopir_Seluler1 = 25;
+    optional string Karyawan_Sopir_Rekening = 26;
+    optional double Referensi_NominalSaldoAwal = 27;
+    optional string Referensi_IdTransaksi = 28;
+    optional string Referensi_WaktuProses = 29;
+    optional string Referensi_Keterangan = 30;
+    optional string Pembayaran_Keterangan = 31;
+    optional string Pembayaran_Via = 32;
+    optional bool Pembayaran_StatusTerbayar = 33;
+    optional double Pembayaran_Total = 34;
+    optional string PKLink1 = 35;
+    optional string PKLink2 = 36;
+    
+	//Default BaseModelTransaksiHeader
+    optional string Periode = 201;
+    optional string Status = 202;
+    optional string WaktuProses = 203;
+    optional string WaktuInsert = 204;
+    optional string WaktuUpdate = 205;
+    optional int32 Simpan = 206;
+    optional int32 CetakFaktur = 207;
+    optional string NoTransaksi = 208;
+    optional string IdTransaksi = 209;
+    optional string IdCompany = 210;
+    optional string IdLogHeader = 211;
+    optional string IdSupervisor = 212;
+    optional string IdInspector = 213;
+    optional string IdCreator = 214;
+    optional string IdOperator = 215;
+    optional string IdValidator = 216;
+    optional string Application_ApplicationName = 217;
+    optional string Karyawan_Supervisor = 218;
+    optional string Karyawan_Inspector = 219;
+    optional string Karyawan_Creator = 220;
+    optional string Karyawan_Operator = 221;
+    optional string Karyawan_Validator = 222;
+    optional string State = 223;
+    optional bool Batal = 224;
+    optional string Catatan = 225;
+    optional string Preview = 226;
+    optional string Synchronise = 227;
+}
+message RplPendataanMuatan_T7PenugasanArmadaById
+{
+    optional string IdDetilPenugasanArmada = 1;
+    optional string IdPenugasanArmada = 2;
+    optional string IdRute = 3;
+    optional string IdCustomer = 4;
+    optional string IdJenisCustomer = 5;
+    optional string IdPenyeliaCustomer = 6;
+    optional string IdAlamatCustomer = 7;
+    optional string WaktuPenugasan = 8;
+    google.protobuf.Int32Value Urutan = 9;
+    google.protobuf.Int32Value TonaseAwal = 10;
+    google.protobuf.Int32Value TonaseRealisasi = 11;
+    optional string Muatan = 12;
+    google.protobuf.Int32Value BBMVolume = 13;
+    optional string BBMMetode = 14;
+    optional double BBMHarga = 15;
+    optional double SanguTonase = 16;
+    optional double SanguRitase = 17;
+    optional double SanguSementara = 18;
+    optional string ProsentaseSanguTonase = 19;
+    optional double Deposit = 20;
+    optional string ProsentaseDeposit = 21;
+    optional double BonSopir = 22;
+    optional double Komisi = 23;
+    optional double HargaTonase = 24;
+    optional double HargaRitase = 25;
+    optional string JenisHarga = 26;
+    optional double TotalHarga = 27;
+    optional double TotalAkhir = 28;
+    optional double KelebihanSanguSementara = 29;
+    optional double SisaSangu = 30;
+    google.protobuf.BoolValue StatusSuratJalan = 31;
+    google.protobuf.BoolValue StatusPenagihan = 32;
+    optional string KeteranganRute = 33;
+    optional string Rute_Rute = 34;
+    optional string Rute_Jenis = 35;
+    optional string Customer_Nama = 36;
+    optional string Customer_Inisial = 37;
+    optional string Customer_Alamat = 38;
+    optional string Customer_Kota = 39;
+    optional string Customer_Email1 = 40;
+    optional string Customer_Phone1 = 41;
+    optional string Customer_FaxPhone1 = 42;
+    optional string JenisCustomer_Jenis = 43;
+    optional string PenyeliaCustomer_Nama = 44;
+    optional string PenyeliaCustomer_JenisKelamin = 45;
+    optional string PenyeliaCustomer_Jabatan = 46;
+    optional string AlamatCustomer_Alamat = 47;
+    optional string AlamatCustomer_KodePos = 48;
+    optional string AlamatCustomer_Kota = 49;
+    optional string WaktuProses_Pembayaran = 50;
+    google.protobuf.Int32Value CetakFaktur = 51;
+    optional string NoPenugasan = 52;
+    optional string IdCompany = 53;
+    optional string KodePOSupplier = 54;
+    optional string Attn = 55;
+    optional string DeliveryBy = 56;
+    optional string DiskonDetil = 57;
+    optional double DiskonNominal = 58;
+    optional string PPNDetil = 59;
+    
+	//Default BaseModelTransaksiDetil
+    optional string Synchronise = 201;
+
+    optional PtmT6PenugasanArmada T6PenugasanArmada = 301;
+}
+
+message RplT7PenugasanArmada {
+    repeated RplPendataanMuatan_T7PenugasanArmadaById ListT7PenugasanArmada = 1;
+}
+
+message PtmT8PenugasanArmada_SuratJalan{
+    optional string IdDetilDetilPenugasanArmada = 1;
+    optional string IdDetilPenugasanArmada = 2;
+    optional string IdTujuanBongkar = 3;
+    optional int64 IdKota = 4;
+    optional string NomorSuratJalan = 5;
+    optional string JenisBarang = 6;
+    optional double JumlahMuatan = 7;
+    optional double JumlahKlaim = 8;
+    optional string Satuan = 9;
+    optional int32 TonaseMuatan = 10;
+    optional int32 TonaseKlaim = 11;
+    optional double NominalMuatan = 12;
+    optional double NominalKlaim = 13;
+    optional google.protobuf.Timestamp TanggalMuat = 14;
+    optional google.protobuf.Timestamp TanggalBongkar = 15;
+    optional string Keterangan = 16;
+    optional string TujuanBongkar_Penerima = 17;
+    optional string TujuanBongkar_Alamat = 18;
+    optional string TujuanBongkar_Phone1 = 19;
+    optional string TujuanBongkar_Kota = 20;
+    optional string DokumenRute_Rute = 21;
+
+    //Default BaseModelTransaksiDetil
+    optional string Synchronise = 201;
+}
+
+message RqsInsertPendataanMuatan{
+
+}
+
+message RplWritePendataanMuatan {
+	bool IsOK = 1;
+	string Result = 2;
+}

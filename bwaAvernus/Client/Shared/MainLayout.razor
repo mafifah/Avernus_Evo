@@ -1,0 +1,28 @@
+﻿@inherits LayoutComponentBase
+@inject Blazored.LocalStorage.ILocalStorageService _lss
+
+<div class="page">
+	<main>
+		<article class="FullSidebar">
+				<RadzenDialog/>
+				<RadzenNotification/>
+				<RadzenTooltip/>
+				<RadzenRequiredValidator />
+			@Body
+		</article>
+	</main>
+</div>
+
+<style>
+	.FullSidebar
+	{
+		margin-left : -3vw;
+	}
+</style>
+
+@code {
+	protected override async Task OnInitializedAsync()
+	{
+		//await _lss.RemoveItemAsync("APIAddress");
+	}
+}

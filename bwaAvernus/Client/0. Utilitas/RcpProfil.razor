@@ -1,0 +1,65 @@
+﻿@using DevExpress.Blazor.Internal
+@using System.Text.RegularExpressions;
+@namespace bwaCrixalis.Client._0._Utilitas
+
+<style>
+    .card-header-picture {
+        background-color: transparent;
+        border-bottom: none;
+    }
+
+    .card {
+        border: none !important;
+    }
+
+    .validasierror {
+        border-color: red;
+    }
+
+    .validasisucess {
+        border-color: green;
+    }
+</style>
+
+<RadzenSplitter Orientation="Radzen.Orientation.Horizontal" style="height: max-content; border: 0px solid rgba(0,0,0,.08);">
+    <RadzenSplitterPane Size="30%" Min="10px">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Nama Lengkap:" ColSpanMd="12">
+                <DxTextBox Enabled="false" Text="" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Nama Panggilan:" ColSpanMd="12">
+                <DxTextBox Enabled="false" Text="" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Jenis Kelamin:" ColSpanMd="12">
+                <DxTextBox Enabled="false" Text="" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Tempat, Tangga Lahir:" ColSpanMd="12">
+                <DxTextBox Enabled="false" Text="" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Nomor Identitas 1:" ColSpanMd="12">
+                <DxTextBox Enabled="false" Text="" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Nomor Identitas 2:" ColSpanMd="12">
+                <DxTextBox Enabled="false" Text="" />
+            </DxFormLayoutItem>
+            <DxAccordion>
+                <Items>
+                    <DxAccordionItem Text="Domisili Asal">
+                        <ContentTemplate>
+                           
+                        </ContentTemplate>
+                    </DxAccordionItem>
+                </Items>
+            </DxAccordion>
+        </DxFormLayout>
+    </RadzenSplitterPane>
+    <RadzenSplitterPane Style="height:80vh">
+    </RadzenSplitterPane>
+</RadzenSplitter>
+
+
+@code {
+    
+
+    
+}

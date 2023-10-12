@@ -1,0 +1,166 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "bwaAvernus.Shared._1._Master";
+package MasterBBMPackage;
+
+// Definisikan BBM service.
+service svpMasterBBM {
+	rpc GetBBMById (RqsBBMById) returns (RplBBMById);
+	rpc GetBBM (RqsDataBBM) returns (RplBBM);
+	rpc GetHargaBBM (RqsBBMById) returns (RplHargaBBM);
+    
+	rpc InsertBBM (RqsInsertBBM) returns (RplWriteBBM);
+	rpc UpdateBBM (RqsUpdateBBM) returns (RplWriteBBM);
+	rpc DeleteBBM (RqsDeleteBBM) returns (RplWriteBBM);
+
+    rpc GetDraftBBM (RqsGetDraftBBM) returns (RplGetDraftBBM);
+    rpc SetDraftBBM (RqsSetDraftBBM) returns (RplSetDraftBBM);
+}
+
+message PtmHargaBBM
+{
+    optional string IdHargaBBM = 1;
+    optional string IdBBM = 2;
+    optional string Harga = 3;
+    
+	//Default BaseModelMasterHeader
+    optional string Tag = 201;
+    optional bool Status = 202;
+    optional string WaktuInsert = 203;
+    optional string WaktuUpdate = 204;
+    optional string IdLogHeader = 205;
+    optional string IdCreator = 206;
+    optional string IdOperator = 207;
+    optional string IdValidator = 208;
+    optional string State = 209;
+    optional string Synchronise = 210;
+}
+
+message RqsBBMById {
+    string IdBBM = 1;
+}
+
+message RplBBMById
+{
+    optional string IdBBM = 1;
+    optional string BBM = 2;
+    optional string Keterangan = 3;
+    
+	//Default BaseModelMasterHeader
+    optional bool IsDefault = 201;
+    optional bool IsRVisible = 202;
+    optional bool IsDVisible = 203;
+    optional string Tag = 204;
+    optional bool Status = 205;
+    optional string WaktuInsert = 206;
+    optional string WaktuUpdate = 207;
+    optional string IdLogHeader = 208;
+    optional string IdCreator = 209;
+    optional string IdOperator = 210;
+    optional string IdValidator = 211;
+    optional string State = 212;
+    optional string Synchronise = 213;
+}
+
+message RqsDataBBM {
+}
+
+message RplBBM {
+    repeated RplBBMById RpfBBM = 1;
+}
+
+message RplHargaBBM {
+    repeated PtmHargaBBM RpfHargaBBM = 1;
+}
+
+message RqsInsertBBM {
+    optional string IdBBM = 1;
+    optional string BBM = 2;
+    optional string Keterangan = 3;
+
+    //Field Default dari Client
+    optional string IdCreator = 201;
+    optional string IdOperator = 202;
+    optional string IdValidator = 203;
+    optional string Synchronise = 204;
+
+    //Detil Harga BBM
+    repeated PtmHargaBBM ListT4HargaBBM = 301;
+
+}
+
+message RqsUpdateBBM {
+    optional string IdBBM = 1;
+    optional string BBM = 2;
+    optional string Keterangan = 3;
+
+    //Field Default dari Client
+    optional string IdCreator = 201;
+    optional string IdOperator = 202;
+    optional string IdValidator = 203;
+    optional string Synchronise = 204;
+
+    //Detil Harga BBM
+    repeated PtmHargaBBM ListT4HargaBBM = 301;
+}
+
+message RqsDeleteBBM {
+    optional string IdBBM = 1;
+    optional string IdCreator = 2;
+    optional string IdApplication = 3;
+}
+
+message RplWriteBBM {
+	optional bool IsOK = 1;
+	optional string Result = 2;
+}
+
+
+message RqsGetDraftBBM {
+    string IdBBM = 1;
+    string IdUser = 2;
+}
+
+message RplGetDraftBBM {
+    optional string IdBBM = 1;
+    optional string BBM = 2;
+    optional string Keterangan = 3;
+    
+	//Default BaseModelMasterHeader
+    optional bool IsDefault = 201;
+    optional bool IsRVisible = 202;
+    optional bool IsDVisible = 203;
+    optional string Tag = 204;
+    optional bool Status = 205;
+    optional string WaktuInsert = 206;
+    optional string WaktuUpdate = 207;
+    optional string IdLogHeader = 208;
+    optional string IdCreator = 209;
+    optional string IdOperator = 210;
+    optional string IdValidator = 211;
+    optional string State = 212;
+    optional string Synchronise = 213;
+
+    //Detil Harga BBM
+    repeated PtmHargaBBM ListT4HargaBBM = 301;
+}
+
+message RqsSetDraftBBM {
+    optional string IdBBM = 1;
+    optional string BBM = 2;
+    optional string Keterangan = 3;
+    
+	//Field Default dari Client
+    optional string IdCreator = 201;
+    optional string IdOperator = 202;
+    optional string IdValidator = 203;
+    optional string Synchronise = 204;
+
+    //Detil Harga BBM
+    repeated PtmHargaBBM ListT4HargaBBM = 301;
+}
+
+message RplSetDraftBBM{
+    bool IsOK = 1;
+	string Result = 2;
+}
