@@ -1,5 +1,6 @@
 ﻿using bwaAvernus._1._Master;
 using bwaCrixalis.Client._1._Master;
+using bwaCrixalis.Shared._1._Master;
 using Pantheon.Client.Utility;
 
 namespace bwaAvernus.Client._0._Utilitas
@@ -28,10 +29,12 @@ namespace bwaAvernus.Client._0._Utilitas
             return data.Adapt<List<dynamic>>();
         }
 
-        public async Task<IList<dynamic>> Get_RuteByIdAlamatCustomer(Guid idAlamatCustomer, bool perbaruiMeskipunAda = false)
+        public async Task<IList<dynamic>> Get_RuteByIdAlamatCustomer(Guid? idAlamatCustomer= null, bool perbaruiMeskipunAda = false)
         {
-            var data = await _svcRute.GetDataRuteByIdAlamatCustomer(idAlamatCustomer);
-            return data.Adapt<List<dynamic>>();
+            var data = new List<dynamic>();
+            if(idAlamatCustomer is not null) data = (await _svcRute.GetDataRuteByIdAlamatCustomer((Guid)idAlamatCustomer)).Adapt<List<dynamic>>();
+            else data = (await _svcRute.GetDataRute()).Adapt<List<dynamic>>();
+            return data;
         }
 
         public async Task<IList<dynamic>> Get_Armada(bool perbaruiMeskipunAda = false)
@@ -40,16 +43,22 @@ namespace bwaAvernus.Client._0._Utilitas
             return data.Adapt<List<dynamic>>();
         }
 
-        public async Task<IList<dynamic>> Get_ArmadaSopir(Guid idArmada, bool perbaruiMeskipunAda = false)
+        public async Task<IList<dynamic>> Get_ArmadaSopir(Guid? idArmada = null, bool perbaruiMeskipunAda = false)
         {
-            var data = await _svcArmada.GetDataArmadaSopirById(idArmada);
-            return data.Adapt<List<dynamic>>();
+            var data = new List<dynamic>();
+            if (idArmada is not null) data = (await _svcArmada.GetDataArmadaSopirById((Guid)idArmada)).Adapt<List<dynamic>>();
+            else data = (await _svcArmada.GetDataArmada()).Adapt<List<dynamic>>();
+            return data;
         }
 
-        public async Task<IList<dynamic>> Get_BiayaRute(Guid idRute, bool perbaruiMeskipunAda = false)
+        public async Task<IList<dynamic>> Get_BiayaRute(Guid? idRute = null, bool perbaruiMeskipunAda = false)
         {
-            var data = await _svcBiayaRute.GetDataBiayaRuteById(idRute);
-            return data.Adapt<List<dynamic>>();
+            var data = new List<dynamic>();
+            if (idRute is not null) data = (await _svcBiayaRute.GetDataBiayaRuteById((Guid)idRute)).Adapt<List<dynamic>>();
+            else data = (await _svcBiayaRute.GetDataBiayaRute()).Adapt<List<dynamic>>();
+            return data;
+            //var data = await _svcBiayaRute.GetDataBiayaRuteById(idRute);
+            //return data.Adapt<List<dynamic>>();
         }
 
         public async Task<IList<dynamic>> Get_Rekening(bool perbaruiMeskipunAda = false)

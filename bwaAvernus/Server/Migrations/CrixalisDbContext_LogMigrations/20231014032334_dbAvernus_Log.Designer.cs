@@ -12,7 +12,7 @@ using bwaCrixalis.Server.Data;
 namespace bwaAvernus.Server.Migrations.CrixalisDbContext_LogMigrations
 {
     [DbContext(typeof(CrixalisDbContext_Log))]
-    [Migration("20231012030245_dbAvernus_Log")]
+    [Migration("20231014032334_dbAvernus_Log")]
     partial class dbAvernus_Log
     {
         /// <inheritdoc />

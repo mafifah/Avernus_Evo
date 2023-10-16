@@ -35,7 +35,7 @@
         </DxFormLayoutItem>
         <DxFormLayoutGroup Caption="Armada" ColSpanMd="6">
             <DxFormLayoutItem @ref="@FliArmada" Caption="Armada" ColSpanMd="12">
-                <DxComboBox @ref="@CmbArmada"
+                <DxComboBox @ref="@CmbArmada" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbArmada"
                             @bind-Value="@DrCmbArmada"
                             TextFieldName="Nopol"
@@ -50,7 +50,7 @@
         </DxFormLayoutGroup>
         <DxFormLayoutGroup Caption="Sopir" ColSpanMd="6">
             <DxFormLayoutItem @ref="@FliSopir" Caption="Sopir" ColSpanMd="12">
-                <DxComboBox @ref="@CmbSopir"
+                <DxComboBox @ref="@CmbSopir" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbSopir"
                             @bind-Value="@DrCmbSopir"
                             TextFieldName="NamaSopir"
@@ -66,8 +66,8 @@
         <DxFormLayoutGroup Caption="Penugasan Rute Pertama" ColSpanMd="12">
             <DxFormLayoutGroup ColSpanMd="6">
                 <DxFormLayoutItem @ref="@FliCustomer" Caption="Customer" ColSpanMd="12">
-                    <DxComboBox @ref="@CmbCustomer"
-                                Data="@DtCmbCustomer"
+                    <DxComboBox @ref="@CmbCustomer" FilteringMode="DataGridFilteringMode.Contains"
+                                Data="@DtCmbCustomer" 
                                 @bind-Value="@DrCmbCustomer"
                                 TextFieldName="Nama"
                                 CssClass="cw-480 font_0"
@@ -78,11 +78,10 @@
                         <DxListEditorColumn FieldName="Nama" Caption="Nama" />
                         <DxListEditorColumn FieldName="Kode" Caption="Kode" />
                         <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
-                        <DxListEditorColumn FieldName="Alamat" Caption="Alamat" />
                     </DxComboBox>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem @ref="@FliAlamatCustomer" Caption="Alamat" ColSpanMd="12">
-                    <DxComboBox @ref="@CmbAlamatCustomer"
+                    <DxComboBox @ref="@CmbAlamatCustomer" FilteringMode="DataGridFilteringMode.Contains"
                                 Data="@DtCmbAlamatCustomer"
                                 @bind-Value="@DrCmbAlamatCustomer"
                                 TextFieldName="Alamat"
@@ -95,7 +94,7 @@
                     </DxComboBox>
                 </DxFormLayoutItem>
                 <DxFormLayoutItem @ref="@FliRute" Caption="Rute" ColSpanMd="12">
-                    <DxComboBox @ref="@CmbRute"
+                    <DxComboBox @ref="@CmbRute" FilteringMode="DataGridFilteringMode.Contains"
                                 Data="@DtCmbRute"
                                 @bind-Value="@DrCmbRute"
                                 TextFieldName="Rute"
@@ -191,7 +190,6 @@
                         <DxGridDataColumn FieldName="BBMVolume" Caption="BBM Volume" />
                         <DxGridDataColumn FieldName="Kode1" Caption="Kode" />
                         <DxGridDataColumn FieldName="Kode2" Caption="Kode Manual" />
-                        <DxGridDataColumn FieldName="BBMVolumeSisa" Caption="BBM Volume Sisa" />
                     </Columns>
                     <EditFormTemplate Context="ctxT7PenugasanArmada_SPBU">
                         @{
@@ -203,9 +201,6 @@
                             </DxFormLayoutItem>
                             <DxFormLayoutItem Caption="Kode Manual" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
                                 <DxTextBox @bind-Text="@edm.Kode2" />
-                            </DxFormLayoutItem>
-                            <DxFormLayoutItem Caption="BBM Volume Sisa" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
-                                <DxSpinEdit TValue="decimal?" @bind-Value="@edm.BBMVolumeSisa" />
                             </DxFormLayoutItem>
                         </DxFormLayout>
                     </EditFormTemplate>

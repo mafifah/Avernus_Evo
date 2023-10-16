@@ -12,7 +12,7 @@ using bwaAvernus.Server.Data;
 namespace bwaAvernus.Server.Migrations
 {
     [DbContext(typeof(AvernusDbContext))]
-    [Migration("20231012025855_dbAvernus")]
+    [Migration("20231014032030_dbAvernus")]
     partial class dbAvernus
     {
         /// <inheritdoc />

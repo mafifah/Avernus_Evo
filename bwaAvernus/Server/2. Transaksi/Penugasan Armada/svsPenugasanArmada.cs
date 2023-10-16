@@ -1,9 +1,6 @@
 ﻿using bwaAvernus.Server.Data;
 using bwaAvernus.Shared._1._Master;
 using bwaAvernus.Shared._2._Transaksi;
-using bwaCrixalis.Server.Data;
-using Microsoft.EntityFrameworkCore;
-using Pantheon.Server.ServiceDomains;
 
 namespace bwaAvernus.Server._2._Transaksi
 {
@@ -56,7 +53,7 @@ namespace bwaAvernus.Server._2._Transaksi
         public override async Task<RplT7PenugasanArmada_SPBUById> GetT7PenugasanArmada_SPBUById(RqsT7PenugasanArmadaById request, ServerCallContext context)
         {
             var rplDetilPenugasanArmada = new RplT7PenugasanArmada_SPBUById();
-            var listDetilPenugasanArmada = await _svd.GetEntityById<T7PenugasanArmada_SPBU>(request.IdPenugasanArmada);
+            var listDetilPenugasanArmada = await _svd.GetEntitiesDenganSpec<T7PenugasanArmada_SPBU>(x => x.IdPenugasanArmada == Guid.Parse(request.IdPenugasanArmada));
             if(listDetilPenugasanArmada is null) return rplDetilPenugasanArmada;
 
             rplDetilPenugasanArmada.ListT7PenugasanArmadaSPBU.AddRange(listDetilPenugasanArmada.Adapt<IEnumerable<PtmT7PenugasanArmada_SPBU>>());
@@ -167,6 +164,26 @@ namespace bwaAvernus.Server._2._Transaksi
 
         public override async Task<RplWritePenugasanArmada> UpdatePenugasanArmada(RqsUpdatePenugasanArmada request, ServerCallContext context)
         {
+            var dtT6PenugasanArmada = request.Adapt<T6PenugasanArmada>();
+            var dtT7PenugasanArmada = dtT6PenugasanArmada.ListT7PenugasanArmada.FirstOrDefault();
+            var dtT6Jurnal = (await _svd.GetEntitiesDenganSpec<pthT6Jurnal>(x => x.NoBukti == dtT7PenugasanArmada.NoPenugasan)).FirstOrDefault();
+            var dtT7Jurnal = new List<pthT7Jurnal>();
+            if (dtT6Jurnal != null) { 
+                dtT7Jurnal = (_svd.GetEntitiesDenganSpec<pthT7Jurnal>(x => x.IdJurnal == dtT6Jurnal.IdJurnal)).Adapt<List<pthT7Jurnal>>();
+                dtT6Jurnal.GrandTotal = (decimal)dtT7PenugasanArmada.SanguSementara;
+                dtT7Jurnal.ForEach(x => x.NominalAkuntansi = dtT6Jurnal.GrandTotal);
+                dtT7Jurnal.ForEach(x => x.NominalTransaksi = dtT6Jurnal.GrandTotal);
+
+                dtT6Jurnal.ListT7Jurnal = dtT7Jurnal.Adapt<ICollection<pthT7Jurnal>>();
+
+                await _svd.UpdateTransaksiHeader<pthT6Jurnal, pthT7Jurnal, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6Jurnal, 30200030);
+            }
+            else if (dtT7PenugasanArmada.SanguSementara > 0)
+            {
+                await GenerateJurnal(dtT7PenugasanArmada.IdCompany, 30701020, dtT6PenugasanArmada.IdTransaksi, dtT7PenugasanArmada.NoPenugasan, $"{dtT6PenugasanArmada.Nopol} ({dtT6PenugasanArmada.Karyawan_Sopir_NamaPanggilan}): ({dtT7PenugasanArmada.Customer_Inisial}) {dtT7PenugasanArmada.Rute_Rute} [{dtT7PenugasanArmada.Rute_Jenis}]", $"Sangu Sopir = {dtT7PenugasanArmada.SanguSementara}", dtT7PenugasanArmada.SanguSementara, dtT6PenugasanArmada.IdRekening);
+
+            }
+
             var hasil = await _svd.UpdateTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(request.Adapt<T6PenugasanArmada>(), request.IdForm);
             return new RplWritePenugasanArmada { IsOK = true, Result = hasil };
         }
