@@ -5,8 +5,6 @@ using bwaAvernus._1._Master;
 using bwaCrixalis.Client._0._Utilitas;
 using bwaAvernus.Shared._2._Transaksi;
 using Radzen;
-using bwaCrixalis.Shared._1._Master;
-using DevExpress.ClipboardSource.SpreadsheetML;
 using System.Reflection;
 
 namespace bwaAvernus.Client._2._Transaksi;
@@ -472,6 +470,15 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         SetDetil_SebelumUpdateDatabase<T7PenugasanArmada_SPBU>();
         base.ProsesUpdateDatabase();
     }
+
+    protected override async void CtmNavigasi_Click(ContextMenuItemClickEventArgs args)
+    {
+        if (args.ItemInfo.Text == "Cetak")
+        {
+            await TampilkanReport("rptPenugasanArmada", DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString());
+        }
+    }
+    
     #endregion
 
     public class uimValidasiRute
