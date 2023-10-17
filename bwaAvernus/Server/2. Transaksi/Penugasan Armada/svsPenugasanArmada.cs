@@ -1,6 +1,8 @@
 ﻿using bwaAvernus.Server.Data;
 using bwaAvernus.Shared._1._Master;
 using bwaAvernus.Shared._2._Transaksi;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace bwaAvernus.Server._2._Transaksi
 {
@@ -80,6 +82,22 @@ namespace bwaAvernus.Server._2._Transaksi
                 }
             }
             return rplValidasiRute;
+        }
+
+        public override async Task<RplPenugasanArmada_Cetak> GetPenugasanArmada_Cetak(RqsPenugasanArmadaById request, ServerCallContext context)
+        {
+            var dtT6PenugasanArmada = (await _svd.GetEntitiesDenganSpec<T7PenugasanArmada>(x => x.IdPenugasanArmada.ToString() == request.IdPenugasanArmada, $"{nameof(T6PenugasanArmada)}.{nameof(T1Armada)}.{nameof(T0JenisArmada)}")).FirstOrDefault();
+            var dtCompany = (await _svd.GetEntities<pthT0Company>()).FirstOrDefault(x => x.IdCompany == dtT6PenugasanArmada.T6PenugasanArmada.T1Armada.IdCompany_Pemilik);
+            var reply = dtT6PenugasanArmada.T6PenugasanArmada.Adapt<RplPenugasanArmada_Cetak>();
+            reply.CompanyPemilik = $"{dtCompany.Prefix} {R.DecryptString(dtCompany.Nama)}";
+            reply.JenisArmadaJenis = dtT6PenugasanArmada.T6PenugasanArmada.T1Armada.T0JenisArmada.Jenis;
+            reply.RuteRute = dtT6PenugasanArmada.Rute_Rute;
+            reply.CustomerNama = dtT6PenugasanArmada.Customer_Nama;
+            reply.CustomerAlamat = dtT6PenugasanArmada.Customer_Alamat;
+            reply.CustomerKota = dtT6PenugasanArmada.Customer_Kota;
+            reply.CustomerPhone1 = dtT6PenugasanArmada.Customer_Phone1;
+            return reply;
+             
         }
         #endregion
 

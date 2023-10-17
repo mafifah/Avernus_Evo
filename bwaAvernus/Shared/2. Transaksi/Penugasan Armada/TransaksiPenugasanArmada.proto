@@ -14,6 +14,7 @@ service svpTransaksiPenugasanArmada {
 	rpc GetT7PenugasanArmadaById (RqsT7PenugasanArmadaById) returns (RplT7PenugasanArmadaById);
 	rpc GetT7PenugasanArmada_SPBUById (RqsT7PenugasanArmadaById) returns (RplT7PenugasanArmada_SPBUById);
 	rpc GetValidasiRute (RqsValidasiRute) returns (Ptm_ValidasiRute);
+    rpc GetPenugasanArmada_Cetak (RqsPenugasanArmadaById) returns (RplPenugasanArmada_Cetak);
     
 	rpc InsertPenugasanArmada (RqsInsertPenugasanArmada) returns (RplWritePenugasanArmada);
 	rpc UpdatePenugasanArmada (RqsUpdatePenugasanArmada) returns (RplWritePenugasanArmada);
@@ -97,6 +98,28 @@ message RplPenugasanArmadaById
     optional string Catatan = 225;
     optional string Preview = 226;
     optional string Synchronise = 227;
+}
+
+message RplPenugasanArmada_Cetak
+{
+    optional string IdPenugasanArmada = 1;
+    optional string IdTransaksi = 2;
+    optional string Company_Pemilik = 3;
+    optional string Nopol = 8;
+    optional string Armada_Inisial = 14;
+    optional string Armada_Nopol = 15;
+    optional string Armada_Merk = 16;
+    optional string JenisArmada_Jenis = 17;
+    optional string Karyawan_Sopir_NamaPanggilan = 20;
+    optional string Karyawan_Sopir_Seluler1 = 25;
+    optional string WaktuProses = 203;
+
+    optional string Rute_Rute = 34;
+    optional string Customer_Nama = 36;
+    optional string Customer_Alamat = 38;
+    optional string Customer_Kota = 39;
+    optional string Customer_Phone1 = 41;
+        
 }
 
 message RqsPenugasanArmada {

@@ -6,6 +6,7 @@ using bwaCrixalis.Client._0._Utilitas;
 using bwaAvernus.Shared._2._Transaksi;
 using Radzen;
 using System.Reflection;
+using bwaCrixalis.Shared._1._Master;
 
 namespace bwaAvernus.Client._2._Transaksi;
 public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, svcPenugasanArmada>
@@ -235,6 +236,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
             DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer = customer.IdCustomer;
             DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdJenisCustomer = customer.IdJenisCustomer;
+            DtRekapitulasi_Terseleksi.T7PenugasanArmada.Customer_Kota = customer.Kota;
             PropertyInfo[] customerProperties = customer.GetType().GetProperties();
             foreach ( var property in customerProperties)
             {
@@ -337,6 +339,10 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
                 }
 
             }
+
+            DtRekapitulasi_Terseleksi.JenisArmada_Jenis = armada.T0JenisArmada.Jenis;
+            DtRekapitulasi_Terseleksi.JenisArmada_Alias = armada.T0JenisArmada.Alias;
+
             ValidasiRute = (await Svc.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
             if(!string.IsNullOrWhiteSpace(ValidasiRute.IdPenugasanArmada))
             {
