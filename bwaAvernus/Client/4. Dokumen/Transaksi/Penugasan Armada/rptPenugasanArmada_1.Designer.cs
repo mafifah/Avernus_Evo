@@ -146,7 +146,6 @@ namespace bwaAvernus.Client._4._Dokumen
             // 
             // Detail
             // 
-            this.Detail.Expanded = false;
             this.Detail.HeightF = 0F;
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -403,7 +402,7 @@ namespace bwaAvernus.Client._4._Dokumen
             this.xlbWaktuProses.Name = "xlbWaktuProses";
             this.xlbWaktuProses.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xlbWaktuProses.SizeF = new System.Drawing.SizeF(210F, 22.16667F);
-            this.xlbWaktuProses.TextFormatString = "{0:dddd, dd MMMM yyyy}";
+            this.xlbWaktuProses.TextFormatString = "{0:dddd, d MMMM, yyyy}";
             // 
             // xpbFaxPhone1
             // 
@@ -511,6 +510,8 @@ namespace bwaAvernus.Client._4._Dokumen
             // tbcEkspedisi
             // 
             this.tbcEkspedisi.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.tbcEkspedisi.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Operator]")});
             this.tbcEkspedisi.Name = "tbcEkspedisi";
             this.tbcEkspedisi.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 5, 100F);
             this.tbcEkspedisi.StylePriority.UseBorders = false;
@@ -553,6 +554,8 @@ namespace bwaAvernus.Client._4._Dokumen
             // tbcBagianEkspedisi
             // 
             this.tbcBagianEkspedisi.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.tbcBagianEkspedisi.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Operator_Jabatan]")});
             this.tbcBagianEkspedisi.Font = new DevExpress.Drawing.DXFont("Tahoma", 9F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {
             new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.tbcBagianEkspedisi.Name = "tbcBagianEkspedisi";

@@ -57,7 +57,9 @@ namespace bwaAvernus.Client._4._Dokumen
             public string? Customer_Nama { get; set; }
             public string? Customer_Alamat { get; set; }
             public string? Customer_Kota { get; set; }
-            public string Customer_Phone1 { get; set; }
+            public string? Customer_Phone1 { get; set; }
+            public string? Operator { get; set; }
+            public string? Operator_Jabatan { get; set; }
 
             public string? AlamatCustomer_Alamat { get; set; }
             public string? AlamatCustomer_KodePos {  get; set; }

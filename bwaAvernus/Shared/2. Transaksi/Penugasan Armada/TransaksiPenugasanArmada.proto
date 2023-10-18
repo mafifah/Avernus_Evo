@@ -113,6 +113,8 @@ message RplPenugasanArmada_Cetak
     optional string Karyawan_Sopir_NamaPanggilan = 20;
     optional string Karyawan_Sopir_Seluler1 = 25;
     optional string WaktuProses = 203;
+    optional string Operator = 204;
+    optional string Operator_Jabatan = 205;
 
     optional string Rute_Rute = 34;
     optional string Customer_Nama = 36;

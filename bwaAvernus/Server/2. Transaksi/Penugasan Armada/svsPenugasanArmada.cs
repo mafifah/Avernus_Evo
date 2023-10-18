@@ -86,8 +86,13 @@ namespace bwaAvernus.Server._2._Transaksi
 
         public override async Task<RplPenugasanArmada_Cetak> GetPenugasanArmada_Cetak(RqsPenugasanArmadaById request, ServerCallContext context)
         {
-            var dtT6PenugasanArmada = (await _svd.GetEntitiesDenganSpec<T7PenugasanArmada>(x => x.IdPenugasanArmada.ToString() == request.IdPenugasanArmada, $"{nameof(T6PenugasanArmada)}.{nameof(T1Armada)}.{nameof(T0JenisArmada)}")).FirstOrDefault();
-            var dtCompany = (await _svd.GetEntities<pthT0Company>()).FirstOrDefault(x => x.IdCompany == dtT6PenugasanArmada.T6PenugasanArmada.T1Armada.IdCompany_Pemilik);
+            var dtT6PenugasanArmada = (await _svd.GetEntitiesDenganSpec<T7PenugasanArmada>(x => x.IdPenugasanArmada.ToString() == request.IdPenugasanArmada && x.Urutan == 1, $"{nameof(T6PenugasanArmada)}.{nameof(T1Armada)}.{nameof(T0JenisArmada)}")).FirstOrDefault();
+            var dtCompany = (await _svd.GetEntities<pthT0Company>()).FirstOrDefault(x => x.IdCompany == "GMA");
+            var dtOperator = new pthT1Karyawan();
+            if (dtT6PenugasanArmada.IdOperator is null) 
+             dtOperator = (await _svd.GetEntitiesDenganSpec<pthT1Karyawan>(x => x.IdKaryawan == dtT6PenugasanArmada.IdCreator, $"{nameof(pthT1Karyawan.T0Jabatan)}")).FirstOrDefault();
+            else
+                dtOperator = (await _svd.GetEntitiesDenganSpec<pthT1Karyawan>(x => x.IdKaryawan == dtT6PenugasanArmada.IdOperator, $"{nameof(pthT1Karyawan.T0Jabatan)}")).FirstOrDefault();
             var reply = dtT6PenugasanArmada.T6PenugasanArmada.Adapt<RplPenugasanArmada_Cetak>();
             reply.CompanyPemilik = $"{dtCompany.Prefix} {R.DecryptString(dtCompany.Nama)}";
             reply.JenisArmadaJenis = dtT6PenugasanArmada.T6PenugasanArmada.T1Armada.T0JenisArmada.Jenis;
@@ -98,6 +103,8 @@ namespace bwaAvernus.Server._2._Transaksi
             reply.CustomerPhone1 = dtT6PenugasanArmada.Customer_Phone1;
             reply.AlamatCustomerAlamat = dtT6PenugasanArmada.AlamatCustomer_Alamat;
             reply.AlamatCustomerKota = dtT6PenugasanArmada.AlamatCustomer_Kota;
+            reply.Operator = dtOperator.NamaLengkap;
+            reply.OperatorJabatan = dtOperator.T0Jabatan.Jabatan;
             return reply;
              
         }
