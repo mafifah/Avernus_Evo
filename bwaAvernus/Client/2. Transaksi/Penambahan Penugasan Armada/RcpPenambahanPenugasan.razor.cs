@@ -10,7 +10,7 @@ using bwaCrixalis.Shared._1._Master;
 using Microsoft.Ajax.Utilities;
 
 namespace bwaAvernus.Client._2._Transaksi;
-public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, svcPenugasanArmada>
+public partial class RcpPenambahanPenugasan : ConTransaksi_2<uimT6PenugasanArmada, svcPenambahanPenugasan>
 {
     #region Inject
     [Inject]
@@ -155,23 +155,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         
     }
 
-    public override async void ProsesSeleksiData(object data)
-    {
-        base.ProsesSeleksiData(data);
-        
-        DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
-        DrCmbSopir = DtCmbSopir.Adapt<IList<uimT5ArmadaSopir>>().FirstOrDefault(x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi.IdKaryawan_Sopir);
-        DtRekapitulasi_Terseleksi.T7PenugasanArmada = (await Svc.GetDataT7PenugasanArmadaById(DtRekapitulasi_Terseleksi.IdPenugasanArmada)).Adapt<IList<uimT7PenugasanArmada>>().FirstOrDefault(x => x.Urutan == 1);
-        
-        DrCmbCustomer = DtCmbCustomer.Adapt<IList<uimT1CustomerInstansi>>().FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer);
-        DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer)).Adapt<IList<dynamic>>();
-        DrCmbAlamatCustomer = DtCmbAlamatCustomer.Adapt<IList<uimT2AlamatCustomer>>().FirstOrDefault(x => x.IdAlamatCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer);
-        DrCmbRute = DtCmbRute.Adapt<IList<uimT3Rute>>().FirstOrDefault(x => x.IdRute == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute);
-        DrCmbBBMMetode = DtCmbBBMMetode.Adapt<IList<string>>().FirstOrDefault(x => x.Equals(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode));
-        DrCmbRekening = DtCmbRekening.Adapt<IList<pthT0Rekening>>().FirstOrDefault(x => x.IdRekening == DtRekapitulasi_Terseleksi.IdRekening);
-        StateHasChanged();
-
-    }
+    
     #endregion
 
     #region Detil
@@ -371,7 +355,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             }
 
 
-            ValidasiRute = (await Svc.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
+            ValidasiRute = (await ah.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
             if(!string.IsNullOrWhiteSpace(ValidasiRute.IdPenugasanArmada))
             {
                 if(ValidasiRute.StatusPerjalanan != "Kembali") DialogService.Alert($"Armada dengan Nopol {armada.Nopol} belum kembali dengan no {ValidasiRute.IdTransaksi}", "Perhatian!");
@@ -495,10 +479,6 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     #endregion
 
     #region Navigasi
-    public override async Task ProsesDataBaru()
-    {
-        await base.ProsesDataBaru();
-    }
     public override void ProsesUpdateDatabase()
     {
         SetDetil_SebelumUpdateDatabase<T7PenugasanArmada_SPBU>();
@@ -513,7 +493,27 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         }
         
     }
-    
+
+    public override async void ProsesSeleksiData(object data)
+    {
+        base.ProsesSeleksiData(data);
+
+        DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
+        DrCmbSopir = DtCmbSopir.Adapt<IList<uimT5ArmadaSopir>>().FirstOrDefault(x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi.IdKaryawan_Sopir);
+        DtRekapitulasi_Terseleksi.ListT7PenugasanArmada = (await Svc.GetDataT7PenambahanPenugasanById(DtRekapitulasi_Terseleksi.IdPenugasanArmada))?.Adapt<IList<T7PenugasanArmada>>();
+
+        DtRekapitulasi_Terseleksi.T7PenugasanArmada = DtRekapitulasi_Terseleksi?.ListT7PenugasanArmada?.FirstOrDefault(x => x.Urutan == 1);
+
+        DrCmbCustomer = DtCmbCustomer.Adapt<IList<uimT1CustomerInstansi>>().FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer);
+        DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer)).Adapt<IList<dynamic>>();
+        DrCmbAlamatCustomer = DtCmbAlamatCustomer.Adapt<IList<uimT2AlamatCustomer>>().FirstOrDefault(x => x.IdAlamatCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer);
+        DrCmbRute = DtCmbRute.Adapt<IList<uimT3Rute>>().FirstOrDefault(x => x.IdRute == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute);
+        DrCmbBBMMetode = DtCmbBBMMetode.Adapt<IList<string>>().FirstOrDefault(x => x.Equals(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode));
+        DrCmbRekening = DtCmbRekening.Adapt<IList<pthT0Rekening>>().FirstOrDefault(x => x.IdRekening == DtRekapitulasi_Terseleksi.IdRekening);
+        StateHasChanged();
+
+    }
+
     #endregion
 
     public class uimValidasiRute

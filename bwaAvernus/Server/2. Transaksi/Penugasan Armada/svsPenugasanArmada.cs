@@ -185,7 +185,7 @@ namespace bwaAvernus.Server._2._Transaksi
         public override async Task<RplWritePenugasanArmada> UpdatePenugasanArmada(RqsUpdatePenugasanArmada request, ServerCallContext context)
         {
             var dtT6PenugasanArmada = request.Adapt<T6PenugasanArmada>();
-            var dtT7PenugasanArmada = dtT6PenugasanArmada.ListT7PenugasanArmada.FirstOrDefault();
+            var dtT7PenugasanArmada = dtT6PenugasanArmada.ListT7PenugasanArmada.FirstOrDefault(x => x.Urutan == 1);
             var dtT6Jurnal = (await _svd.GetEntitiesDenganSpec<pthT6Jurnal>(x => x.NoBukti == dtT7PenugasanArmada.NoPenugasan)).FirstOrDefault();
             var dtT7Jurnal = new List<pthT7Jurnal>();
             if (dtT6Jurnal != null) { 

@@ -6,13 +6,9 @@ namespace bwaAvernus.Client._2._Transaksi
 {
     public class uimT6PenugasanArmada : T6PenugasanArmada
     {
-        public uimT1CustomerInstansi? T1Customer { get; set; }
-        public uimT2AlamatCustomer? T2AlamatCustomer { get; set; }
-        public string? Customer => T2AlamatCustomer?.T1Customer?.Nama;
-        public string AlamatCustomer => T2AlamatCustomer?.Alamat;
-        public Guid? IdCustomer { get; set; }
-        public Guid? IdAlamatCustomer { get; set; }
+        public string? Customer => T7PenugasanArmada?.Customer_Nama ?? "";
+        public string AlamatCustomer => T7PenugasanArmada?.Customer_Alamat ?? "";
+        public string Rute => T7PenugasanArmada?.Rute_Rute ?? "";
         public T7PenugasanArmada? T7PenugasanArmada { get; set; } = new();
-        //public uimT3Rute T3Rute { get; set; }
-    }
+	}
 }

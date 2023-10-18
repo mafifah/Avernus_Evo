@@ -18,6 +18,7 @@ using DevExpress.AspNetCore.Reporting;
 using bwaAvernus.Server._2._Transaksi;
 using bwaCrixalis.Server._2._Transaksi;
 using bwaCrixalis.Shared._2._Transaksi;
+using bwaAvernus.Client._2._Transaksi;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -221,6 +222,7 @@ app.MapGrpcService<svsRute>().EnableGrpcWeb();
 app.MapGrpcService<svsBiayaRute>().EnableGrpcWeb();
 app.MapGrpcService<svsPenugasanArmada>().EnableGrpcWeb();
 app.MapGrpcService<svsPendataanMuatan>().EnableGrpcWeb();
+app.MapGrpcService<svsPenambahanPenugasanArmada>().EnableGrpcWeb();
 
 
 app.MapRazorPages();

@@ -77,6 +77,7 @@ builder.Services.AddSingleton<svcBiayaRute>();
 
 builder.Services.AddSingleton<svcPenugasanArmada>();
 builder.Services.AddSingleton<svcPendataanMuatan>();
+builder.Services.AddSingleton<svcPenambahanPenugasan>();
 
 
 await builder.Build().RunAsync();

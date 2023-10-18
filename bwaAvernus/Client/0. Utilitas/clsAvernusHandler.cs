@@ -1,7 +1,10 @@
 ﻿using bwaAvernus._1._Master;
+using bwaAvernus.Client._2._Transaksi;
+using bwaAvernus.Shared._2._Transaksi;
 using bwaCrixalis.Client._1._Master;
 using bwaCrixalis.Shared._1._Master;
 using Pantheon.Client.Utility;
+using Wisej.Core;
 
 namespace bwaAvernus.Client._0._Utilitas
 {
@@ -12,6 +15,7 @@ namespace bwaAvernus.Client._0._Utilitas
         private readonly svcBiayaRute _svcBiayaRute = new svcBiayaRute();
         private readonly svcArmada _svcArmada = new svcArmada();
         private readonly pthSvcRekening _svcRekening = new pthSvcRekening();
+        private readonly svcPenugasanArmada _svcPenugasanArmada = new svcPenugasanArmada();
         public clsAvernusHandler()
         {
             
@@ -65,6 +69,12 @@ namespace bwaAvernus.Client._0._Utilitas
         {
             var data = await _svcRekening.GetDataRekening();
             return data.Adapt<List<dynamic>>();
+        }
+
+        public async Task<object> GetValidasiRute(string nopol)
+        {
+            var validasiRute = await _svcPenugasanArmada.GetValidasiRute(nopol);
+            return validasiRute.Adapt<object>();
         }
     }
 }

@@ -10,6 +10,7 @@
     <None Remove="1. Master\BBM\MasterBBM.proto" />
     <None Remove="1. Master\BiayaRute\MasterBiayaRute.proto" />
     <None Remove="1. Master\Rute\MasterRute.proto" />
+    <None Remove="2. Transaksi\Penambahan Penugasan Armada\TransaksiPenambahanPenugasanArmada.proto" />
     <None Remove="2. Transaksi\Pendataan Muatan\TransaksiPendataanMuatan.proto" />
     <None Remove="2. Transaksi\Penugasan Armada\TransaksiPenugasanArmada.proto" />
   </ItemGroup>
@@ -46,6 +47,7 @@
 	  <Protobuf Include="1. Master\BBM\MasterBBM.proto" GrpcServices="Both" />
 	  <Protobuf Include="1. Master\BiayaRute\MasterBiayaRute.proto" GrpcServices="Both" />
 	  <Protobuf Include="1. Master\Rute\MasterRute.proto" />
+	  <Protobuf Include="2. Transaksi\Penambahan Penugasan Armada\TransaksiPenambahanPenugasanArmada.proto" GrpcServices="Both" />
 	  <Protobuf Include="2. Transaksi\Pendataan Muatan\TransaksiPendataanMuatan.proto" GrpcServices="Both" />
 	  <Protobuf Include="2. Transaksi\Penugasan Armada\TransaksiPenugasanArmada.proto" GrpcServices="Both" />
 	</ItemGroup>
