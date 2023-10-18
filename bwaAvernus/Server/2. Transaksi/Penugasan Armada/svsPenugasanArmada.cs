@@ -96,6 +96,8 @@ namespace bwaAvernus.Server._2._Transaksi
             reply.CustomerAlamat = dtT6PenugasanArmada.Customer_Alamat;
             reply.CustomerKota = dtT6PenugasanArmada.Customer_Kota;
             reply.CustomerPhone1 = dtT6PenugasanArmada.Customer_Phone1;
+            reply.AlamatCustomerAlamat = dtT6PenugasanArmada.AlamatCustomer_Alamat;
+            reply.AlamatCustomerKota = dtT6PenugasanArmada.AlamatCustomer_Kota;
             return reply;
              
         }
@@ -172,7 +174,7 @@ namespace bwaAvernus.Server._2._Transaksi
             dtT7PenugasanArmada.NoPenugasan = await GenerateIdTransaksi(dtT7PenugasanArmada.IdCompany, "DO");
             dtT6PenugasanArmada.ListT7PenugasanArmada.Clear();
             dtT6PenugasanArmada.ListT7PenugasanArmada.Add(dtT7PenugasanArmada);
-            var hasil = await _svd.InsertTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6PenugasanArmada, request.IdForm);
+            var hasil = await _svd.InsertTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, T7PenugasanArmada_SPBU, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6PenugasanArmada, request.IdForm);
             if (dtT7PenugasanArmada.SanguSementara > 0)
             {
                 await GenerateJurnal(dtT7PenugasanArmada.IdCompany, 30701020, dtT6PenugasanArmada.IdTransaksi, dtT7PenugasanArmada.NoPenugasan, $"{dtT6PenugasanArmada.Nopol} ({dtT6PenugasanArmada.Karyawan_Sopir_NamaPanggilan}): ({dtT7PenugasanArmada.Customer_Inisial}) {dtT7PenugasanArmada.Rute_Rute} [{dtT7PenugasanArmada.Rute_Jenis}]", $"Sangu Sopir = {dtT7PenugasanArmada.SanguSementara}", dtT7PenugasanArmada.SanguSementara, dtT6PenugasanArmada.IdRekening);
@@ -202,7 +204,7 @@ namespace bwaAvernus.Server._2._Transaksi
 
             }
 
-            var hasil = await _svd.UpdateTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(request.Adapt<T6PenugasanArmada>(), request.IdForm);
+            var hasil = await _svd.UpdateTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, T7PenugasanArmada_SPBU, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(request.Adapt<T6PenugasanArmada>(), request.IdForm);
             return new RplWritePenugasanArmada { IsOK = true, Result = hasil };
         }
         public override async Task<RplWritePenugasanArmada> BatalPenugasanArmada(RqsBatalPenugasanArmada request, ServerCallContext context)

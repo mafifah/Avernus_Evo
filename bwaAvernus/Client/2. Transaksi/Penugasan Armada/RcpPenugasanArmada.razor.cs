@@ -7,6 +7,7 @@ using bwaAvernus.Shared._2._Transaksi;
 using Radzen;
 using System.Reflection;
 using bwaCrixalis.Shared._1._Master;
+using Microsoft.Ajax.Utilities;
 
 namespace bwaAvernus.Client._2._Transaksi;
 public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, svcPenugasanArmada>
@@ -84,6 +85,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public IList<dynamic> DtGrdT7PenugasanArmada_SPBU { get; set; }
     public IList<uimT3Rute> DtRute { get; set; }
     public IList<uimT4BiayaRute> DtBiayaRute { get; set; }
+    public IList<uimT2Kota> DtKota { get; set; }
     #endregion
 
     #region Properties
@@ -111,7 +113,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     {
         PrimaryText = "IdTransaksi";
         base.OnInitialized();
-
+        DtKota = (await ch.Get_Kota()).ToList();
         if (DtCmbArmada is null) DtCmbArmada = (await ah.Get_Armada()).Adapt<IList<dynamic>>();
         if (DtCmbCustomer is null) DtCmbCustomer = (await ah.Get_Customer()).Adapt<IList<dynamic>>();
         if (DtCmbRekening is null) DtCmbRekening = (await ah.Get_Rekening()).Adapt<IList<dynamic>>();
@@ -122,8 +124,13 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         DtRute = (await ah.Get_RuteByIdAlamatCustomer()).Adapt<IList<uimT3Rute>>();
         if (DtCmbRute is null) DtCmbRute = DtRute.Adapt<IList<dynamic>>();
 
+        var updatedCustomer = DtCmbCustomer.Adapt<IList<uimT1CustomerInstansi>>();
+        updatedCustomer.ForEach(x => x.T2Kota = DtKota.FirstOrDefault(y => y.IdKota == x.IdKota));
+        DtCmbCustomer = updatedCustomer.Adapt<IList<dynamic>>();
+
         dtPropertiesT6 = DtRekapitulasi_Terseleksi.GetType().GetProperties();
         dtPropertiesT7 = DtRekapitulasi_Terseleksi.T7PenugasanArmada.GetType().GetProperties();
+
 
 
 
@@ -225,12 +232,15 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             //DtRekapitulasi_Terseleksi.IdCustomer = customer?.IdCustomer;
             DtRekapitulasi_Terseleksi.T1Customer = customer;
             DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer(customer.IdCustomer)).Adapt<IList<dynamic>>();
+            var updatedAlamatCustomer = DtCmbAlamatCustomer.Adapt<IList<uimT2AlamatCustomer>>();
+            updatedAlamatCustomer.ForEach(x => x.T2Kota = DtKota.FirstOrDefault(y => y.IdKota == x.IdKota));
+            DtCmbAlamatCustomer = updatedAlamatCustomer.Adapt<IList<dynamic>>();
+
+
             DrCmbAlamatCustomer = DtCmbAlamatCustomer?.Adapt<IList<T2AlamatCustomer>>().FirstOrDefault();
             var alamatCustomer = DrCmbAlamatCustomer?.Adapt<uimT2AlamatCustomer>();
-            //await ProsesSimpan_Draft("IdAlamatCustomer", alamatCustomer.IdAlamatCustomer);
             DtRekapitulasi_Terseleksi.T2AlamatCustomer = alamatCustomer;
 
-            //DtCmbRute = (await ah.Get_RuteByIdAlamatCustomer(alamatCustomer.IdAlamatCustomer)).Adapt<IList<dynamic>>();
             DtCmbRute = DtRute.Where(x => x.IdAlamatCustomer == alamatCustomer.IdAlamatCustomer).ToList().Adapt<IList<dynamic>>();
             DrCmbRute = DtCmbRute?.Adapt<IList<uimT3Rute>>().FirstOrDefault();
 
@@ -251,7 +261,17 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer = alamatCustomer.IdAlamatCustomer;
             DtRekapitulasi_Terseleksi.T7PenugasanArmada.WaktuPenugasan = DtRekapitulasi_Terseleksi.WaktuProses;
             DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute = DrCmbRute.Adapt<uimT3Rute>().IdRute;
+            PropertyInfo[] alamatCustomerProperties = alamatCustomer.GetType().GetProperties();
+            foreach (var property in alamatCustomerProperties)
+            {
+                var propertyValue = property.GetValue(alamatCustomer);
+                var propertyToUpdate = dtPropertiesT7.FirstOrDefault(x => x.Name == $"AlamatCustomer_{property.Name}");
+                if (propertyToUpdate is not null)
+                {
+                    dtPropertiesT7.FirstOrDefault(x => x.Name == $"AlamatCustomer_{property.Name}").SetValue(DtRekapitulasi_Terseleksi.T7PenugasanArmada, propertyValue);
+                }
 
+            }
             DtBiayaRute = (await ah.Get_BiayaRute(DrCmbRute.Adapt<uimT3Rute>().IdRute)).Adapt<IList<uimT4BiayaRute>>();
             if (DrCmbArmada is not null) ProsesHitungBiayaRute();
             await InvokeAsync(StateHasChanged);
@@ -261,17 +281,29 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     {
         if (val == true)
         {
-            DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer(DrCmbCustomer.Adapt<uimT1Customer>().IdCustomer)).Adapt<IList<dynamic>>();
-            DrCmbAlamatCustomer = DtCmbAlamatCustomer?.Adapt<IList<T2AlamatCustomer>>().FirstOrDefault();
+            DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer(DrCmbCustomer.Adapt<uimT1CustomerInstansi>().IdCustomer)).Adapt<IList<dynamic>>();
+            var updatedAlamatCustomer = DtCmbAlamatCustomer.Adapt<IList<uimT2AlamatCustomer>>();
+            updatedAlamatCustomer.ForEach(x => x.T2Kota = DtKota.FirstOrDefault(y => y.IdKota == x.IdKota));
+            DtCmbAlamatCustomer = updatedAlamatCustomer.Adapt<IList<dynamic>>();
             await InvokeAsync(StateHasChanged);
         }
         else
         {
             var alamatCustomer = DrCmbAlamatCustomer?.Adapt<uimT2AlamatCustomer>();
-            //await ProsesSimpan_Draft("IdAlamatCustomer", alamatCustomer.IdAlamatCustomer);
-            DtRekapitulasi_Terseleksi.T2AlamatCustomer = alamatCustomer;
-            DtCmbRute = DtRute.FirstOrDefault(x => x.IdAlamatCustomer == alamatCustomer.IdAlamatCustomer).Adapt<IList<dynamic>>();
+            DtCmbRute = DtRute.Where(x => x.IdAlamatCustomer == alamatCustomer.IdAlamatCustomer).Adapt<IList<dynamic>>();
             DrCmbRute = DtCmbRute?.Adapt<IList<uimT3Rute>>().FirstOrDefault();
+            PropertyInfo[] alamatCustomerProperties = alamatCustomer.GetType().GetProperties();
+            foreach (var property in alamatCustomerProperties)
+            {
+                var propertyValue = property.GetValue(alamatCustomer);
+                var propertyToUpdate = dtPropertiesT7.FirstOrDefault(x => x.Name == $"AlamatCustomer_{property.Name}");
+                if (propertyToUpdate is not null)
+                {
+                    dtPropertiesT7.FirstOrDefault(x => x.Name == $"AlamatCustomer_{property.Name}").SetValue(DtRekapitulasi_Terseleksi.T7PenugasanArmada, propertyValue);
+                }
+
+            }
+            
             DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute = DrCmbRute.Adapt<uimT3Rute>().IdRute;
             DtBiayaRute = (await ah.Get_BiayaRute(DrCmbCustomer.Adapt<uimT3Rute>().IdRute)).Adapt<IList<uimT4BiayaRute>>();
             if (DrCmbArmada is not null) ProsesHitungBiayaRute();
@@ -340,8 +372,6 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
             }
 
-            DtRekapitulasi_Terseleksi.JenisArmada_Jenis = armada.T0JenisArmada.Jenis;
-            DtRekapitulasi_Terseleksi.JenisArmada_Alias = armada.T0JenisArmada.Alias;
 
             ValidasiRute = (await Svc.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
             if(!string.IsNullOrWhiteSpace(ValidasiRute.IdPenugasanArmada))
@@ -481,8 +511,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     {
         if (args.ItemInfo.Text == "Cetak")
         {
-            await TampilkanReport("rptPenugasanArmada", DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString());
+            await TampilkanReport("rptPenugasanArmada_1", DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString());
         }
+        
     }
     
     #endregion

@@ -126,7 +126,7 @@
                 </DxFormLayoutItem>
                 <DxFormLayoutItem @ref="FliBBMHarga" Caption="BBM Harga " ColSpanMd="12">
                     <DxSpinEdit @ref="SpeBBMHarga" InputId="0.0, 8.0" tabindex="10"
-                                Value="0" ReadOnly="true"
+                                Value="@DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga" ReadOnly="true"
                                 ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
                                 ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume), (int?)valueBaru))" />
                 </DxFormLayoutItem>

@@ -119,6 +119,9 @@ message RplPenugasanArmada_Cetak
     optional string Customer_Alamat = 38;
     optional string Customer_Kota = 39;
     optional string Customer_Phone1 = 41;
+    optional string AlamatCustomer_Alamat = 47;
+    optional string AlamatCustomer_KodePos = 48;
+    optional string AlamatCustomer_Kota = 49;
         
 }
 

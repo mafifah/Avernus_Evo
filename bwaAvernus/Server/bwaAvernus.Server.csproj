@@ -52,8 +52,6 @@
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Server\2. Transaksi\209. Penjualan\svsOrderPenjualan.cs" Link="2. Transaksi\Crixalis\209. Penjualan\svsOrderPenjualan.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Server\Data\CrixalisDbContext_Log.cs" Link="Data\CrixalisDbContext_Log.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Server\Data\ExportHelper.cs" Link="Data\ExportHelper.cs" />
-    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Server\Reporting\CustomReportDesignerController.cs" Link="Reporting\CustomReportDesignerController.cs" />
-    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Server\Reporting\CustomWebDocumentViewerReportResolver.cs" Link="Reporting\CustomWebDocumentViewerReportResolver.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -128,7 +126,6 @@
     <Folder Include="2. Transaksi\Crixalis\208. Pembelian\" />
     <Folder Include="2. Transaksi\Crixalis\209. Penjualan\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Reporting\" />
   </ItemGroup>
 
   <ItemGroup>

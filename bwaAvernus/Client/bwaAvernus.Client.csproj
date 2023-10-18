@@ -61,6 +61,7 @@
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Barang\uimT1Warna.cs" Link="1. Master\Crixalis\106. Inventori\Barang\uimT1Warna.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Barang\uimT2Barang.cs" Link="1. Master\Crixalis\106. Inventori\Barang\uimT2Barang.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Barang\uimT3Satuan.cs" Link="1. Master\Crixalis\106. Inventori\Barang\uimT3Satuan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\RcpDivisiBarang.razor.cs" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\RcpDivisiBarang.razor.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\svcDivisiBarang.cs" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\svcDivisiBarang.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\uimT0DivisiBarang.cs" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\uimT0DivisiBarang.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\uimT1SubDivisiBarang.cs" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\uimT1SubDivisiBarang.cs" />
@@ -264,9 +265,11 @@
   <ItemGroup>
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\0. Utilitas\RcpKonfigurasiHakAkses.razor" Link="0. Utilitas\Crixalis\RcpKonfigurasiHakAkses.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\0. Utilitas\RcpLihatRekamanAktivitas.razor" Link="0. Utilitas\Crixalis\RcpLihatRekamanAktivitas.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\RcpDivisiBarang.razor.css" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\RcpDivisiBarang.razor.css" />
     <None Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\0. Utilitas\RcpProfil.razor" Link="0. Utilitas\Crixalis\RcpProfil.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Aset\RcpAset.razor" Link="1. Master\Crixalis\106. Inventori\Aset\RcpAset.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Karyawan\RcpKaryawan.razor" Link="1. Master\Crixalis\101. Karyawan\Karyawan\RcpKaryawan.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\RcpDivisiBarang.razor" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\RcpDivisiBarang.razor" />
     <None Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Masuk\RcpKasBankMasuk.razor" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Masuk\RcpKasBankMasuk.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pencairan Piutang Giro\RcpPencairanPiutangGiro.razor" Link="2. Transaksi\Crixalis\202. Accounting\Pencairan Piutang Giro\RcpPencairanPiutangGiro.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pencairan Hutang Giro\RcpPencairanHutangGiro.razor" Link="2. Transaksi\Crixalis\202. Accounting\Pencairan Hutang Giro\RcpPencairanHutangGiro.razor" />

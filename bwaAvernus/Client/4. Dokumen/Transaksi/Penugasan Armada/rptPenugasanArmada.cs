@@ -29,7 +29,12 @@ namespace bwaAvernus.Client._4._Dokumen
 
         private void PenugasanArmada_BeforePrint(object sender, CancelEventArgs e)
         {
-            var dtT6 = _client.GetPenugasanArmada_Cetak(new RqsPenugasanArmadaById { IdPenugasanArmada = _idPK }, Headers).Adapt<PenugasanArmada_Cetak>();
+            var rqs = _client.GetPenugasanArmada_Cetak(new RqsPenugasanArmadaById { IdPenugasanArmada = _idPK }, Headers);
+            var dtT6 = rqs.Adapt<PenugasanArmada_Cetak>();
+            if (rqs.AlamatCustomerKota == "")
+            {
+                dtT6.AlamatCustomer_Kota = dtT6.Customer_Kota;
+            }
             DtPenugasanArmada.Add(dtT6);
             DataSource = DtPenugasanArmada;
             
@@ -53,6 +58,10 @@ namespace bwaAvernus.Client._4._Dokumen
             public string? Customer_Alamat { get; set; }
             public string? Customer_Kota { get; set; }
             public string Customer_Phone1 { get; set; }
+
+            public string? AlamatCustomer_Alamat { get; set; }
+            public string? AlamatCustomer_KodePos {  get; set; }
+            public string? AlamatCustomer_Kota { get; set; }
             public DateTime WaktuCetak { get; set; } = DateTime.Now;
         }
     }
