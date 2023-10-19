@@ -25,7 +25,7 @@ public class svcPenambahanPenugasan: pthBaseService
 	public async Task<IList<dynamic>> GetDataT7PenambahanPenugasanById(Guid idPenugasanArmada)
 	{
 		var rplT7PenambahanPenugasanArmada = await _client.GetT7PenambahanPenugasanArmadaByIdAsync(new RqsT7PenambahanPenugasanArmadaById() { IdPenugasanArmada = idPenugasanArmada.ToString() }, Headers);
-		return rplT7PenambahanPenugasanArmada.ListT7PenambahanPenugasanArmada.Adapt<IList<dynamic>>() ?? new List<dynamic>();
+		return rplT7PenambahanPenugasanArmada.ListT7PenugasanArmada.Adapt<IList<dynamic>>() ?? new List<dynamic>();
 	}
 
 	public async Task<IList<dynamic>> GetDataT7PenambahanPenugasanArmada_SPBUById(Guid idPenugasanArmada)
@@ -36,7 +36,6 @@ public class svcPenambahanPenugasan: pthBaseService
 
 	public async Task<string> UpdatePenambahanPenugasan(uimT6PenugasanArmada drPenugasanArmada)
 	{
-		drPenugasanArmada.ListT7PenugasanArmada = drPenugasanArmada.ListT7PenambahanPenugasanArmada;
         drPenugasanArmada.Synchronise = "updated";
 		drPenugasanArmada.T7PenugasanArmada.Synchronise = "updated";
 		drPenugasanArmada.T7PenugasanArmada.IdOperator = IdUser;

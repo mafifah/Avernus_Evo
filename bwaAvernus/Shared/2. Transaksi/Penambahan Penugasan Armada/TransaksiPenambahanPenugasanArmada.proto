@@ -229,7 +229,6 @@ message PtmT7PenambahanPenugasanArmada_SPBU {
 
 message RplT7PenambahanPenugasanArmadaById {
     repeated PtmT7PenambahanPenugasanArmada ListT7PenugasanArmada = 1;
-    repeated PtmT7PenambahanPenugasanArmada ListT7PenambahanPenugasanArmada = 2;
 }
 
 message RplT7PenambahanPenugasanArmada_SPBUById {
