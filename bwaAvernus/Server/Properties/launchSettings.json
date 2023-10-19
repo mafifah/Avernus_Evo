@@ -1,6 +1,6 @@
 
 ////setting run server saja
-/*{
+{
   "profiles": {
     "bwaAvernus.Server": {
       "commandName": "Project",
@@ -21,12 +21,12 @@
       "distributionName": ""
     }
   }
-}*/
+}
 
 
 //Setting untuk server & client 
 
-{
+/*{
     "iisSettings": {
       "windowsAuthentication": false,
       "anonymousAuthentication": true,
@@ -65,4 +65,4 @@
         }
       }
     }
-  }
+  }*/

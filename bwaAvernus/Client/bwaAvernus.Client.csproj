@@ -182,20 +182,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Shared\bwaAvernus.Shared.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="bwaCrixalis.Shared">
-      <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net7.0\bwaCrixalis.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="Pantheon.Client">
-      <HintPath>..\..\..\DevOps\Pantheon\Client\bin\Debug\net7.0\Pantheon.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Pantheon.Server">
-      <HintPath>..\..\..\DevOps\Pantheon\Server\bin\Debug\net7.0\Pantheon.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="Pantheon.Shared">
-      <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
@@ -279,6 +265,18 @@
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Giro\RcpPiutangGiro.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Giro\RcpPiutangGiro.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\RcpArmada.razor" Link="1. Master\Crixalis\107. Armada\RcpArmada.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="bwaCrixalis.Shared">
+      <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net7.0\bwaCrixalis.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Pantheon.Client">
+      <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Client\bin\Debug\net7.0\Pantheon.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Pantheon.Shared">
+      <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

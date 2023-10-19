@@ -118,7 +118,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         if (DtCmbCustomer is null) DtCmbCustomer = (await ah.Get_Customer()).Adapt<IList<dynamic>>();
         if (DtCmbRekening is null) DtCmbRekening = (await ah.Get_Rekening()).Adapt<IList<dynamic>>();
         if (DtCmbBBMMetode is null) DtCmbBBMMetode = await ah.Get_DataOption("Metode BBM");
-        if (DtCmbSopir is null) DtCmbSopir = (await ah.Get_ArmadaSopir()).Adapt<IList<dynamic>>();
+        //if (DtCmbSopir is null) DtCmbSopir = (await ah.Get_ArmadaSopir()).Adapt<IList<dynamic>>();
         //if (DtCmbRute is null) DtCmbRute = (await ah.Get_RuteByIdAlamatCustomer()).Adapt<IList<dynamic>>();
         //if (DtBiayaRute.Count() < 1) DtBiayaRute = (await ah.Get_BiayaRute()).Adapt<IList<uimT4BiayaRute>>();
         DtRute = (await ah.Get_RuteByIdAlamatCustomer()).Adapt<IList<uimT3Rute>>();
@@ -160,14 +160,16 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         base.ProsesSeleksiData(data);
         
         DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
-        DrCmbSopir = DtCmbSopir.Adapt<IList<uimT5ArmadaSopir>>().FirstOrDefault(x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi.IdKaryawan_Sopir);
+        DtCmbSopir = await ah.Get_ArmadaSopir(DrCmbArmada.Adapt<uimT1Armada>().IdArmada);
+        DrCmbSopir = (await ah.Get_ArmadaSopir(DrCmbArmada.Adapt<uimT1Armada>().IdArmada)).Adapt<IList<uimT5ArmadaSopir>>().FirstOrDefault(x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi.IdKaryawan_Sopir);
         DtRekapitulasi_Terseleksi.T7PenugasanArmada = (await Svc.GetDataT7PenugasanArmadaById(DtRekapitulasi_Terseleksi.IdPenugasanArmada)).Adapt<IList<uimT7PenugasanArmada>>().FirstOrDefault(x => x.Urutan == 1);
         
         DrCmbCustomer = DtCmbCustomer.Adapt<IList<uimT1CustomerInstansi>>().FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer);
         DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer)).Adapt<IList<dynamic>>();
         DrCmbAlamatCustomer = DtCmbAlamatCustomer.Adapt<IList<uimT2AlamatCustomer>>().FirstOrDefault(x => x.IdAlamatCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer);
         DrCmbRute = DtCmbRute.Adapt<IList<uimT3Rute>>().FirstOrDefault(x => x.IdRute == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute);
-        DrCmbBBMMetode = DtCmbBBMMetode.Adapt<IList<string>>().FirstOrDefault(x => x.Equals(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode));
+        var dtBBM = DtCmbBBMMetode.Adapt<IList<pthT9DataOption>>();
+        DrCmbBBMMetode = dtBBM.FirstOrDefault(x => x.DataOption == DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode);
         DrCmbRekening = DtCmbRekening.Adapt<IList<pthT0Rekening>>().FirstOrDefault(x => x.IdRekening == DtRekapitulasi_Terseleksi.IdRekening);
         StateHasChanged();
 
@@ -372,9 +374,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
 
             ValidasiRute = (await Svc.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
-            if(!string.IsNullOrWhiteSpace(ValidasiRute.IdPenugasanArmada))
+            if (!string.IsNullOrWhiteSpace(ValidasiRute.IdPenugasanArmada))
             {
-                if(ValidasiRute.StatusPerjalanan != "Kembali") DialogService.Alert($"Armada dengan Nopol {armada.Nopol} belum kembali dengan no {ValidasiRute.IdTransaksi}", "Perhatian!");
+                if (ValidasiRute.StatusPerjalanan != "Kembali") DialogService.Alert($"Armada dengan Nopol {armada.Nopol} belum kembali dengan no {ValidasiRute.IdTransaksi}", "Perhatian!");
                 else DialogService.Alert($"Armada dengan Nopol {armada.Nopol} tidak dapat diinput karena sedang berada pada rute {ValidasiRute.Rute} di transaksi {ValidasiRute.IdTransaksi}", "Perhatian!");
                 DrCmbArmada = null;
                 await InvokeAsync(StateHasChanged);
@@ -505,15 +507,22 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         base.ProsesUpdateDatabase();
     }
 
-    protected override async void CtmNavigasi_Click(ContextMenuItemClickEventArgs args)
+    /*protected override async void CtmNavigasi_Click(ContextMenuItemClickEventArgs args)
     {
         if (args.ItemInfo.Text == "Cetak")
         {
             await TampilkanReport("rptPenugasanArmada_1", DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString());
         }
         
+    }*/
+
+    public override async Task ProsesCetak()
+    {
+        base.ProsesCetak();
+        await TampilkanReport("rptPenugasanArmada_1", DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString());
+
     }
-    
+
     #endregion
 
     public class uimValidasiRute

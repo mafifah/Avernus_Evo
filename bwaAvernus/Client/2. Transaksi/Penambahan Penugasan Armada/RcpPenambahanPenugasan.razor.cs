@@ -118,7 +118,6 @@ public partial class RcpPenambahanPenugasan : ConTransaksi_2<uimT6PenugasanArmad
         if (DtCmbCustomer is null) DtCmbCustomer = (await ah.Get_Customer()).Adapt<IList<dynamic>>();
         if (DtCmbRekening is null) DtCmbRekening = (await ah.Get_Rekening()).Adapt<IList<dynamic>>();
         if (DtCmbBBMMetode is null) DtCmbBBMMetode = await ah.Get_DataOption("Metode BBM");
-        if (DtCmbSopir is null) DtCmbSopir = (await ah.Get_ArmadaSopir()).Adapt<IList<dynamic>>();
         //if (DtCmbRute is null) DtCmbRute = (await ah.Get_RuteByIdAlamatCustomer()).Adapt<IList<dynamic>>();
         //if (DtBiayaRute.Count() < 1) DtBiayaRute = (await ah.Get_BiayaRute()).Adapt<IList<uimT4BiayaRute>>();
         DtRute = (await ah.Get_RuteByIdAlamatCustomer()).Adapt<IList<uimT3Rute>>();
@@ -355,7 +354,7 @@ public partial class RcpPenambahanPenugasan : ConTransaksi_2<uimT6PenugasanArmad
             }
 
 
-            ValidasiRute = (await ah.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
+            /*ValidasiRute = (await ah.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
             if(!string.IsNullOrWhiteSpace(ValidasiRute.IdPenugasanArmada))
             {
                 if(ValidasiRute.StatusPerjalanan != "Kembali") DialogService.Alert($"Armada dengan Nopol {armada.Nopol} belum kembali dengan no {ValidasiRute.IdTransaksi}", "Perhatian!");
@@ -363,7 +362,7 @@ public partial class RcpPenambahanPenugasan : ConTransaksi_2<uimT6PenugasanArmad
                 DrCmbArmada = null;
                 await InvokeAsync(StateHasChanged);
                 return;
-            }
+            }*/
             DtRekapitulasi_Terseleksi.IdArmada = armada.IdArmada;
             DtRekapitulasi_Terseleksi.IdJenisArmada = armada.IdJenisArmada;
             DtRekapitulasi_Terseleksi.Nopol = armada.Nopol;
@@ -499,6 +498,7 @@ public partial class RcpPenambahanPenugasan : ConTransaksi_2<uimT6PenugasanArmad
         base.ProsesSeleksiData(data);
 
         DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
+        DtCmbSopir = await ah.Get_ArmadaSopir(DrCmbArmada.Adapt<uimT1Armada>().IdArmada);
         DrCmbSopir = DtCmbSopir.Adapt<IList<uimT5ArmadaSopir>>().FirstOrDefault(x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi.IdKaryawan_Sopir);
         DtRekapitulasi_Terseleksi.ListT7PenugasanArmada = (await Svc.GetDataT7PenambahanPenugasanById(DtRekapitulasi_Terseleksi.IdPenugasanArmada))?.Adapt<IList<T7PenugasanArmada>>();
 
