@@ -90,9 +90,9 @@ namespace bwaAvernus.Server._2._Transaksi
             var dtCompany = (await _svd.GetEntities<pthT0Company>()).FirstOrDefault(x => x.IdCompany == "GMA");
             var dtOperator = new pthT1Karyawan();
             if (dtT6PenugasanArmada.IdOperator is null) 
-             dtOperator = (await _svd.GetEntitiesDenganSpec<pthT1Karyawan>(x => x.IdKaryawan == dtT6PenugasanArmada.IdCreator, $"{nameof(pthT1Karyawan.T0Jabatan)}")).FirstOrDefault();
+             dtOperator = (await _svd.GetEntitiesDenganSpec<pthT1Karyawan>(x => x.IdKaryawan == dtT6PenugasanArmada.T6PenugasanArmada.IdCreator, $"{nameof(pthT1Karyawan.T0Jabatan)}")).FirstOrDefault();
             else
-                dtOperator = (await _svd.GetEntitiesDenganSpec<pthT1Karyawan>(x => x.IdKaryawan == dtT6PenugasanArmada.IdOperator, $"{nameof(pthT1Karyawan.T0Jabatan)}")).FirstOrDefault();
+                dtOperator = (await _svd.GetEntitiesDenganSpec<pthT1Karyawan>(x => x.IdKaryawan == dtT6PenugasanArmada.T6PenugasanArmada.IdOperator, $"{nameof(pthT1Karyawan.T0Jabatan)}")).FirstOrDefault();
             var reply = dtT6PenugasanArmada.T6PenugasanArmada.Adapt<RplPenugasanArmada_Cetak>();
             reply.CompanyPemilik = $"{dtCompany.Prefix} {R.DecryptString(dtCompany.Nama)}";
             reply.JenisArmadaJenis = dtT6PenugasanArmada.T6PenugasanArmada.T1Armada.T0JenisArmada.Jenis;
