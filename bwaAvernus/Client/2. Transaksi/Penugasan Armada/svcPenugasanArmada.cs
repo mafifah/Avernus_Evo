@@ -66,6 +66,7 @@ namespace bwaAvernus.Client._2._Transaksi
             {
                 return await InsertPenugasanArmada(drPenugasanArmada);
             }
+            drPenugasanArmada.Synchronise = "inserted";
             var rqsPenugasanArmada = drPenugasanArmada.Adapt<RqsUpdatePenugasanArmada>();
             rqsPenugasanArmada.IdForm = 30701020;
             //rqsPenugasanArmada.ListT5Pembayaran.AddRange(dtT5Pembayaran.Adapt<IEnumerable<PtmT5Pembayaran_T6PenugasanArmada>>());
