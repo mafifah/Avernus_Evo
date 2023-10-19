@@ -46,7 +46,8 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 		var listDetilPenambahanPenugasanArmada = await _svd.GetEntitiesDenganSpec<T7PenugasanArmada>(x => x.IdPenugasanArmada.ToString() == request.IdPenugasanArmada);
 		if (listDetilPenambahanPenugasanArmada is null) return rplDetilPenambahanPenugasanArmada;
 		rplDetilPenambahanPenugasanArmada.ListT7PenugasanArmada.AddRange(listDetilPenambahanPenugasanArmada.Adapt<IEnumerable<PtmT7PenambahanPenugasanArmada>>());
-		return rplDetilPenambahanPenugasanArmada;
+        rplDetilPenambahanPenugasanArmada.ListT7PenambahanPenugasanArmada.AddRange(listDetilPenambahanPenugasanArmada.Adapt<IEnumerable<PtmT7PenambahanPenugasanArmada>>());
+        return rplDetilPenambahanPenugasanArmada;
 	}
 
 	public override async Task<RplT7PenambahanPenugasanArmada_SPBUById> GetT7PenambahanPenugasanArmada_SPBUById(RqsT7PenambahanPenugasanArmadaById request, ServerCallContext context)

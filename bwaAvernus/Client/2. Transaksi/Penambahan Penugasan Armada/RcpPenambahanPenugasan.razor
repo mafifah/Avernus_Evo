@@ -1,10 +1,47 @@
 ﻿@inherits ConTransaksi_2<uimT6PenugasanArmada, svcPenambahanPenugasan>
 @namespace bwaAvernus.Client._2._Transaksi
 @using bwaAvernus.Shared._2._Transaksi;
+@using Pantheon.Client.Custom_Control;
 @{
 	base.BuildRenderTree(__builder);
 	RfDetil = 
     @<DxFormLayout CssClass="custom-form-layout">
+        <DxFormLayoutGroup ColSpanMd="12">
+            <DxGrid @ref="@GrdT7PenambahanPenugasan"
+                    Data="@(DtGrdT7PenambahanPenugasan.Adapt<IList<uimT7PenugasanArmada>>())"
+                    KeyFieldName="@nameof(uimT7PenugasanArmada.IdDetilPenugasanArmada)"
+                    CustomizeElement="GrdDetil_CustomizeElement"
+                    CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT7PenugasanArmada>)"
+                    EditModelSaving="@(GrdDetil_EditModelSaving<uimT7PenugasanArmada, T7PenugasanArmada>)"
+                    EditMode="GridEditMode.EditForm"
+                    EditNewRowPosition="GridEditNewRowPosition.Bottom"
+                    SelectionMode="GridSelectionMode.Single"
+                    @oncontextmenu:preventDefault>
+                <Columns>
+                    <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
+                        <CellDisplayTemplate>
+                            @(context.VisibleIndex + 1)
+                        </CellDisplayTemplate>
+                    </DxGridDataColumn>
+                    <DxGridDataColumn FieldName="Customer_Nama" Caption="Customer" />
+                    <DxGridDataColumn FieldName="IdDetilPenugasanArmada" Caption="IdDetilPenugasanArmada" />
+                    <DxGridDataColumn FieldName="IdRute" Caption="IdRute" />
+                    <DxGridDataColumn FieldName="Urutan" Caption="Urutan" />
+                    <DxGridDataColumn FieldName="WaktuPenugasan" Caption="WaktuPenugasan" />
+                    <DxGridDataColumn FieldName="AlamatCustomer_Alamat" Caption="Alamat Customer" />
+                    <DxGridDataColumn FieldName="Rute_Rute" Caption="Rute" />
+                    <DxGridDataColumn FieldName="Synchronise" Caption="Status Rute" />
+                </Columns>
+            </DxGrid>
+            <PthContextMenuHeaderGrid Grid="@GrdT7PenambahanPenugasan" @ref="@CtmDetil" />
+        </DxFormLayoutGroup>
+
+        <DxFormLayoutItem ColSpanMd="6">
+            <DxButton Click="@ProsesPenugasanBaru" Text="Penugasan Baru"/>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem ColSpanMd="6">
+            <DxButton Text="Hapus Penugasan" />
+        </DxFormLayoutItem>
         <DxFormLayoutItem @ref="@FliIdCompany" Caption="Kode" ColSpanMd="3">
             <DxComboBox @ref="@CmbIdCompany"
                         Data="@DtCmbIdCompany"
@@ -161,8 +198,8 @@
                 </DxFormLayoutItem>
             </DxFormLayoutGroup>
             <DxFormLayoutGroup ColSpanMd="6">
-                <DxGrid @ref="@GrdT7PenugasanArmada_SPBU"
-                        Data="@(DtGrdT7PenugasanArmada_SPBU.Adapt<IList<uimT7PenugasanArmada_SPBU>>())"
+                <DxGrid @ref="@GrdT7PenambahanPenugasanArmada_SPBU"
+                        Data="@(DtGrdT7PenambahanPenugasanArmada_SPBU.Adapt<IList<uimT7PenugasanArmada_SPBU>>())"
                         KeyFieldName="@nameof(uimT7PenugasanArmada_SPBU.IdDetilPenugasanArmada)"
                         CustomizeElement="GrdDetil_CustomizeElement"
                         CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT7PenugasanArmada_SPBU>)"
@@ -174,10 +211,10 @@
                     <Columns>
                         <DxGridCommandColumn Width="10px">
                             <HeaderTemplate>
-                                <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdT7PenugasanArmada_SPBU.StartEditNewRowAsync())"></a>
+                                <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdT7PenambahanPenugasanArmada_SPBU.StartEditNewRowAsync())"></a>
                             </HeaderTemplate>
                             <CellDisplayTemplate>
-                                <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdT7PenugasanArmada_SPBU.StartEditRowAsync(context.VisibleIndex))"></a>
+                                <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdT7PenambahanPenugasanArmada_SPBU.StartEditRowAsync(context.VisibleIndex))"></a>
                                 <a class="fa-solid fa-trash-can text-decoration-none" @onclick="@(() =>  GrdDetil_OnHapus<uimT7PenugasanArmada_SPBU, T7PenugasanArmada_SPBU>((uimT7PenugasanArmada_SPBU)context.DataItem))"></a>
                             </CellDisplayTemplate>
                         </DxGridCommandColumn>
@@ -204,7 +241,7 @@
                             </DxFormLayoutItem>
                         </DxFormLayout>
                     </EditFormTemplate>
-                </DxGrid>
+                </DxGrid> 
                 <br/>
                 <DxFormLayoutItem @ref="FliBBMMetode" Caption="BBM Metode" ColSpanMd="12">
                     <DxComboBox @ref="@CmbBBMMetode" Data="@DtCmbBBMMetode" @bind-Value="@DrCmbBBMMetode"
