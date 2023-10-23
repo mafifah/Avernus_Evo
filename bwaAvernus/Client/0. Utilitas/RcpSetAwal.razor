@@ -12,7 +12,8 @@
 {
 	protected override async void OnInitialized()
 	{
-		//base.OnInitialized();
+		base.OnInitialized();
+		await Task.Delay(1);
 		AlamatAPI = "https://localhost:7243/";
 		//AlamatAPI = "https://ascrixalis-evo.azurewebsites.net/";
 		URL_AzureBlobStorage = "https://sdatafile.blob.core.windows.net/fortiscentral";
