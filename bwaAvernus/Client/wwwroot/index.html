@@ -139,44 +139,15 @@
             carousel.cycle();
         }
 
-        function setHeader(ubahWarnaHeader) {
-            if (ubahWarnaHeader == "true") {
-                let header = document.querySelector("#header-app");
-                let konten = document.querySelector("#body");
-                let icon = document.getElementsByClassName("warna-icon-header");
-                let posisiScroll = konten.scrollTop;
-
-                for (var i = 0; i < icon.length; ++i) {
-                    if (posisiScroll > 40) {
-                        icon[i].style = "color: rgba(211, 211, 211, 255) !important;";
-                    } else if (posisiScroll > 30) {
-                        icon[i].style = "color: rgba(219, 219, 219, 255) !important;";
-                    } else if (posisiScroll > 20) {
-                        icon[i].style = "color: rgba(228, 228, 228, 255) !important;";
-                    } else if (posisiScroll > 10) {
-                        icon[i].style = "color: rgba(238, 238, 238, 255) !important;";
-                    } else if (posisiScroll > 0) {
-                        icon[i].style = "color: rgba(247, 247, 247, 255) !important;";
-                    } else {
-                        icon[i].style = "color: rgba(255, 255, 255, 255) !important;";
-                    }
-                }
-
-                if (posisiScroll > 40) {
-                    header.style = "background-color: rgba(255, 255, 255, 1);";
-                } else if (posisiScroll > 30) {
-                    header.style = "background-color: rgba(255, 255, 255, 0.8);";
-                } else if (posisiScroll > 20) {
-                    header.style = "background-color: rgba(255, 255, 255, 0.6);";
-                } else if (posisiScroll > 10) {
-                    header.style = "background-color: rgba(255, 255, 255, 0.4);";
-                } else if (posisiScroll > 0) {
-                    header.style = "background-color: rgba(255, 255, 255, 0.2);";
-                } else {
-                    header.style = "background-color: transparent;";
-                }
+        function autoScrollKetikaPindahTab(idControl) {
+            alert(idControl);
+            //console.log(idControl);
+            var targetElement = document.getElementById(idControl);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         }
+        
     </script>
 </body>
 

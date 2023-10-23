@@ -58,7 +58,7 @@ namespace bwaAvernus.Client._2._Transaksi
         {
             
             var dtT7PenugasanArmada = new List<T7PenugasanArmada>();
-            drPenugasanArmada.T7PenugasanArmada.Synchronise = "updated";
+            drPenugasanArmada.Synchronise = "updated";
             drPenugasanArmada.T7PenugasanArmada.IdOperator = IdUser;
             dtT7PenugasanArmada.Add(drPenugasanArmada.T7PenugasanArmada);
             drPenugasanArmada.ListT7PenugasanArmada = dtT7PenugasanArmada.Adapt<ICollection<T7PenugasanArmada>>();

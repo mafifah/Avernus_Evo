@@ -4,37 +4,37 @@
 @{
 	base.BuildRenderTree(__builder);
 	RfDetil = 
-    @<DxFormLayout CssClass="custom-form-layout">
-        <DxFormLayoutItem @ref="@FliIdCompany" Caption="Kode" ColSpanMd="3">
-            <DxComboBox @ref="@CmbIdCompany"
-                        Data="@DtCmbIdCompany"
-                        @bind-Value="@DrCmbIdCompany"
-                        TextFieldName="IdCompany"
-                        CssClass="cw-480 font_0"
-                        DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                        DropDownVisibleChanged="@((bool valueBaru) => CmbIdCompany_DropDownVisibleChanged(valueBaru))"
-                        tabindex="1">
-                <DxListEditorColumn FieldName="IdCompany" Caption="IdCompany" />
-                <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
-            </DxComboBox>
-        </DxFormLayoutItem>
-        <DxFormLayoutItem @ref="@FliIdTransaksi" Caption="" ColSpanMd="3">
-            <DxTextBox @ref="@TxbIdTransaksi" @bind-Text="DtRekapitulasi_Terseleksi.IdTransaksi" NullText="tampil setelah simpan" ReadOnly=true
-                       tabindex="2">
-            </DxTextBox>
-        </DxFormLayoutItem>
-        <DxFormLayoutItem @ref="@FliWaktuProses" Caption="Proses" ColSpanMd="6">
-            <DxDateEdit @ref="@DteWaktuProses"
-                        Date="@DtRekapitulasi_Terseleksi.WaktuProses"
-                        DateExpression="@(() => DtRekapitulasi_Terseleksi.WaktuProses)"
-                        DateChanged="@(async (DateTimeOffset? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.WaktuProses), valueBaru))"
-                        Mask="dddd, dd MMMM yyyy  HH:mm"
-                        CssClass="dteCustom"
-                        tabindex="3">
-            </DxDateEdit>
-        </DxFormLayoutItem>
-        <DxFormLayoutGroup Caption="Armada" ColSpanMd="6">
-            <DxFormLayoutItem @ref="@FliArmada" Caption="Armada" ColSpanMd="12">
+    @<DxFormLayout CssClass="custom-form-layout" Id="scRute">
+        <DxFormLayout CssClass="sticky-row-1 w-100 sc">
+            <DxFormLayoutItem @ref="@FliIdCompany" Caption="Kode" ColSpanMd="3">
+                <DxComboBox @ref="@CmbIdCompany"
+                            Data="@DtCmbIdCompany"
+                            @bind-Value="@DrCmbIdCompany"
+                            TextFieldName="IdCompany"
+                            CssClass="cw-480 font_0"
+                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            DropDownVisibleChanged="@((bool valueBaru) => CmbIdCompany_DropDownVisibleChanged(valueBaru))"
+                            tabindex="1">
+                    <DxListEditorColumn FieldName="IdCompany" Caption="IdCompany" />
+                    <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="@FliIdTransaksi" Caption="" ColSpanMd="3">
+                <DxTextBox @ref="@TxbIdTransaksi" @bind-Text="DtRekapitulasi_Terseleksi.IdTransaksi" NullText="tampil setelah simpan" ReadOnly=true
+                           tabindex="2">
+                </DxTextBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="@FliWaktuProses" Caption="Proses" ColSpanMd="6">
+                <DxDateEdit @ref="@DteWaktuProses"
+                            Date="@DtRekapitulasi_Terseleksi.WaktuProses"
+                            DateExpression="@(() => DtRekapitulasi_Terseleksi.WaktuProses)"
+                            DateChanged="@(async (DateTimeOffset? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.WaktuProses), valueBaru))"
+                            Mask="dddd, dd MMMM yyyy  HH:mm"
+                            CssClass="dteCustom"
+                            tabindex="3">
+                </DxDateEdit>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="@FliArmada" Caption="Armada" ColSpanMd="6">
                 <DxComboBox @ref="@CmbArmada" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbArmada"
                             @bind-Value="@DrCmbArmada"
@@ -47,9 +47,7 @@
                     <DxListEditorColumn FieldName="Merk" Caption="Merk" />
                 </DxComboBox>
             </DxFormLayoutItem>
-        </DxFormLayoutGroup>
-        <DxFormLayoutGroup Caption="Sopir" ColSpanMd="6">
-            <DxFormLayoutItem @ref="@FliSopir" Caption="Sopir" ColSpanMd="12">
+            <DxFormLayoutItem @ref="@FliSopir" Caption="Sopir" ColSpanMd="6">
                 <DxComboBox @ref="@CmbSopir" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbSopir"
                             @bind-Value="@DrCmbSopir"
@@ -62,175 +60,211 @@
                     <DxListEditorColumn FieldName="Seluler1" Caption="GSM Phone" />
                 </DxComboBox>
             </DxFormLayoutItem>
-        </DxFormLayoutGroup>
-        <DxFormLayoutGroup Caption="Penugasan Rute Pertama" ColSpanMd="12">
-            <DxFormLayoutGroup ColSpanMd="6">
-                <DxFormLayoutItem @ref="@FliCustomer" Caption="Customer" ColSpanMd="12">
-                    <DxComboBox @ref="@CmbCustomer" FilteringMode="DataGridFilteringMode.Contains"
-                                Data="@DtCmbCustomer" 
-                                @bind-Value="@DrCmbCustomer"
-                                TextFieldName="Nama"
-                                CssClass="cw-480 font_0"
-                                DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                                DropDownVisibleChanged="@((bool valueBaru) => CmbCustomer_DropDownVisibleChanged(valueBaru))"
-                                tabindex="4">
-                        <DxListEditorColumn FieldName="Prefix" Caption="Prefix" />
-                        <DxListEditorColumn FieldName="Nama" Caption="Nama" />
-                        <DxListEditorColumn FieldName="Kode" Caption="Kode" />
-                        <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
-                    </DxComboBox>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="@FliAlamatCustomer" Caption="Alamat" ColSpanMd="12">
-                    <DxComboBox @ref="@CmbAlamatCustomer" FilteringMode="DataGridFilteringMode.Contains"
-                                Data="@DtCmbAlamatCustomer"
-                                @bind-Value="@DrCmbAlamatCustomer"
-                                TextFieldName="Alamat"
-                                CssClass="cw-480 font_0"
-                                DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                                DropDownVisibleChanged="@((bool valueBaru) => CmbAlamatCustomer_DropDownVisibleChanged(valueBaru))"
-                                tabindex="5">
-                        <DxListEditorColumn FieldName="Alamat" Caption="Alamat" />
-                        <DxListEditorColumn FieldName="KodePos" Caption="Kode Pos" />
-                    </DxComboBox>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="@FliRute" Caption="Rute" ColSpanMd="12">
-                    <DxComboBox @ref="@CmbRute" FilteringMode="DataGridFilteringMode.Contains"
-                                Data="@DtCmbRute"
-                                @bind-Value="@DrCmbRute"
-                                TextFieldName="Rute"
-                                CssClass="cw-480 font_0"
-                                DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                                DropDownVisibleChanged="@((bool valueBaru) => CmbRute_DropDownVisibleChanged(valueBaru))"
-                                tabindex="6">
-                        <DxListEditorColumn FieldName="Rute" Caption="Rute" />
-                        <DxListEditorColumn FieldName="Jenis" Caption="Jenis" />
-                    </DxComboBox>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="FliSanguRitase" Caption="Sangu Ritase" ColSpanMd="12">
-                    <DxSpinEdit @ref="SpeSanguRitase" InputId="0.0, 8.0" tabindex="7"
-                                Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
-                                ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
-                                ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase), (int?)valueBaru))" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="FliTotalSangu" Caption="Total Sangu" ColSpanMd="12">
-                    <DxSpinEdit @ref="SpeTotalSangu" InputId="0.0, 8.0" tabindex="8"
-                                Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
-                                ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
-                                ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase), (int?)valueBaru))" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="FliBBMVolume" Caption="BBM Volume" ColSpanMd="12">
-                    <DxSpinEdit @ref="SpeBBMVolume" InputId="0.0, 8.0" tabindex="9"
-                                Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
-                                ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
-                                ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume), (int?)valueBaru))" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="FliBBMHarga" Caption="BBM Harga " ColSpanMd="12">
-                    <DxSpinEdit @ref="SpeBBMHarga" InputId="0.0, 8.0" tabindex="10"
-                                Value="@DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga" ReadOnly="true"
-                                ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
-                                ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume), (int?)valueBaru))" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="FliBBMSangu" Caption="BBM + Sangu" ColSpanMd="12">
-                    <DxSpinEdit @ref="SpeBBMSangu" InputId="0.0, 8.0" tabindex="11"
-                                Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
-                                ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
-                                ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase), (int?)valueBaru))" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="FliDeposit" Caption="Deposit" ColSpanMd="12">
-                    <DxSpinEdit @ref="SpeDeposit" InputId="0.0, 8.0" tabindex="12"
-                                Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.Deposit)"
-                                ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.Deposit)"
-                                ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.Deposit), (int?)valueBaru))" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="FliPotongan" Caption="Potongan" ColSpanMd="12">
-                    <DxSpinEdit @ref="SpePotongan" InputId="0.0, 8.0" tabindex="13"
-                                Value="@((decimal?)Potongan)"
-                                ValueExpression="@(() => (decimal?)Potongan)" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="FliTotalAkhir" Caption="Total Akhir" ColSpanMd="12">
-                    <DxSpinEdit @ref="SpeTotalAkhir" InputId="0.0, 8.0" tabindex="14"
-                                Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.TotalAkhir)"
-                                ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.TotalAkhir)"
-                                ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.TotalAkhir), (int?)valueBaru))" />
-                </DxFormLayoutItem>
-                <DxFormLayoutItem @ref="FliSanguSementara" Caption="Sangu Sementara" ColSpanMd="12">
-                    <DxSpinEdit @ref="SpeSanguSementara" InputId="0.0, 8.0" tabindex="15"
-                                Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguSementara)"
-                                ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguSementara)"
-                                ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguSementara), (int?)valueBaru))" />
-                </DxFormLayoutItem>
-            </DxFormLayoutGroup>
-            <DxFormLayoutGroup ColSpanMd="6">
-                <DxGrid @ref="@GrdT7PenugasanArmada_SPBU"
-                        Data="@(DtGrdT7PenugasanArmada_SPBU.Adapt<IList<uimT7PenugasanArmada_SPBU>>())"
-                        KeyFieldName="@nameof(uimT7PenugasanArmada_SPBU.IdDetilPenugasanArmada)"
-                        CustomizeElement="GrdDetil_CustomizeElement"
-                        CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT7PenugasanArmada_SPBU>)"
-                        EditModelSaving="@(GrdDetil_EditModelSaving<uimT7PenugasanArmada_SPBU, T7PenugasanArmada_SPBU>)"
-                        EditMode="GridEditMode.EditForm"
-                        EditNewRowPosition="GridEditNewRowPosition.Bottom"
-                        SelectionMode="GridSelectionMode.Single"
-                        @oncontextmenu:preventDefault>
-                    <Columns>
-                        <DxGridCommandColumn Width="10px">
-                            <HeaderTemplate>
-                                <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdT7PenugasanArmada_SPBU.StartEditNewRowAsync())"></a>
-                            </HeaderTemplate>
-                            <CellDisplayTemplate>
-                                <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdT7PenugasanArmada_SPBU.StartEditRowAsync(context.VisibleIndex))"></a>
-                                <a class="fa-solid fa-trash-can text-decoration-none" @onclick="@(() =>  GrdDetil_OnHapus<uimT7PenugasanArmada_SPBU, T7PenugasanArmada_SPBU>((uimT7PenugasanArmada_SPBU)context.DataItem))"></a>
-                            </CellDisplayTemplate>
-                        </DxGridCommandColumn>
-                        <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
-                            <CellDisplayTemplate>
-                                @(context.VisibleIndex + 1)
-                            </CellDisplayTemplate>
-                        </DxGridDataColumn>
+        </DxFormLayout>
+        
+        <DxFormLayout CssClass="sticky-row-2 w-100" Id="sticky-row-2">
+            <DxFormLayoutItem ColSpanMd="2">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="Rute" Click="@(() => ProsesPilihTab_Detil("scRute"))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="2">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="BBM" Click="@(() => ProsesPilihTab_Detil("scBBM"))" />
+            </DxFormLayoutItem>
+            
+            <DxFormLayoutItem ColSpanMd="8">
+            </DxFormLayoutItem>
+        </DxFormLayout>
+        <DxFormLayout CssClass="sc">
+            <DxFormLayoutItem @ref="@FliCustomer" Caption="Customer" ColSpanMd="12">
+                <DxComboBox @ref="@CmbCustomer" FilteringMode="DataGridFilteringMode.Contains"
+                            Data="@DtCmbCustomer"
+                            @bind-Value="@DrCmbCustomer"
+                            TextFieldName="Nama"
+                            CssClass="cw-480 font_0"
+                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            DropDownVisibleChanged="@((bool valueBaru) => CmbCustomer_DropDownVisibleChanged(valueBaru))"
+                            tabindex="4">
+                    <DxListEditorColumn FieldName="Prefix" Caption="Prefix" />
+                    <DxListEditorColumn FieldName="Nama" Caption="Nama" />
+                    <DxListEditorColumn FieldName="Kode" Caption="Kode" />
+                    <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="@FliAlamatCustomer" Caption="Alamat" ColSpanMd="12">
+                <DxComboBox @ref="@CmbAlamatCustomer" FilteringMode="DataGridFilteringMode.Contains"
+                            Data="@DtCmbAlamatCustomer"
+                            @bind-Value="@DrCmbAlamatCustomer"
+                            TextFieldName="Alamat"
+                            CssClass="cw-480 font_0"
+                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            DropDownVisibleChanged="@((bool valueBaru) => CmbAlamatCustomer_DropDownVisibleChanged(valueBaru))"
+                            tabindex="5">
+                    <DxListEditorColumn FieldName="Alamat" Caption="Alamat" />
+                    <DxListEditorColumn FieldName="KodePos" Caption="Kode Pos" />
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="@FliRute" Caption="Rute" ColSpanMd="12">
+                <DxComboBox @ref="@CmbRute" FilteringMode="DataGridFilteringMode.Contains"
+                            Data="@DtCmbRute"
+                            @bind-Value="@DrCmbRute"
+                            TextFieldName="Rute"
+                            CssClass="cw-480 font_0"
+                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            DropDownVisibleChanged="@((bool valueBaru) => CmbRute_DropDownVisibleChanged(valueBaru))"
+                            tabindex="6">
+                    <DxListEditorColumn FieldName="Rute" Caption="Rute" />
+                    <DxListEditorColumn FieldName="Jenis" Caption="Jenis" />
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliSanguRitase" Caption="Sangu Ritase" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeSanguRitase" InputId="0.0, 8.0" tabindex="7"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliTotalSangu" Caption="Total Sangu" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeTotalSangu" InputId="0.0, 8.0" tabindex="8"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliBBMVolume" Caption="BBM Volume" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeBBMVolume" InputId="0.0, 8.0" tabindex="9"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliBBMHarga" Caption="BBM Harga " ColSpanMd="12">
+                <DxSpinEdit @ref="SpeBBMHarga" InputId="0.0, 8.0" tabindex="10"
+                            Value="@DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga" ReadOnly="true"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliBBMSangu" Caption="BBM + Sangu" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeBBMSangu" InputId="0.0, 8.0" tabindex="11"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliDeposit" Caption="Deposit" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeDeposit" InputId="0.0, 8.0" tabindex="12"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.Deposit)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.Deposit)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.Deposit), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliPotongan" Caption="Potongan" ColSpanMd="12">
+                <DxSpinEdit @ref="SpePotongan" InputId="0.0, 8.0" tabindex="13"
+                            Value="@((decimal?)Potongan)"
+                            ValueExpression="@(() => (decimal?)Potongan)" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliTotalAkhir" Caption="Total Akhir" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeTotalAkhir" InputId="0.0, 8.0" tabindex="14"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.TotalAkhir)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.TotalAkhir)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.TotalAkhir), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliSanguSementara" Caption="Sangu Sementara" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeSanguSementara" InputId="0.0, 8.0" tabindex="15"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguSementara)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguSementara)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguSementara), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+        </DxFormLayout>
+        <br/>
+        <DxFormLayout Id="scBBM" CssClass="sc">
+            <DxGrid @ref="@GrdT7PenugasanArmada_SPBU"
+                    Data="@(DtGrdT7PenugasanArmada_SPBU.Adapt<IList<uimT7PenugasanArmada_SPBU>>())"
+                    KeyFieldName="@nameof(uimT7PenugasanArmada_SPBU.IdDetilPenugasanArmada)"
+                    CustomizeElement="GrdDetil_CustomizeElement"
+                    CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT7PenugasanArmada_SPBU>)"
+                    EditModelSaving="@(GrdDetil_EditModelSaving<uimT7PenugasanArmada_SPBU, T7PenugasanArmada_SPBU>)"
+                    EditMode="GridEditMode.EditForm"
+                    EditNewRowPosition="GridEditNewRowPosition.Bottom"
+                    SelectionMode="GridSelectionMode.Single"
+                    @oncontextmenu:preventDefault>
+                <Columns>
+                    <DxGridCommandColumn Width="10px">
+                        <HeaderTemplate>
+                            <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdT7PenugasanArmada_SPBU.StartEditNewRowAsync())"></a>
+                        </HeaderTemplate>
+                        <CellDisplayTemplate>
+                            <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdT7PenugasanArmada_SPBU.StartEditRowAsync(context.VisibleIndex))"></a>
+                            <a class="fa-solid fa-trash-can text-decoration-none" @onclick="@(() =>  GrdDetil_OnHapus<uimT7PenugasanArmada_SPBU, T7PenugasanArmada_SPBU>((uimT7PenugasanArmada_SPBU)context.DataItem))"></a>
+                        </CellDisplayTemplate>
+                    </DxGridCommandColumn>
+                    <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
+                        <CellDisplayTemplate>
+                            @(context.VisibleIndex + 1)
+                        </CellDisplayTemplate>
+                    </DxGridDataColumn>
 
-                        <DxGridDataColumn FieldName="BBMVolume" Caption="BBM Volume" />
-                        <DxGridDataColumn FieldName="Kode1" Caption="Kode" />
-                        <DxGridDataColumn FieldName="Kode2" Caption="Kode Manual" />
-                    </Columns>
-                    <EditFormTemplate Context="ctxT7PenugasanArmada_SPBU">
-                        @{
-                                var edm = (uimT7PenugasanArmada_SPBU)ctxT7PenugasanArmada_SPBU.EditModel;
-                        }
-                        <DxFormLayout>
-                            <DxFormLayoutItem Caption="BBM Volume" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
-                                <DxSpinEdit TValue="int?" @bind-Value="@edm.BBMVolume" />
-                            </DxFormLayoutItem>
-                            <DxFormLayoutItem Caption="Kode Manual" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
-                                <DxTextBox @bind-Text="@edm.Kode2" />
-                            </DxFormLayoutItem>
-                        </DxFormLayout>
-                    </EditFormTemplate>
-                </DxGrid>
-                <br/>
-                <DxFormLayoutItem @ref="FliBBMMetode" Caption="BBM Metode" ColSpanMd="12">
-                    <DxComboBox @ref="@CmbBBMMetode" Data="@DtCmbBBMMetode" @bind-Value="@DrCmbBBMMetode"
-                                tabindex="16" TextFieldName="DataOption"
-                                DropDownVisibleChanged="@((bool valueBaru) => CmbBBMMetode_DropDownVisibleChanged(valueBaru))"
-                                CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
-                    </DxComboBox>
-                </DxFormLayoutItem>
+                    <DxGridDataColumn FieldName="BBMVolume" Caption="BBM Volume" />
+                    <DxGridDataColumn FieldName="Kode1" Caption="Kode" />
+                    <DxGridDataColumn FieldName="Kode2" Caption="Kode Manual" />
+                </Columns>
+                <EditFormTemplate Context="ctxT7PenugasanArmada_SPBU">
+                    @{
+                            var edm = (uimT7PenugasanArmada_SPBU)ctxT7PenugasanArmada_SPBU.EditModel;
+                    }
+                    <DxFormLayout>
+                        <DxFormLayoutItem Caption="BBM Volume" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
+                            <DxSpinEdit TValue="int?" @bind-Value="@edm.BBMVolume" />
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Kode Manual" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
+                            <DxTextBox @bind-Text="@edm.Kode2" />
+                        </DxFormLayoutItem>
+                    </DxFormLayout>
+                </EditFormTemplate>
+            </DxGrid>
+            <br />
+            <DxFormLayoutItem @ref="FliBBMMetode" Caption="BBM Metode" ColSpanMd="12">
+                <DxComboBox @ref="@CmbBBMMetode" Data="@DtCmbBBMMetode" @bind-Value="@DrCmbBBMMetode"
+                            tabindex="16" TextFieldName="DataOption"
+                            DropDownVisibleChanged="@((bool valueBaru) => CmbBBMMetode_DropDownVisibleChanged(valueBaru))"
+                            CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
+                </DxComboBox>
+            </DxFormLayoutItem>
 
-                <DxFormLayoutItem @ref="FliRekening" Caption="Rekening" ColSpanMd="12">
-                    <DxComboBox @ref="@CmbRekening" Data="@DtCmbRekening" @bind-Value="@DrCmbRekening" tabindex="17"
-                                DropDownVisibleChanged="@((bool valueBaru) => CmbRekening_DropDownVisibleChanged(valueBaru))"
-                                TextFieldName="Rekening"
-                                CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
-                        <DxListEditorColumn FieldName="Rekening" Caption="Rekening" />
-                        <DxListEditorColumn FieldName="Alias" Caption="Alias" />
-                    </DxComboBox>
-                </DxFormLayoutItem>
-            </DxFormLayoutGroup>
-            @*<DxFormLayoutItem Caption="= Rp " ColSpanMd="4">
-                <DxSpinEdit Value="0" tabindex="11"/>
-            </DxFormLayoutItem>*@
-        </DxFormLayoutGroup>
+            <DxFormLayoutItem @ref="FliRekening" Caption="Rekening" ColSpanMd="12">
+                <DxComboBox @ref="@CmbRekening" Data="@DtCmbRekening" @bind-Value="@DrCmbRekening" tabindex="17"
+                            DropDownVisibleChanged="@((bool valueBaru) => CmbRekening_DropDownVisibleChanged(valueBaru))"
+                            TextFieldName="Rekening"
+                            CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
+                    <DxListEditorColumn FieldName="Rekening" Caption="Rekening" />
+                    <DxListEditorColumn FieldName="Alias" Caption="Alias" />
+                </DxComboBox>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+        
         
 	</DxFormLayout>;
 }
-@code {
+<style>
+    .sticky-row-1 {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        opacity: 1 !important;
+        position: -webkit-sticky !important;
+        position: sticky;
+        top: 5.8vh; /* Sesuaikan dengan tinggi header Anda */
+        z-index: 10000;
+        background-color: white !important;
+    }
 
-}
+    .sticky-row-2 {
+        opacity: 1 !important;
+        position: -webkit-sticky !important;
+        position: sticky;
+        z-index: 9999;
+        top: 16.5vh;
+        background-color: white !important;
+
+    }
+
+    .sc{
+        margin: 1vh !important;
+    }
+</style>
