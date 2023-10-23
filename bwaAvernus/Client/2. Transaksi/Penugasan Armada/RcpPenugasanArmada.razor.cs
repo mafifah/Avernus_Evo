@@ -8,6 +8,7 @@ using Radzen;
 using System.Reflection;
 using bwaCrixalis.Shared._1._Master;
 using Microsoft.Ajax.Utilities;
+using Microsoft.JSInterop;
 
 namespace bwaAvernus.Client._2._Transaksi;
 public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, svcPenugasanArmada>
@@ -22,6 +23,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     [Inject]
 
     DialogService DialogService { get; set; }
+
+    [Inject]
+    IJSRuntime _js { get; set; }
     #endregion
 
     #region Fli
@@ -493,6 +497,17 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         }
         if (DrCmbIdCompany is not null) DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCompany = DrCmbIdCompany.Adapt<uimT0Company>().IdCompany;
         StateHasChanged();
+    }
+
+    public async void ProsesPilihTab_Detil(string idControl)
+    {
+        try
+        {
+            await _js.InvokeVoidAsync("autoScrollKetikaPindahTab", idControl);
+        }catch(Exception e) {
+            var msg = e.Message;
+        }
+
     }
     #endregion
 
