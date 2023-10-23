@@ -7,8 +7,11 @@
 	RfDetil = 
     @<DxFormLayout CssClass="custom-form-layout">
         <DxFormLayoutGroup ColSpanMd="12">
-            <DxGrid @ref="@GrdT7PenambahanPenugasan"
-                    Data="@(DtGrdT7PenambahanPenugasan.Adapt<IList<uimT7PenugasanArmada>>())"
+            <DxGrid @ref="@GrdT7PenugasanArmada"
+                    AllowSelectRowByClick="true"
+                    SelectedDataItem="@SelectedDataItemT7PenugasanArmada"
+                    SelectedDataItemChanged="OnSelectedDataItemT7PenugasanArmadaChanged"
+                    Data="@(DtGrdT7PenugasanArmada.Adapt<IList<uimT7PenugasanArmada>>())"
                     KeyFieldName="@nameof(uimT7PenugasanArmada.IdDetilPenugasanArmada)"
                     CustomizeElement="GrdDetil_CustomizeElement"
                     CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT7PenugasanArmada>)"
@@ -33,7 +36,7 @@
                     <DxGridDataColumn FieldName="Synchronise" Caption="Status Rute" />
                 </Columns>
             </DxGrid>
-            <PthContextMenuHeaderGrid Grid="@GrdT7PenambahanPenugasan" @ref="@CtmDetil" />
+            <PthContextMenuHeaderGrid Grid="@GrdT7PenugasanArmada" @ref="@CtmDetil" />
         </DxFormLayoutGroup>
 
         <DxFormLayoutItem ColSpanMd="6">
@@ -198,8 +201,8 @@
                 </DxFormLayoutItem>
             </DxFormLayoutGroup>
             <DxFormLayoutGroup ColSpanMd="6">
-                <DxGrid @ref="@GrdT7PenambahanPenugasanArmada_SPBU"
-                        Data="@(DtGrdT7PenambahanPenugasanArmada_SPBU.Adapt<IList<uimT7PenugasanArmada_SPBU>>())"
+                <DxGrid @ref="@GrdT7PenambahanPenugasan_SPBU"
+                        Data="@(DtGrdT7PenambahanPenugasan_SPBU.Adapt<IList<uimT7PenugasanArmada_SPBU>>())"
                         KeyFieldName="@nameof(uimT7PenugasanArmada_SPBU.IdDetilPenugasanArmada)"
                         CustomizeElement="GrdDetil_CustomizeElement"
                         CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT7PenugasanArmada_SPBU>)"
@@ -211,10 +214,10 @@
                     <Columns>
                         <DxGridCommandColumn Width="10px">
                             <HeaderTemplate>
-                                <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdT7PenambahanPenugasanArmada_SPBU.StartEditNewRowAsync())"></a>
+                                <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdT7PenambahanPenugasan_SPBU.StartEditNewRowAsync())"></a>
                             </HeaderTemplate>
                             <CellDisplayTemplate>
-                                <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdT7PenambahanPenugasanArmada_SPBU.StartEditRowAsync(context.VisibleIndex))"></a>
+                                <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdT7PenambahanPenugasan_SPBU.StartEditRowAsync(context.VisibleIndex))"></a>
                                 <a class="fa-solid fa-trash-can text-decoration-none" @onclick="@(() =>  GrdDetil_OnHapus<uimT7PenugasanArmada_SPBU, T7PenugasanArmada_SPBU>((uimT7PenugasanArmada_SPBU)context.DataItem))"></a>
                             </CellDisplayTemplate>
                         </DxGridCommandColumn>

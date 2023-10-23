@@ -149,7 +149,7 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 	{
 		var dtT6PenambahanPenugasanArmada = request.Adapt<T6PenugasanArmada>();
 		var dtT7PenambahanPenugasanArmada = dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.FirstOrDefault(x => x.Urutan == dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.Count);
-		var dtT6Jurnal = (await _svd.GetEntitiesDenganSpec<pthT6Jurnal>(x => x.NoBukti == dtT7PenambahanPenugasanArmada.NoPenugasan)).FirstOrDefault();
+		var dtT6Jurnal = (await _svd.GetEntitiesDenganSpec<pthT6Jurnal>(x => x.NoBukti == dtT7PenambahanPenugasanArmada.NoPenugasan))?.FirstOrDefault();
 		var dtT7Jurnal = new List<pthT7Jurnal>();
 		if (dtT6Jurnal != null)
 		{
