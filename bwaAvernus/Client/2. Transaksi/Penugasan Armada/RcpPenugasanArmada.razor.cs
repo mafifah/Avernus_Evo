@@ -108,14 +108,15 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
     private readonly clsCrixalisHandler ch = new();
     private readonly clsAvernusHandler ah = new();
-    PropertyInfo[] dtPropertiesT7;
-    PropertyInfo[] dtPropertiesT6;
+    PropertyInfo[]? dtPropertiesT7;
+    PropertyInfo[]? dtPropertiesT6;
 
     private string outerHeight = "";
 
 
     protected override async void OnInitialized()
     {
+        
         PrimaryText = "IdTransaksi";
         base.OnInitialized();
         DtKota = (await ch.Get_Kota()).ToList();
@@ -135,18 +136,12 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
         dtPropertiesT6 = DtRekapitulasi_Terseleksi.GetType().GetProperties();
         dtPropertiesT7 = DtRekapitulasi_Terseleksi.T7PenugasanArmada.GetType().GetProperties();
-
-        var outer = await _js.InvokeAsync<int>("getOuterHeight");
-
-        outerHeight = $"{outer + 40}px !important";
-
-
-
-
     }
-    protected override void OnAfterRender(bool firstRender)
+    protected override async void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
+        var outer = await _js.InvokeAsync<int>("getLength");
+        outerHeight = $"{outer + 40}px !important";
     }
     /*public override void Inisialisasi_Filter()
     {
@@ -509,7 +504,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         try
         {
             await _js.InvokeVoidAsync("autoScrollKetikaPindahTab", idControl);
-        }catch(Exception e) {
+            
+        }
+        catch(Exception e) {
             var msg = e.Message;
         }
 
