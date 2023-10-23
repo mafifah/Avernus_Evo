@@ -328,7 +328,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
                 DtRekapitulasi_Terseleksi.BBM_BBM = "Solar";
                 DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga = 6800;
                 DtRekapitulasi_Terseleksi.IdBBM = Guid.Parse("22357F57-9ECC-405F-8481-F9DC5E2FE3E2");
-                if (ValidasiRute is not null)
+                /*if (ValidasiRute is not null)
                 {
                     if (!string.IsNullOrWhiteSpace(ValidasiRute.IdPenugasanArmada))
                     {
@@ -338,7 +338,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
                         await InvokeAsync(StateHasChanged);
                         return;
                     }
-                }
+                }*/
                 ProsesHitungBiayaRute();
             }
             PropertyInfo[] ruteProperties = rute.GetType().GetProperties();
@@ -377,7 +377,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             }
 
 
-            ValidasiRute = (await Svc.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
+            /*ValidasiRute = (await Svc.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
             if (!string.IsNullOrWhiteSpace(ValidasiRute.IdPenugasanArmada))
             {
                 if (ValidasiRute.StatusPerjalanan != "Kembali") DialogService.Alert($"Armada dengan Nopol {armada.Nopol} belum kembali dengan no {ValidasiRute.IdTransaksi}", "Perhatian!");
@@ -385,7 +385,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
                 DrCmbArmada = null;
                 await InvokeAsync(StateHasChanged);
                 return;
-            }
+            }*/
             DtRekapitulasi_Terseleksi.IdArmada = armada.IdArmada;
             DtRekapitulasi_Terseleksi.IdJenisArmada = armada.IdJenisArmada;
             DtRekapitulasi_Terseleksi.Nopol = armada.Nopol;

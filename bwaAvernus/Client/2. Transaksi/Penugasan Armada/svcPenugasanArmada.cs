@@ -77,6 +77,7 @@ namespace bwaAvernus.Client._2._Transaksi
         public async Task<string> BatalPenugasanArmada(Guid idPenugasanArmada)
         {
             var rqsPenugasanArmada = new RqsBatalPenugasanArmada();
+            rqsPenugasanArmada.IdPenugasanArmada = idPenugasanArmada.ToString();
             rqsPenugasanArmada.IdOperator = IdUser.ToString();
             var rplPenugasanArmada = await _client.BatalPenugasanArmadaAsync(rqsPenugasanArmada, Headers);
             return rplPenugasanArmada.Result;
