@@ -136,7 +136,7 @@
       <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Client\bin\Debug\net7.0\Pantheon.Client.dll</HintPath>
     </Reference>
     <Reference Include="Pantheon.Server">
-      <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Server\bin\Debug\net7.0\Pantheon.Server.dll</HintPath>
+      <HintPath>..\..\..\DevOps\Pantheon\Server\bin\Debug\net7.0\Pantheon.Server.dll</HintPath>
     </Reference>
     <Reference Include="Pantheon.Shared">
       <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
