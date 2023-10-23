@@ -111,6 +111,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     PropertyInfo[] dtPropertiesT7;
     PropertyInfo[] dtPropertiesT6;
 
+    private string outerHeight = "";
 
 
     protected override async void OnInitialized()
@@ -134,6 +135,10 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
         dtPropertiesT6 = DtRekapitulasi_Terseleksi.GetType().GetProperties();
         dtPropertiesT7 = DtRekapitulasi_Terseleksi.T7PenugasanArmada.GetType().GetProperties();
+
+        var outer = await _js.InvokeAsync<int>("getOuterHeight");
+
+        outerHeight = $"{outer + 40}px !important";
 
 
 

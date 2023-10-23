@@ -147,7 +147,24 @@
                 targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         }
-        
+
+        function getOuterHeight() {
+            var stickyRow1 = document.getElementById("sticky-row-1");
+            var outerHeight = stickyRow1 ? stickyRow1.offsetHeight : 0;
+
+            // Kirim nilai outer height ke elemen HTML di Blazor
+            var outerHeightContainer = document.getElementById("outerHeightContainer");
+            if (outerHeightContainer) {
+                outerHeightContainer.innerText = outerHeight.toString();
+            }
+            
+            return outerHeight;
+            //alert(outerHeight);
+        }
+
+        window.onload = function () {
+            getOuterHeight();
+        }
     </script>
 </body>
 
