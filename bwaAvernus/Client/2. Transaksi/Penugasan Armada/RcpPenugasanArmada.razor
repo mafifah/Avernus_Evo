@@ -73,8 +73,20 @@
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
                           Text="BBM" Click="@(() => ProsesPilihTab_Detil("scBBM"))" />
             </DxFormLayoutItem>
+
+            <DxFormLayoutItem ColSpanMd="4">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="Detil Armada" Click="@(() => ProsesPilihTab_Detil("scArmada"))" />
+            </DxFormLayoutItem>
+
+            <DxFormLayoutItem ColSpanMd="2">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="Detil Sopir" Click="@(() => ProsesPilihTab_Detil("scSopir"))" />
+            </DxFormLayoutItem>
             
-            <DxFormLayoutItem ColSpanMd="8">
+            <DxFormLayoutItem ColSpanMd="2">
             </DxFormLayoutItem>
         </DxFormLayout>
         <DxFormLayout CssClass="sc">
@@ -131,24 +143,7 @@
                             ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
                             ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase), (int?)valueBaru))" />
             </DxFormLayoutItem>
-            <DxFormLayoutItem @ref="FliBBMVolume" Caption="BBM Volume" ColSpanMd="12">
-                <DxSpinEdit @ref="SpeBBMVolume" InputId="0.0, 8.0" tabindex="9"
-                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
-                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
-                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume), (int?)valueBaru))" />
-            </DxFormLayoutItem>
-            <DxFormLayoutItem @ref="FliBBMHarga" Caption="BBM Harga " ColSpanMd="12">
-                <DxSpinEdit @ref="SpeBBMHarga" InputId="0.0, 8.0" tabindex="10"
-                            Value="@DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga" ReadOnly="true"
-                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
-                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume), (int?)valueBaru))" />
-            </DxFormLayoutItem>
-            <DxFormLayoutItem @ref="FliBBMSangu" Caption="BBM + Sangu" ColSpanMd="12">
-                <DxSpinEdit @ref="SpeBBMSangu" InputId="0.0, 8.0" tabindex="11"
-                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
-                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
-                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase), (int?)valueBaru))" />
-            </DxFormLayoutItem>
+            
             <DxFormLayoutItem @ref="FliDeposit" Caption="Deposit" ColSpanMd="12">
                 <DxSpinEdit @ref="SpeDeposit" InputId="0.0, 8.0" tabindex="12"
                             Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.Deposit)"
@@ -220,6 +215,27 @@
                 </EditFormTemplate>
             </DxGrid>
             <br />
+            
+
+            <DxFormLayoutItem @ref="FliBBMVolume" Caption="BBM Volume" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeBBMVolume" InputId="0.0, 8.0" tabindex="9"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliBBMHarga" Caption="BBM Harga " ColSpanMd="12">
+                <DxSpinEdit @ref="SpeBBMHarga" InputId="0.0, 8.0" tabindex="10"
+                            Value="@DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga" ReadOnly="true"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="FliBBMSangu" Caption="BBM + Sangu" ColSpanMd="12">
+                <DxSpinEdit @ref="SpeBBMSangu" InputId="0.0, 8.0" tabindex="11"
+                            Value="@((decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
+                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase)"
+                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguRitase), (int?)valueBaru))" />
+            </DxFormLayoutItem>
+
             <DxFormLayoutItem @ref="FliBBMMetode" Caption="BBM Metode" ColSpanMd="12">
                 <DxComboBox @ref="@CmbBBMMetode" Data="@DtCmbBBMMetode" @bind-Value="@DrCmbBBMMetode"
                             tabindex="16" TextFieldName="DataOption"
@@ -238,7 +254,26 @@
                 </DxComboBox>
             </DxFormLayoutItem>
         </DxFormLayout>
+
+        <DxFormLayout Id="scArmada" CssClass="sc">
+            <DxFormLayoutItem Caption="Jenis Armada" ColSpanMd="8">
+                <DxTextBox Text="@DtRekapitulasi_Terseleksi.JenisArmada_Jenis" NullText="" ReadOnly=true>
+                </DxTextBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Foto Armada" ColSpanMd="4">
+                <RadzenImage Path="@UrlGambarArmada" Style="width:250px" />
+            </DxFormLayoutItem>
+        </DxFormLayout>
         
+        <DxFormLayout Id="scSopir" CssClass="sc">
+            <DxFormLayoutItem Caption="Seluler" ColSpanMd="8">
+                <DxTextBox Text="@DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1" NullText="" ReadOnly=true>
+                </DxTextBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Foto Sopir" ColSpanMd="4">
+                <RadzenImage Path="https://sdatafile.blob.core.windows.net/fortiscentral/Gambar/Karyawan/Default%20Profile.png" Style="width:250px" />
+            </DxFormLayoutItem>
+        </DxFormLayout>
         
 	</DxFormLayout>;
 }

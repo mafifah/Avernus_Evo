@@ -18,6 +18,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public svcCompany _svcCompany { get; set; }
 
     [Inject]
+    public svcArmada _svcArmada { get; set; }
+
+    [Inject]
     public svcRute _svcRute{ get; set; }
 
     [Inject]
@@ -90,6 +93,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public IList<uimT3Rute> DtRute { get; set; }
     public IList<uimT4BiayaRute> DtBiayaRute { get; set; }
     public IList<uimT2Kota> DtKota { get; set; }
+    public IList<uimT0JenisArmada> DtJenisArmada { get; set; }
     #endregion
 
     #region Properties
@@ -102,6 +106,14 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public object DrCmbBBMMetode { get; set; }
     public object DrCmbRekening { get; set; }
     public decimal? Potongan { get; set; } = 0;
+
+    public string? UrlGambarArmada { get; set; } = "";
+
+    public bool TampilkanGambarArmada = false;
+
+    public string? UrlGambarSopir { get; set; } = "";
+
+    public bool TampilkanGambarSopir = true;
     public uimValidasiRute? ValidasiRute { get; set; } = new();
     #endregion
 
@@ -116,10 +128,11 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
     protected override async void OnInitialized()
     {
-        
+        SedangMemuatKomponen = true;
         PrimaryText = "IdTransaksi";
         base.OnInitialized();
         DtKota = (await ch.Get_Kota()).ToList();
+        DtJenisArmada = (await _svcArmada.GetDataJenisArmada()).ToList();
         if (DtCmbArmada is null) DtCmbArmada = (await ah.Get_Armada()).Adapt<IList<dynamic>>();
         if (DtCmbCustomer is null) DtCmbCustomer = (await ah.Get_Customer()).Adapt<IList<dynamic>>();
         if (DtCmbRekening is null) DtCmbRekening = (await ah.Get_Rekening()).Adapt<IList<dynamic>>();
@@ -136,6 +149,8 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
         dtPropertiesT6 = DtRekapitulasi_Terseleksi.GetType().GetProperties();
         dtPropertiesT7 = DtRekapitulasi_Terseleksi.T7PenugasanArmada.GetType().GetProperties();
+
+        SedangMemuatKomponen = false;
     }
     protected override async void OnAfterRender(bool firstRender)
     {
@@ -361,7 +376,12 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         }
         else
         {
+            var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
             var armada = DrCmbArmada?.Adapt<uimT1Armada>();
+            DtRekapitulasi_Terseleksi.JenisArmada_Jenis = DtJenisArmada.FirstOrDefault(x => x.IdJenisArmada == armada.IdJenisArmada).Jenis;
+            DtRekapitulasi_Terseleksi.JenisArmada_Alias = DtJenisArmada.FirstOrDefault(x => x.IdJenisArmada == armada.IdJenisArmada).Alias;
+            var nopol = armada.Nopol.Replace(" ", "%20");
+            UrlGambarArmada = $"{baseUrl}{nopol}.jpg";
             PropertyInfo[] customerProperties = armada.GetType().GetProperties();
             foreach (var property in customerProperties)
             {
