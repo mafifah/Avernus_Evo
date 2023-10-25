@@ -178,6 +178,10 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     {
         base.ProsesSeleksiData(data);        
             DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
+            var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
+            var armada = DrCmbArmada?.Adapt<uimT1Armada>();
+            var nopol = armada.Nopol.Replace(" ", "%20");
+            UrlGambarArmada = $"{baseUrl}{nopol}.jpg";
             DtCmbSopir = await ah.Get_ArmadaSopir(DrCmbArmada?.Adapt<uimT1Armada>().IdArmada);
             DrCmbSopir = (await ah.Get_ArmadaSopir(DrCmbArmada?.Adapt<uimT1Armada>().IdArmada)).Adapt<IList<uimT5ArmadaSopir>>().FirstOrDefault(x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi.IdKaryawan_Sopir);
             DtRekapitulasi_Terseleksi.T7PenugasanArmada = (await Svc.GetDataT7PenugasanArmadaById(DtRekapitulasi_Terseleksi.IdPenugasanArmada)).Adapt<IList<uimT7PenugasanArmada>>().FirstOrDefault(x => x.Urutan == 1);
