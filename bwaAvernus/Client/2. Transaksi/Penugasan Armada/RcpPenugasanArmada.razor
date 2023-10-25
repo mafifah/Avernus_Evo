@@ -167,7 +167,7 @@
         </DxFormLayout>
         <br/>
         <DxFormLayout Id="scBBM" CssClass="sc">
-            <DxGrid @ref="@GrdT7PenugasanArmada_SPBU"
+            <DxGrid style="margin-left:15px !important; margin-right:15px !important;" @ref="@GrdT7PenugasanArmada_SPBU"
                     Data="@(DtGrdT7PenugasanArmada_SPBU.Adapt<IList<uimT7PenugasanArmada_SPBU>>())"
                     KeyFieldName="@nameof(uimT7PenugasanArmada_SPBU.IdDetilPenugasanArmada)"
                     CustomizeElement="GrdDetil_CustomizeElement"
@@ -297,6 +297,6 @@
     }
 
     .sc{
-        margin: 4vh !important;
+        margin: 2vh !important;
     }
 </style>
