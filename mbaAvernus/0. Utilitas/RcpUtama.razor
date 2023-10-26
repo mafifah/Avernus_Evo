@@ -1,0 +1,28 @@
+﻿@page "/Main"
+@inherits PthRcpUtama
+
+@{
+	base.BuildRenderTree(__builder);
+}
+@code {
+    //public RcpUtama(IStreamSubscriber redisSubscriber) : base(redisSubscriber)
+    //{
+    //}
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        App.W.Title = TitleApp;
+    }
+    public override void KirimPesan(int idWindow, long idForm, string namaForm, string statusAction, string namaFieldPK, object nilaiPK, DateTimeOffset waktuProses, string isiPesan)
+    {
+        base.KirimPesan(idWindow, idForm, namaForm, statusAction, namaFieldPK, nilaiPK, waktuProses, isiPesan);
+    }
+    public override void ssr_TerimaPesan(ClsServisSignalR.PesanSignalR psr)
+    {
+        base.ssr_TerimaPesan(psr);
+    }
+    public override async void ProsesSignOut()
+    {
+        base.ProsesSignOut();
+    }
+}
