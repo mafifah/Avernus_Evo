@@ -128,7 +128,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
     protected override async void OnInitialized()
     {
-        SedangMemuatKomponen = true;
+        SedangProsesRefreshDetil = true;
         PrimaryText = "IdTransaksi";
         base.OnInitialized();
         DtKota = (await ch.Get_Kota()).ToList();
@@ -150,7 +150,8 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         dtPropertiesT6 = DtRekapitulasi_Terseleksi.GetType().GetProperties();
         dtPropertiesT7 = DtRekapitulasi_Terseleksi.T7PenugasanArmada.GetType().GetProperties();
 
-        SedangMemuatKomponen = false;
+        SedangProsesRefreshDetil = false;
+        StateHasChanged();
     }
     protected override async void OnAfterRender(bool firstRender)
     {
