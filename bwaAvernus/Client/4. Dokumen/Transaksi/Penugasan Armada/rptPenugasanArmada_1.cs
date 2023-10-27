@@ -20,7 +20,7 @@ namespace bwaAvernus.Client._4._Dokumen
         string _idPK { get; set; }
         public rptPenugasanArmada_1(string idPK)
         {
-            AlamatAPI = "https://localhost:7243/";
+            AlamatAPI = "https://avernus.azurewebsites.net/";
             _idPK = idPK;
             var handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
             ClientChannel = GrpcChannel.ForAddress(AlamatAPI, new GrpcChannelOptions
