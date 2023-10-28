@@ -4,6 +4,7 @@ using bwaAvernus.Shared._2._Transaksi;
 using bwaCrixalis.Client._1._Master;
 using bwaCrixalis.Shared._1._Master;
 using Pantheon.Client.Utility;
+using System.Collections.ObjectModel;
 using Wisej.Core;
 
 namespace bwaAvernus.Client._0._Utilitas
@@ -41,10 +42,10 @@ namespace bwaAvernus.Client._0._Utilitas
             return data;
         }
 
-        public async Task<IList<dynamic>> Get_Armada(bool perbaruiMeskipunAda = false)
+        public async Task<ObservableCollection<uimT1Armada>> Get_Armada(bool perbaruiMeskipunAda = false)
         {
             var data = await _svcArmada.GetDataArmada();
-            return data.Adapt<List<dynamic>>();
+            return data.Adapt<ObservableCollection<uimT1Armada>>();
         }
 
         public async Task<IList<dynamic>> Get_ArmadaSopir(Guid? idArmada = null, bool perbaruiMeskipunAda = false)

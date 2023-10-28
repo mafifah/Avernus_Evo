@@ -1,6 +1,8 @@
 ﻿@inherits ConTransaksi_1<uimT6PenugasanArmada, svcPenugasanArmada>
 @namespace bwaAvernus.Client._2._Transaksi
 @using bwaAvernus.Shared._2._Transaksi;
+@using bwaAvernus._1._Master;
+@using bwaCrixalis.Client._1._Master;
 @{
 	base.BuildRenderTree(__builder);
 	RfDetil = 
@@ -34,12 +36,12 @@
                 </DxDateEdit>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliArmada" Caption="Armada" ColSpanMd="6">
-                <DxComboBox @ref="@CmbArmada" FilteringMode="DataGridFilteringMode.Contains" TData="object" TValue="object"
+                <DxComboBox @ref="@CmbArmada" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbArmada"
                             Value="@DrCmbArmada"
                             TextFieldName="Nopol"
                             CssClass="cw-480 font_0"
-                            ValueChanged="@((object armada) => CmbArmada_Dipilih(armada))"
+                            ValueChanged="@((uimT1Armada armada) => CmbArmada_Dipilih(armada))"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
                             tabindex="6">
                     <DxListEditorColumn FieldName="Nopol" Caption="Nopol" />
@@ -49,10 +51,11 @@
             <DxFormLayoutItem @ref="@FliSopir" Caption="Sopir" ColSpanMd="6">
                 <DxComboBox @ref="@CmbSopir" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbSopir"
-                            @bind-Value="@DrCmbSopir"
+                            Value="@DrCmbSopir"
                             TextFieldName="NamaSopir"
                             CssClass="cw-480 font_0"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            ValueChanged="@((uimT5ArmadaSopir sopir) => CmbSopir_Dipilih(sopir))"
                             tabindex="7">
                     <DxListEditorColumn FieldName="NamaLengkap" Caption="Nama Panggilan" />
                     <DxListEditorColumn FieldName="Seluler1" Caption="GSM Phone" />
@@ -88,9 +91,10 @@
             <DxFormLayoutItem @ref="@FliCustomer" Caption="Customer" ColSpanMd="12">
                 <DxComboBox @ref="@CmbCustomer" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbCustomer"
-                            @bind-Value="@DrCmbCustomer"
+                            Value="@DrCmbCustomer"
                             TextFieldName="Nama"
                             CssClass="cw-480 font_0"
+                            ValueChanged="@((uimT1Customer customer) => CmbCustomer_Dipilih(customer))"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
                             tabindex="4">
                     <DxListEditorColumn FieldName="Prefix" Caption="Prefix" />
@@ -102,9 +106,10 @@
             <DxFormLayoutItem @ref="@FliAlamatCustomer" Caption="Alamat" ColSpanMd="12">
                 <DxComboBox @ref="@CmbAlamatCustomer" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbAlamatCustomer"
-                            @bind-Value="@DrCmbAlamatCustomer"
+                            Value="@DrCmbAlamatCustomer"
                             TextFieldName="Alamat"
                             CssClass="cw-480 font_0"
+                            ValueChanged="@((uimT2AlamatCustomer alamatCustomer) => CmbAlamatCustomer_Dipilih(alamatCustomer))"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
                             tabindex="5">
                     <DxListEditorColumn FieldName="Alamat" Caption="Alamat" />
@@ -114,11 +119,11 @@
             <DxFormLayoutItem @ref="@FliRute" Caption="Rute" ColSpanMd="12">
                 <DxComboBox @ref="@CmbRute" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbRute"
-                            @bind-Value="@DrCmbRute"
+                            Value="@DrCmbRute"
                             TextFieldName="Rute"
                             CssClass="cw-480 font_0"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                            
+                            ValueChanged="@((uimT3Rute rute) => CmbRute_Dipilih(rute))"
                             tabindex="6">
                     <DxListEditorColumn FieldName="Rute" Caption="Rute" />
                     <DxListEditorColumn FieldName="Jenis" Caption="Jenis" />
@@ -228,15 +233,17 @@
             </DxFormLayoutItem>
 
             <DxFormLayoutItem @ref="FliBBMMetode" Caption="BBM Metode" ColSpanMd="12">
-                <DxComboBox @ref="@CmbBBMMetode" Data="@DtCmbBBMMetode" @bind-Value="@DrCmbBBMMetode"
+                <DxComboBox @ref="@CmbBBMMetode" Data="@DtCmbBBMMetode" Value="@DrCmbBBMMetode"
                             tabindex="16" TextFieldName="DataOption"
+                            ValueChanged="@((pthT9DataOption metodeBBM) => CmbBBMMetode_Dipilih(metodeBBM))"
                             CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
                 </DxComboBox>
             </DxFormLayoutItem>
 
             <DxFormLayoutItem @ref="FliRekening" Caption="Rekening" ColSpanMd="12">
-                <DxComboBox @ref="@CmbRekening" Data="@DtCmbRekening" @bind-Value="@DrCmbRekening" tabindex="17"
+                <DxComboBox @ref="@CmbRekening" Data="@DtCmbRekening" Value="@DrCmbRekening" tabindex="17"
                             TextFieldName="Rekening"
+                            ValueChanged="@((pthT0Rekening rekening) => CmbRekening_Dipilih(rekening))"
                             CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
                     <DxListEditorColumn FieldName="Rekening" Caption="Rekening" />
                     <DxListEditorColumn FieldName="Alias" Caption="Alias" />
@@ -270,7 +277,7 @@
     .sticky-row-1 {
         padding-top: 12px;
         padding-bottom: 12px;
-        opacity: 1 !important;
+        opacity: 100 !important;
         position: -webkit-sticky !important;
         position: sticky;
         top: 10vh; /* Sesuaikan dengan tinggi header Anda */
