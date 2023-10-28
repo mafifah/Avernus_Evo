@@ -157,7 +157,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     {
         base.OnAfterRender(firstRender);
         var outer = await _js.InvokeAsync<int>("getLength");
-        outerHeight = $"{outer + 40}px !important";
+        outerHeight = $"{outer + 90}px !important";
     }
     /*public override void Inisialisasi_Filter()
     {
