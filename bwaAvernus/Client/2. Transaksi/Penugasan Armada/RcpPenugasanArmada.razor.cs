@@ -373,15 +373,10 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             await InvokeAsync(StateHasChanged);
         }
     }
-    public async void CmbArmada_DropDownVisibleChanged(bool val)
+    public async void CmbArmada_Dipilih(object dtArmada)
     {
-        if (val)
-        {
-            
-        }
-        else
-        {
             var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
+            DrCmbArmada = dtArmada;
             var armada = DrCmbArmada?.Adapt<uimT1Armada>();
             DtRekapitulasi_Terseleksi.JenisArmada_Jenis = DtJenisArmada.FirstOrDefault(x => x.IdJenisArmada == armada.IdJenisArmada).Jenis;
             DtRekapitulasi_Terseleksi.JenisArmada_Alias = DtJenisArmada.FirstOrDefault(x => x.IdJenisArmada == armada.IdJenisArmada).Alias;
@@ -428,7 +423,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             await ProsesSimpan_Draft("IdArmada", armada.IdArmada);
             await ProsesSimpan_Draft("IdJenisArmada", armada.IdJenisArmada);
             await InvokeAsync(StateHasChanged);
-        }
+        
         
     }
 

@@ -34,11 +34,12 @@
                 </DxDateEdit>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliArmada" Caption="Armada" ColSpanMd="6">
-                <DxComboBox @ref="@CmbArmada" FilteringMode="DataGridFilteringMode.Contains"
+                <DxComboBox @ref="@CmbArmada" FilteringMode="DataGridFilteringMode.Contains" TData="object" TValue="object"
                             Data="@DtCmbArmada"
-                            @bind-Value="@DrCmbArmada"
+                            Value="@DrCmbArmada"
                             TextFieldName="Nopol"
                             CssClass="cw-480 font_0"
+                            ValueChanged="@((object armada) => CmbArmada_Dipilih(armada))"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
                             tabindex="6">
                     <DxListEditorColumn FieldName="Nopol" Caption="Nopol" />
