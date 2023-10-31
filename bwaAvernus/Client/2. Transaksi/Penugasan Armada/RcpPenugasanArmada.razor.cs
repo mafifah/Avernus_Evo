@@ -11,6 +11,9 @@ using Microsoft.Ajax.Utilities;
 using Microsoft.JSInterop;
 using System.Collections.ObjectModel;
 using Mapster;
+using Pantheon.Shared.UIModels;
+using Pantheon.Client.Services.LogUser;
+using DevExpress.Xpo.DB;
 
 namespace bwaAvernus.Client._2._Transaksi;
 public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, svcPenugasanArmada>
@@ -31,6 +34,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
     [Inject]
     IJSRuntime _js { get; set; }
+
+    [Inject]
+    protected pthSvcLog _svc { get; set; }
     #endregion
 
     #region Fli
@@ -110,10 +116,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public decimal? Potongan { get; set; } = 0;
 
     public string? UrlGambarArmada { get; set; } = "";
+    public string? UrlGambarSopir { get; set; } = "";
 
     public bool TampilkanGambarArmada = false;
-
-    public string? UrlGambarSopir { get; set; } = "";
 
     public bool TampilkanGambarSopir = true;
     public uimValidasiRute? ValidasiRute { get; set; } = new();
@@ -126,8 +131,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     PropertyInfo[]? dtPropertiesT6;
 
     private string outerHeight = "";
+    private string outerHeightTopHeaderCaption = "";
 
-
+    public IEnumerable<uimLog>? DtGrdInformasi { get; set; }
     protected override async void OnInitialized()
     {
         SedangProsesRefreshDetil = true;
@@ -139,6 +145,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         if (DtCmbCustomer is null) DtCmbCustomer = (await ah.Get_Customer()).Adapt<ObservableCollection<uimT1Customer>>();
         if (DtCmbRekening is null) DtCmbRekening = (await ah.Get_Rekening()).Adapt<ObservableCollection<pthT0Rekening>>();
         if (DtCmbBBMMetode is null) DtCmbBBMMetode = (await ah.Get_DataOption("Metode BBM")).Adapt<ObservableCollection<pthT9DataOption>>();
+        if (DtCmbIdCompany is null) DtCmbIdCompany = (await _svcCompany.GetDataCompany()).Adapt<ObservableCollection<uimT0Company>>();
         //if (DtCmbSopir is null) DtCmbSopir = (await ah.Get_ArmadaSopir()).Adapt<IList<dynamic>>();
         //if (DtCmbRute is null) DtCmbRute = (await ah.Get_RuteByIdAlamatCustomer()).Adapt<IList<dynamic>>();
         //if (DtBiayaRute.Count() < 1) DtBiayaRute = (await ah.Get_BiayaRute()).Adapt<IList<uimT4BiayaRute>>();
@@ -159,7 +166,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     {
         base.OnAfterRender(firstRender);
         var outer = await _js.InvokeAsync<int>("getLength");
-        outerHeight = $"{outer + 90}px !important";
+        var outerHeader = await _js.InvokeAsync<int>("getLengthTopHeaderCaption");
+        outerHeight = $"{outer + 89}px !important";
+        outerHeightTopHeaderCaption = $"{outerHeader}px !important";
     }
     /*public override void Inisialisasi_Filter()
     {
@@ -180,24 +189,34 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public override async void ProsesSeleksiData(object data)
     {
         base.ProsesSeleksiData(data);
-        SedangProsesRefreshDetil = true;
-        DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
-        var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
-        var armada = DrCmbArmada?.Adapt<uimT1Armada>();
-        var nopol = armada.Nopol.Replace(" ", "%20");
-        UrlGambarArmada = $"{baseUrl}{nopol}.jpg";
-        DtCmbSopir = (await ah.Get_ArmadaSopir(DrCmbArmada?.IdArmada)).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
-        DrCmbSopir = DtCmbSopir.FirstOrDefault(x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi.IdKaryawan_Sopir);
-        DtRekapitulasi_Terseleksi.T7PenugasanArmada = (await Svc.GetDataT7PenugasanArmadaById(DtRekapitulasi_Terseleksi.IdPenugasanArmada)).Adapt<IList<uimT7PenugasanArmada>>().FirstOrDefault(x => x.Urutan == 1);
+        if (data != null)
+        {
+			SedangProsesRefreshDetil = true;
+			DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
+			var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
+			var baseUrlKaryawan = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Karyawan/";
+			var armada = DrCmbArmada?.Adapt<uimT1Armada>();
+			var nopol = armada.Nopol.Replace(" ", "%20");
+            var namaSopir = DtRekapitulasi_Terseleksi.Karyawan_Sopir_NamaPanggilan.Replace(" ", "%20");
+            UrlGambarArmada = $"{baseUrl}{nopol}.jpg";
+			UrlGambarSopir = $"{baseUrlKaryawan}{namaSopir}.JPG";
 
-        DrCmbCustomer = DtCmbCustomer.FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer);
-        DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer)).Adapt<ObservableCollection<uimT2AlamatCustomer>>();
-        DrCmbAlamatCustomer = DtCmbAlamatCustomer.FirstOrDefault(x => x.IdAlamatCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer);
-        DrCmbRute = DtCmbRute.FirstOrDefault(x => x.IdRute == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute);
-        var dtBBM = DtCmbBBMMetode;
-        DrCmbBBMMetode = dtBBM.FirstOrDefault(x => x.DataOption == DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode);
-        DrCmbRekening = DtCmbRekening.FirstOrDefault(x => x.IdRekening == DtRekapitulasi_Terseleksi.IdRekening);
-        SedangProsesRefreshDetil = false;
+			DtCmbSopir = (await ah.Get_ArmadaSopir(DrCmbArmada?.IdArmada)).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
+			DrCmbSopir = DtCmbSopir.FirstOrDefault(x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi.IdKaryawan_Sopir);
+			DtRekapitulasi_Terseleksi.T7PenugasanArmada = (await Svc.GetDataT7PenugasanArmadaById(DtRekapitulasi_Terseleksi.IdPenugasanArmada)).Adapt<IList<uimT7PenugasanArmada>>().FirstOrDefault(x => x.Urutan == 1);
+
+			DrCmbCustomer = DtCmbCustomer.FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer);
+			DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer)).Adapt<ObservableCollection<uimT2AlamatCustomer>>();
+			DrCmbAlamatCustomer = DtCmbAlamatCustomer.FirstOrDefault(x => x.IdAlamatCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer);
+			DrCmbRute = DtCmbRute.FirstOrDefault(x => x.IdRute == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute);
+			var dtBBM = DtCmbBBMMetode;
+			DrCmbBBMMetode = dtBBM.FirstOrDefault(x => x.DataOption == DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode);
+			DrCmbRekening = DtCmbRekening.FirstOrDefault(x => x.IdRekening == DtRekapitulasi_Terseleksi.IdRekening);
+			SedangProsesRefreshDetil = false;
+			DtGrdInformasi = await _svc.GetDataLog(DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString() ?? "");
+		}
+
+       
         StateHasChanged();
     }
     #endregion
@@ -378,13 +397,15 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public async void CmbArmada_Dipilih(uimT1Armada armada)
     {
             var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
+            var baseUrlKaryawan = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Karyawan/";
             DrCmbArmada = armada;
             //var armada = DrCmbArmada?.Adapt<uimT1Armada>();
             DtRekapitulasi_Terseleksi.JenisArmada_Jenis = DtJenisArmada.FirstOrDefault(x => x.IdJenisArmada == armada.IdJenisArmada).Jenis;
             DtRekapitulasi_Terseleksi.JenisArmada_Alias = DtJenisArmada.FirstOrDefault(x => x.IdJenisArmada == armada.IdJenisArmada).Alias;
             var nopol = armada?.Nopol?.Replace(" ", "%20");
             UrlGambarArmada = $"{baseUrl}{nopol}.jpg";
-            PropertyInfo[] customerProperties = armada?.GetType().GetProperties();
+            
+        PropertyInfo[] customerProperties = armada?.GetType().GetProperties();
             foreach (var property in customerProperties)
             {
                 var propertyValue = property.GetValue(armada);
@@ -415,14 +436,15 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             DtCmbSopir = (await ah.Get_ArmadaSopir(armada.IdArmada)).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
             DrCmbSopir = DtCmbSopir?.FirstOrDefault(x => x.IdArmada == armada.IdArmada);
             var sopir = DrCmbSopir;
+            UrlGambarSopir = $"{baseUrlKaryawan}{sopir?.NamaSopir.Replace(" ","%20")}.JPG";
             DtRekapitulasi_Terseleksi.IdKaryawan_Sopir = sopir.IdKaryawan_Sopir;
             DtRekapitulasi_Terseleksi.Karyawan_Sopir_NamaPanggilan = sopir.NamaSopir;
             DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1 = sopir.Seluler1;
 
             if (DtBiayaRute is not null) ProsesHitungBiayaRute();
             
-            await ProsesSimpan_Draft("IdArmada", armada.IdArmada);
-            await ProsesSimpan_Draft("IdJenisArmada", armada.IdJenisArmada);
+            //await ProsesSimpan_Draft("IdArmada", armada.IdArmada);
+           // await ProsesSimpan_Draft("IdJenisArmada", armada.IdJenisArmada);
             await InvokeAsync(StateHasChanged);
         
         
@@ -519,9 +541,21 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public override async Task ProsesDataBaru()
     {
         await base.ProsesDataBaru();
+        DrCmbArmada = null;
+        DrCmbSopir = null;
+        DrCmbCustomer = null;
+        DrCmbAlamatCustomer = null;
+        DrCmbRute = null;
+        DrCmbBBMMetode = null;
+        DrCmbRekening = null;
+        UrlGambarArmada = "";
+        UrlGambarSopir = "";
+        DtGrdInformasi = null;
+		StateHasChanged();
     }
     public override void ProsesUpdateDatabase()
     {
+        DtRekapitulasi_Terseleksi.IdCompany = IdCompany;
         SetDetil_SebelumUpdateDatabase<T7PenugasanArmada_SPBU>();
         base.ProsesUpdateDatabase();
     }

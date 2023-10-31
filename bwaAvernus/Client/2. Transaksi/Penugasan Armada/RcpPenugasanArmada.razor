@@ -1,5 +1,6 @@
 ﻿@inherits ConTransaksi_1<uimT6PenugasanArmada, svcPenugasanArmada>
 @namespace bwaAvernus.Client._2._Transaksi
+@using Pantheon.Shared.UIModels;
 @using bwaAvernus.Shared._2._Transaksi;
 @using bwaAvernus._1._Master;
 @using bwaCrixalis.Client._1._Master;
@@ -61,15 +62,13 @@
                     <DxListEditorColumn FieldName="Seluler1" Caption="GSM Phone" />
                 </DxComboBox>
             </DxFormLayoutItem>
-        </DxFormLayout>
-        
-        <DxFormLayout CssClass="sticky-row-2 w-100" Id="sticky-row-2">
-            <DxFormLayoutItem ColSpanMd="3">
+
+            <DxFormLayoutItem ColSpanMd="2">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
                           Text="Rute" Click="@(() => ProsesPilihTab_Detil("scRute"))" />
             </DxFormLayoutItem>
-            <DxFormLayoutItem ColSpanMd="3">
+            <DxFormLayoutItem ColSpanMd="2">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
                           Text="BBM" Click="@(() => ProsesPilihTab_Detil("scBBM"))" />
@@ -86,7 +85,13 @@
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
                           Text="Detil Sopir" Click="@(() => ProsesPilihTab_Detil("scSopir"))" />
             </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="2">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="Aktivitas" Click="@(() => ProsesPilihTab_Detil("scAktifitas"))" />
+            </DxFormLayoutItem>
         </DxFormLayout>
+        
         <DxFormLayout CssClass="sc">
             <DxFormLayoutItem @ref="@FliCustomer" Caption="Customer" ColSpanMd="12">
                 <DxComboBox @ref="@CmbCustomer" FilteringMode="DataGridFilteringMode.Contains"
@@ -267,20 +272,46 @@
                 </DxTextBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem Caption="Foto Sopir" ColSpanMd="4">
-                <RadzenImage Path="https://sdatafile.blob.core.windows.net/fortiscentral/Gambar/Karyawan/Default%20Profile.png" Style="width:150px; height:150px;" />
+                <RadzenImage Path="@UrlGambarSopir" Style="width:150px; height:150px;" />
             </DxFormLayoutItem>
         </DxFormLayout>
-        
+        <DxFormLayout Id="scAktifitas" CssClass="sc">
+            <DxGrid Data="@DtGrdInformasi"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    SelectionMode="GridSelectionMode.Single"
+                    PageSize="1000"
+                    @oncontextmenu:preventDefault>
+                <Columns>
+                    <DxGridDataColumn FieldName="@nameof(uimLog.NamaPanggilan)" Caption="User" Width="8em" />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Aktivitas)" Caption="@FH.SplitPascalCase(nameof(uimLog.Aktivitas))" />/>
+                    <DxGridDataColumn FieldName="@nameof(uimLog.ApplicationName)" Caption="@FH.SplitPascalCase(nameof(uimLog.ApplicationName))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Client)" Caption="@FH.SplitPascalCase(nameof(uimLog.Client))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.ExecutablePath)" Caption="@FH.SplitPascalCase(nameof(uimLog.ExecutablePath))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IdCompany)" Caption="@FH.SplitPascalCase(nameof(uimLog.IdCompany))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IdKaryawan)" Caption="@FH.SplitPascalCase(nameof(uimLog.IdKaryawan))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IdLog)" Caption="@FH.SplitPascalCase(nameof(uimLog.IdLog))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Inisial)" Caption="@FH.SplitPascalCase(nameof(uimLog.Inisial))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IPv4)" Caption="@FH.SplitPascalCase(nameof(uimLog.IPv4))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IPv6)" Caption="@FH.SplitPascalCase(nameof(uimLog.IPv6))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Jabatan)" Caption="@FH.SplitPascalCase(nameof(uimLog.Jabatan))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Kolom)" Caption="@FH.SplitPascalCase(nameof(uimLog.Kolom))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.MacAddress)" Caption="@FH.SplitPascalCase(nameof(uimLog.MacAddress))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IdPrimaryKey)" Caption="@FH.SplitPascalCase(nameof(uimLog.IdPrimaryKey))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Tabel)" Caption="@FH.SplitPascalCase(nameof(uimLog.Tabel))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.WaktuInsert)" Caption="Proses" DisplayFormat="dd MMM yy - hh\:mm" GroupIndex="0" GroupInterval="GridColumnGroupInterval.Custom" />
+                </Columns>
+            </DxGrid>
+        </DxFormLayout>
 	</DxFormLayout>;
+
+        
 }
 <style>
     .sticky-row-1 {
-        padding-top: 12px;
-        padding-bottom: 12px;
         opacity: 100 !important;
         position: -webkit-sticky !important;
         position: sticky;
-        top: 10vh; /* Sesuaikan dengan tinggi header Anda */
+        top: @outerHeightTopHeaderCaption; /* Sesuaikan dengan tinggi header Anda */
         z-index: 10000;
         background-color: white !important;
     }
@@ -297,5 +328,31 @@
 
     .sc{
         margin: 2vh !important;
+    }
+</style>
+
+<style>
+    .dxbl-text-edit {
+        border: none !important;
+        border-radius: 0px !important;
+    }
+
+    .dxbl-btn-group-right {
+        visibility: hidden !important
+    }
+
+    .dxbl-text-edit:hover > .dxbl-btn-group-right {
+        visibility: visible !important;
+        border: none !important;
+        border-bottom: none !important;
+    }
+
+    .dxbl-text-edit:hover {
+        border-bottom: 1px solid #AAAAAA !important;
+    }
+
+
+    .dxbl-text-edit > .dxbl-btn-group-vertical > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn-group > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon) {
+        border: none !important;
     }
 </style>

@@ -153,6 +153,18 @@
             var length = element.clientHeight;
             return length;
         }
+
+        function getLengthTopHeaderCaption() {
+            var elements = document.getElementsByClassName("dxbl-group-header bar-header-sticky");
+            if (elements.length > 0) {
+                var element = elements[0]; // Ambil elemen pertama dengan kedua kelas tersebut
+                var length = element.clientHeight;
+                return length;
+            } else {
+                // Tindakan yang perlu dilakukan jika elemen dengan kelas tersebut tidak ditemukan.
+                return 50; // Misalnya, mengembalikan -1 jika elemen tidak ditemukan.
+            }
+        }
     </script>
 </body>
 

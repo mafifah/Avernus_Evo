@@ -271,7 +271,7 @@
       <HintPath>..\..\..\DevOps\Pantheon\Client\bin\Debug\net7.0\Pantheon.Client.dll</HintPath>
     </Reference>
     <Reference Include="Pantheon.Shared">
-      <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
+      <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 
