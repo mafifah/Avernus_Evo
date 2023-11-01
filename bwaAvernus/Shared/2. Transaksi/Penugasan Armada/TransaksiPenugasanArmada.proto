@@ -98,6 +98,8 @@ message RplPenugasanArmadaById
     optional string Catatan = 225;
     optional string Preview = 226;
     optional string Synchronise = 227;
+
+    PtmT7PenugasanArmada T7PenugasanArmada = 301;
 }
 
 message RplPenugasanArmada_Cetak

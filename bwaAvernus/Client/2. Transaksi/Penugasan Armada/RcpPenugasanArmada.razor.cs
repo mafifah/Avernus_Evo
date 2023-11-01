@@ -250,18 +250,16 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         }
         base.ProsesPerbarui_Control(namaControl, dtCmb, perbaruiMeskipunAda);
 
-        DtRekapitulasi_Terseleksi.IdCompany = IdCompany;
-        DrCmbIdCompany = DtCmbIdCompany?.Adapt<IList<uimT0Company>>().FirstOrDefault(x => x.IdCompany == IdCompany);
+        DrCmbIdCompany = DtCmbIdCompany?.FirstOrDefault(x => x.IdCompany == IdCompany);
         //DrCmbRekening = DtCmbRekening.Adapt<IList<pthT0Rekening>>().FirstOrDefault(x => x.Rekening == "Kas Pak Antok");
         //DrCmbBBMMetode = DtCmbBBMMetode.Adapt<IList<string>>().FirstOrDefault();
         await InvokeAsync(StateHasChanged);
     }
-    public async void CmbIdCompany_DropDownVisibleChanged(bool val)
+    public async void CmbIdCompany_Dipilih(uimT0Company company)
     {
-        if (!val)
-        {
-            await ProsesSimpan_Draft("IdCompany", DrCmbIdCompany?.Adapt<uimT0Company>().IdCompany);
-        }
+        DrCmbIdCompany = company;
+        DtRekapitulasi_Terseleksi.IdCompany = company.IdCompany;
+        StateHasChanged();
 
     }
     
@@ -519,7 +517,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguSementara = 0;
             DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume = 0;
         }
-        if (DrCmbIdCompany is not null) DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCompany = DrCmbIdCompany.Adapt<uimT0Company>().IdCompany;
+        if (DrCmbIdCompany is not null) DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCompany = DrCmbIdCompany.IdCompany;
         StateHasChanged();
     }
 

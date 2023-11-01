@@ -12,10 +12,11 @@
             <DxFormLayoutItem @ref="@FliIdCompany" Caption="Kode" ColSpanMd="3">
                 <DxComboBox @ref="@CmbIdCompany"
                             Data="@DtCmbIdCompany"
-                            @bind-Value="@DrCmbIdCompany"
+                            Value="@DrCmbIdCompany"
                             TextFieldName="IdCompany"
-                            CssClass="cw-480 font_0"
+                            CssClass="cw-480 font_0" NullText=""
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            ValueChanged="@((uimT0Company company) => CmbIdCompany_Dipilih(company))"
                             tabindex="1">
                     <DxListEditorColumn FieldName="IdCompany" Caption="IdCompany" />
                     <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />

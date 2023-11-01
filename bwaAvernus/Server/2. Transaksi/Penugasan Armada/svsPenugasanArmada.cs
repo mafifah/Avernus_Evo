@@ -32,9 +32,15 @@ namespace bwaAvernus.Server._2._Transaksi
             {
                 listPenugasanArmada = await _svd.GetEntitiesDenganSpec<T6PenugasanArmada>(x => x.WaktuProses >= request.TanggalFilterAwal.ToDateTimeOffset() && x.WaktuProses <= request.TanggalFilterAkhir.ToDateTimeOffset());
             }
+            
             //await _svdPenugasanArmada.GetPenugasanArmada();
             var rplPenugasanArmada = new RplPenugasanArmada();
             rplPenugasanArmada.ListT6PenugasanArmada.AddRange(listPenugasanArmada.Adapt<IEnumerable<RplPenugasanArmadaById>>());
+            foreach (var item in rplPenugasanArmada.ListT6PenugasanArmada)
+            {
+                var dtT7 = (await _svd.GetEntitiesDenganSpec<T7PenugasanArmada>(x => x.IdPenugasanArmada == Guid.Parse(item.IdPenugasanArmada) && x.Urutan == 1)).FirstOrDefault();
+                item.T7PenugasanArmada = dtT7?.Adapt<PtmT7PenugasanArmada>();
+            }
             return rplPenugasanArmada;
         }
         public async override Task<RplPenugasanArmadaById> GetPenugasanArmadaById(RqsPenugasanArmadaById request, ServerCallContext context)
@@ -90,7 +96,7 @@ namespace bwaAvernus.Server._2._Transaksi
             var dtCompany = (await _svd.GetEntities<pthT0Company>()).FirstOrDefault(x => x.IdCompany == "GMA");
             var dtOperator = new pthT1Karyawan();
             if (dtT6PenugasanArmada.IdOperator is null) 
-             dtOperator = (await _svd.GetEntitiesDenganSpec<pthT1Karyawan>(x => x.IdKaryawan == dtT6PenugasanArmada.T6PenugasanArmada.IdCreator, $"{nameof(pthT1Karyawan.T0Jabatan)}")).FirstOrDefault();
+                dtOperator = (await _svd.GetEntitiesDenganSpec<pthT1Karyawan>(x => x.IdKaryawan == dtT6PenugasanArmada.T6PenugasanArmada.IdCreator, $"{nameof(pthT1Karyawan.T0Jabatan)}")).FirstOrDefault();
             else
                 dtOperator = (await _svd.GetEntitiesDenganSpec<pthT1Karyawan>(x => x.IdKaryawan == dtT6PenugasanArmada.T6PenugasanArmada.IdOperator, $"{nameof(pthT1Karyawan.T0Jabatan)}")).FirstOrDefault();
             var reply = dtT6PenugasanArmada.T6PenugasanArmada.Adapt<RplPenugasanArmada_Cetak>();
@@ -178,6 +184,7 @@ namespace bwaAvernus.Server._2._Transaksi
         {
             var dtT6PenugasanArmada = request.Adapt<T6PenugasanArmada>();
             var dtT7PenugasanArmada = dtT6PenugasanArmada.ListT7PenugasanArmada.FirstOrDefault();
+            dtT6PenugasanArmada.IdCompany = dtT7PenugasanArmada.IdCompany;
             dtT7PenugasanArmada.NoPenugasan = await GenerateIdTransaksi(dtT7PenugasanArmada.IdCompany, "DO");
             dtT6PenugasanArmada.ListT7PenugasanArmada.Clear();
             dtT6PenugasanArmada.ListT7PenugasanArmada.Add(dtT7PenugasanArmada);
