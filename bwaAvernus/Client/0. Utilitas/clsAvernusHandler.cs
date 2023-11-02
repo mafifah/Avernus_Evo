@@ -22,16 +22,16 @@ namespace bwaAvernus.Client._0._Utilitas
             
         }
 
-        public async Task<IList<dynamic>> Get_Customer(bool perbaruiMeskipunAda = false)
+        public async Task<ObservableCollection<uimT1CustomerInstansi>> Get_Customer(bool perbaruiMeskipunAda = false)
         {
             var data = await _svcCustomerInstansi.GetDataCustomerInstansi();
-            return data.Adapt<List<dynamic>>();
+            return data.Adapt<ObservableCollection<uimT1CustomerInstansi>>();
         }
 
-        public async Task<IList<dynamic>> Get_AlamatCustomer(Guid idCustomer, bool perbaruiMeskipunAda = false)
+        public async Task<ObservableCollection<uimT2AlamatCustomer>> Get_AlamatCustomer(Guid idCustomer, bool perbaruiMeskipunAda = false)
         {
             var data = await _svcCustomerInstansi.GetDataAlamatCustomerById(idCustomer);
-            return data.Adapt<List<dynamic>>();
+            return data.Adapt<ObservableCollection<uimT2AlamatCustomer>>();
         }
 
         public async Task<IList<dynamic>> Get_RuteByIdAlamatCustomer(Guid? idAlamatCustomer= null, bool perbaruiMeskipunAda = false)
@@ -66,10 +66,10 @@ namespace bwaAvernus.Client._0._Utilitas
             //return data.Adapt<List<dynamic>>();
         }
 
-        public async Task<IList<dynamic>> Get_Rekening(bool perbaruiMeskipunAda = false)
+        public async Task<ObservableCollection<pthT0Rekening>> Get_Rekening(bool perbaruiMeskipunAda = false)
         {
             var data = await _svcRekening.GetDataRekening();
-            return data.Adapt<List<dynamic>>();
+            return data.Adapt<ObservableCollection<pthT0Rekening>>();
         }
 
         public async Task<object> GetValidasiRute(string nopol)

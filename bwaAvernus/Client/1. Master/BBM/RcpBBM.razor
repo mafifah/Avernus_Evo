@@ -7,15 +7,12 @@
 	@<DxFormLayout CssClass="custom-form-layout">
 		<DxFormLayoutItem @ref="FliBBM" Caption="BBM" ColSpanMd="12">
             <DxTextBox @ref="TxbBBM"
-            Text = "@DtRekapitulasi_Terseleksi.BBM"
-			TextExpression="@(() => DtRekapitulasi_Terseleksi.BBM)" 
-            TextChanged="@(async (valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.BBM), valueBaru))"
+            @bind-Text = "@DtRekapitulasi_Terseleksi.BBM"
 			/>
 		</DxFormLayoutItem>
 		<DxFormLayoutItem @ref="FliKeterangan" Caption="Keterangan" ColSpanMd="12">
-            <DxTextBox Text="@DtRekapitulasi_Terseleksi.Keterangan" @ref="TxbKeterangan"
-                       TextExpression="@(() => DtRekapitulasi_Terseleksi.Keterangan)"
-                       TextChanged="@(async (valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Keterangan), valueBaru))" />
+            <DxTextBox @bind-Text="@DtRekapitulasi_Terseleksi.Keterangan" @ref="TxbKeterangan"
+                       />
 		</DxFormLayoutItem>
 
 		@*<DxFormLayoutItem @ref="FliHarga" Caption="Harga" ColSpanMd="12">

@@ -1,6 +1,7 @@
 ﻿@inherits ConMaster_1<uimT3Rute, svcBiayaRute>
 @namespace bwaAvernus._1._Master
 @using bwaAvernus.Shared._1._Master;
+@using bwaCrixalis.Client._1._Master;
 @{
     base.BuildRenderTree(__builder);
     RfDetil = 
@@ -29,11 +30,11 @@
                 <DxFormLayoutItem @ref="@FliCabang" Caption="Cabang" ColSpanMd="12">
                     <DxComboBox @ref="@CmbIdCompany"
                                 Data="@DtCmbIdCompany"
-                                @bind-Value="@DrCmbIdCompany"
+                                Value="@DrCmbIdCompany"
                                 TextFieldName="IdCompany"
                                 CssClass="cw-480 font_0"
                                 DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                                DropDownVisibleChanged="@((bool valueBaru) => CmbIdCompany_DropDownVisibleChanged(valueBaru))"
+                                ValueChanged="@((uimT0Company company) => CmbIdCompany_Dipilih(company))"
                                 tabindex="1">
                         <DxListEditorColumn FieldName="IdCompany" Caption="IdCompany" />
                         <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />

@@ -66,7 +66,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public DxTextBox TxbIdTransaksi { get; set; }
     public DxDateEdit<DateTimeOffset?> DteWaktuProses { get; set; }
 
-    public DxComboBox<uimT1Customer, uimT1Customer> CmbCustomer;
+    public DxComboBox<uimT1CustomerInstansi, uimT1CustomerInstansi> CmbCustomer;
     public DxComboBox<uimT2AlamatCustomer, uimT2AlamatCustomer> CmbAlamatCustomer;
     public DxComboBox<uimT3Rute, uimT3Rute> CmbRute;
     public DxSpinEdit<decimal?> SpeSanguRitase { get; set; }
@@ -90,7 +90,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
     #region Data List
     public ObservableCollection<uimT0Company> DtCmbIdCompany { get; set; }
-    public ObservableCollection<uimT1Customer> DtCmbCustomer { get; set; }
+    public ObservableCollection<uimT1CustomerInstansi> DtCmbCustomer { get; set; }
     public ObservableCollection<uimT2AlamatCustomer> DtCmbAlamatCustomer { get; set; }
     public ObservableCollection<uimT3Rute> DtCmbRute { get; set; }
     public ObservableCollection<uimT1Armada> DtCmbArmada { get; set; }
@@ -106,7 +106,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
     #region Properties
     public uimT0Company? DrCmbIdCompany { get; set; }
-    public uimT1Customer? DrCmbCustomer { get; set; }
+    public uimT1CustomerInstansi? DrCmbCustomer { get; set; }
     public uimT2AlamatCustomer? DrCmbAlamatCustomer { get; set; }
     public uimT3Rute? DrCmbRute { get; set; }
     public uimT1Armada? DrCmbArmada { get; set; }
@@ -142,8 +142,8 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         DtKota = await ch.Get_Kota();
         DtJenisArmada = (await _svcArmada.GetDataJenisArmada()).ToList();
         if (DtCmbArmada is null) DtCmbArmada = await ah.Get_Armada();
-        if (DtCmbCustomer is null) DtCmbCustomer = (await ah.Get_Customer()).Adapt<ObservableCollection<uimT1Customer>>();
-        if (DtCmbRekening is null) DtCmbRekening = (await ah.Get_Rekening()).Adapt<ObservableCollection<pthT0Rekening>>();
+        if (DtCmbCustomer is null) DtCmbCustomer = await ah.Get_Customer();
+        if (DtCmbRekening is null) DtCmbRekening = await ah.Get_Rekening();
         if (DtCmbBBMMetode is null) DtCmbBBMMetode = (await ah.Get_DataOption("Metode BBM")).Adapt<ObservableCollection<pthT9DataOption>>();
         if (DtCmbIdCompany is null) DtCmbIdCompany = (await _svcCompany.GetDataCompany()).Adapt<ObservableCollection<uimT0Company>>();
         //if (DtCmbSopir is null) DtCmbSopir = (await ah.Get_ArmadaSopir()).Adapt<IList<dynamic>>();
@@ -156,8 +156,13 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         updatedCustomer.ForEach(x => x.T2Kota = DtKota.FirstOrDefault(y => y.IdKota == x.IdKota));
         DtCmbCustomer = updatedCustomer;
 
+
         dtPropertiesT6 = DtRekapitulasi_Terseleksi.GetType().GetProperties();
-        dtPropertiesT7 = DtRekapitulasi_Terseleksi.T7PenugasanArmada.GetType().GetProperties();
+        dtPropertiesT7 = DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.GetType().GetProperties();
+
+        DrCmbIdCompany = DtCmbIdCompany?.FirstOrDefault(x => x.IdCompany == IdCompany);
+        DrCmbBBMMetode = DtCmbBBMMetode?.FirstOrDefault(x => x.DataOption == "Voucher");
+        DrCmbRekening = DtCmbRekening?.FirstOrDefault(x => x.Rekening == "Kas Pak Antok");
 
         SedangProsesRefreshDetil = false;
         StateHasChanged();
@@ -251,8 +256,6 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         base.ProsesPerbarui_Control(namaControl, dtCmb, perbaruiMeskipunAda);
 
         DrCmbIdCompany = DtCmbIdCompany?.FirstOrDefault(x => x.IdCompany == IdCompany);
-        //DrCmbRekening = DtCmbRekening.Adapt<IList<pthT0Rekening>>().FirstOrDefault(x => x.Rekening == "Kas Pak Antok");
-        //DrCmbBBMMetode = DtCmbBBMMetode.Adapt<IList<string>>().FirstOrDefault();
         await InvokeAsync(StateHasChanged);
     }
     public async void CmbIdCompany_Dipilih(uimT0Company company)
@@ -263,7 +266,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
     }
     
-    public async void CmbCustomer_Dipilih(uimT1Customer customer)
+    public async void CmbCustomer_Dipilih(uimT1CustomerInstansi customer)
     {
         DrCmbCustomer = customer;
 
@@ -549,7 +552,10 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         UrlGambarArmada = "";
         UrlGambarSopir = "";
         DtGrdInformasi = null;
-		StateHasChanged();
+        DrCmbIdCompany = DtCmbIdCompany?.FirstOrDefault(x => x.IdCompany == IdCompany);
+        DrCmbBBMMetode = DtCmbBBMMetode?.FirstOrDefault(x => x.DataOption == "Voucher");
+        DrCmbRekening = DtCmbRekening?.FirstOrDefault(x => x.Rekening == "Kas Pak Antok");
+        StateHasChanged();
     }
     public override void ProsesUpdateDatabase()
     {

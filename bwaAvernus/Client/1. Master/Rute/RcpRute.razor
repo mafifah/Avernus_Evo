@@ -9,15 +9,12 @@
 		<DxFormLayoutGroup Decoration="FormLayoutGroupDecoration.None" ColSpanMd="6">
             <DxFormLayoutItem @ref="FliRute" Caption="Rute" ColSpanMd="12">
                 <DxTextBox @ref="TxbRute" InputId="ABC, AGA" tabindex="1"
-                           Text="@DtRekapitulasi_Terseleksi.Rute"
-                           TextChanged="@(async (valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Rute), valueBaru))"
+                           @bind-Text="@DtRekapitulasi_Terseleksi.Rute"
                            />
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliAlias" Caption="Alias" ColSpanMd="12">
                 <DxTextBox @ref="TxbAlias" InputId="ABC, AGA" tabindex="2"
-                           Text="@DtRekapitulasi_Terseleksi.Alias" 
-                           TextExpression="@(() => DtRekapitulasi_Terseleksi.Alias)" 
-                           TextChanged="@(async (valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Alias), valueBaru))"
+                           @bind-Text="@DtRekapitulasi_Terseleksi.Alias"
                            />
             </DxFormLayoutItem>
             @*<DxFormLayoutItem @ref="FliJenisRute" Caption="Jenis" ColSpanMd="12">
@@ -29,49 +26,42 @@
             </DxFormLayoutItem>*@
             <DxFormLayoutItem @ref="FliJenisRute" Caption="Jenis Rute" ColSpanMd="12">
                 <DxComboBox @ref="@CmbJenisRute" Data="@DtCmbJenisRute" @bind-Value="@DrCmbJenisRute"
-                            Text="@DtRekapitulasi_Terseleksi.Jenis" tabindex="3"
-                            TextExpression="@(() => DtRekapitulasi_Terseleksi.Jenis)"
-                            TextChanged="@(async (string valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Jenis), valueBaru))"
+                            @bind-Text="@DtRekapitulasi_Terseleksi.Jenis" tabindex="3"
                             TextFieldName="DataOption"
-                            CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                            DropDownVisibleChanged="@((bool val) => CmbJenisRute_DropDownVisibleChanged(val))">
+                            CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
                 </DxComboBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliEstimasiJarak" Caption="Estimasi Jarak" ColSpanMd="12">
                 <DxSpinEdit @ref="SpeEstimasiJarak" InputId="0.0, 8.0" tabindex="4"
                     Value="@((decimal?)DtRekapitulasi_Terseleksi.EstimasiJarak)"
                     ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.EstimasiJarak)"
-                    ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.EstimasiJarak), (int?)valueBaru))"/>
+                    ValueChanged="@(async (decimal? valueBaru) => DtRekapitulasi_Terseleksi.EstimasiJarak = (int?)valueBaru)" />
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliEstimasiWaktu" Caption="Estimasi Waktu" ColSpanMd="12">
                 <DxSpinEdit @ref="SpeEstimasiWaktu" InputId="0.0, 5.7" tabindex="5"
                             Value="@((decimal?)DtRekapitulasi_Terseleksi.EstimasiWaktu)"
                             ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.EstimasiWaktu)"
-                            ValueChanged="@(async (decimal? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.EstimasiWaktu), (int?)valueBaru))"
-                            />
+                            ValueChanged="@(async (decimal? valueBaru) => DtRekapitulasi_Terseleksi.EstimasiWaktu = (int?)valueBaru)" />
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliJenisMuatan" Caption="Jenis Muatan" ColSpanMd="12">
                 <DxComboBox @ref="@CmbJenisMuatan" Data="@DtCmbJenisMuatan" @bind-Value="@DrCmbJenisMuatan"
                             Text="@DtRekapitulasi_Terseleksi.Muatan" tabindex="6"
                             TextExpression="@(() => DtRekapitulasi_Terseleksi.Muatan)"
-                            TextChanged="@(async (string valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Muatan), valueBaru))"
                             TextFieldName="DataOption"
                             CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                            DropDownVisibleChanged="@((bool val) => CmbJenisMuatan_DropDownVisibleChanged(val))">
+                            >
                 </DxComboBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliStatusRutePaket" Caption="Status Rute Paket" ColSpanMd="12">
                 <DxCheckBox @ref="ChbStatusRutePaket" tabindex="7"
                     Checked="@((bool?)DtRekapitulasi_Terseleksi.StatusRutePaket)"
                     CheckedExpression="@(() => (bool?)DtRekapitulasi_Terseleksi.StatusRutePaket)"
-                    CheckedChanged="@(async (bool? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.StatusRutePaket), valueBaru))"
                 />
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliStatus" Caption="Status" ColSpanMd="12">
                 <DxCheckBox @ref="ChbStatus" tabindex="8"
                     Checked="@((bool?)DtRekapitulasi_Terseleksi.Status)"
                     CheckedExpression="@(() => (bool?)DtRekapitulasi_Terseleksi.Status)"
-                    CheckedChanged="@(async (bool? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.Status), valueBaru))"
                 />
             </DxFormLayoutItem>
         </DxFormLayoutGroup>
@@ -79,16 +69,14 @@
             <DxFormLayoutItem @ref="FliCustomer" Caption="Customer" ColSpanMd="12">
                 <DxComboBox @ref="@CmbCustomer" tabindex="9"
                             Data="@DtCmbCustomer"
-                            @bind-Value="@DrCmbCustomer"
+                            Value="@DrCmbCustomer"
                             TextFieldName="Nama"
                             CssClass="cw-480 font_0"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                            DropDownVisibleChanged="@((bool valueBaru) => CmbCustomer_DropDownVisibleChanged(valueBaru))">
-                    <DxListEditorColumn FieldName="Prefix" Caption="Prefix" />
+                            ValueChanged="@((uimT1CustomerInstansi customer) => CmbCustomer_Dipilih(customer))">
                     <DxListEditorColumn FieldName="Nama" Caption="Nama" />
                     <DxListEditorColumn FieldName="Kode" Caption="Kode" />
                     <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
-                    <DxListEditorColumn FieldName="Alamat" Caption="Alamat" />
                 </DxComboBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliAlamatCustomer" Caption="Alamat" ColSpanMd="12">
@@ -97,8 +85,7 @@
                             @bind-Value="@DrCmbAlamatCustomer"
                             TextFieldName="Alamat"
                             CssClass="cw-480 font_0"
-                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                            DropDownVisibleChanged="@((bool valueBaru) => CmbAlamatCustomer_DropDownVisibleChanged(valueBaru))">
+                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
                     <DxListEditorColumn FieldName="Alamat" Caption="Alamat" />
                     <DxListEditorColumn FieldName="KodePos" Caption="Kode Pos" />
                 </DxComboBox>

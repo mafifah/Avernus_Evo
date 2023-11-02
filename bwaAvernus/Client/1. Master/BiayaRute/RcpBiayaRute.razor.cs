@@ -2,6 +2,7 @@
 using bwaCrixalis.Client._1._Master;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNetCore.Components;
+using System.Collections.ObjectModel;
 
 namespace bwaAvernus._1._Master
 {
@@ -32,19 +33,19 @@ namespace bwaAvernus._1._Master
         public DxSpinEdit<decimal?> SpeEstimasiWaktu { get; set; }
         public DxSpinEdit<decimal?> SpeEstimasiJarak { get; set; }
         public DxTextBox TxbMuatan { get; set; }
-        public DxComboBox<dynamic, object> CmbIdCompany { get; set; }
+        public DxComboBox<uimT0Company, uimT0Company> CmbIdCompany { get; set; }
         public IGrid GrdBiayaRute { get; set; }
         #endregion
 
         #region Data List 
-        public IList<dynamic> DtCmbIdCompany { get; set; }
+        public ObservableCollection<uimT0Company> DtCmbIdCompany { get; set; }
         public IList<T0JenisArmada> DtT0JenisArmada { get; set; }
         public IList<dynamic> DtGrdBiayaRute { get; set; }
         public IList<uimT2Kota> DtT2Kota { get; set; }
         #endregion
 
         #region Properties
-        public object DrCmbIdCompany { get; set; }
+        public uimT0Company? DrCmbIdCompany { get; set; }
         #endregion
 
         private readonly clsCrixalisHandler ch = new clsCrixalisHandler();
@@ -105,12 +106,11 @@ namespace bwaAvernus._1._Master
 
         }
 
-        public async void CmbIdCompany_DropDownVisibleChanged(bool val)
+        public async void CmbIdCompany_Dipilih(uimT0Company company)
         {
-            if (!val)
-            {
-                DtGrdBiayaRute.Adapt<IList<uimT4BiayaRute>>().ForEach(x => x.IdCompany = DrCmbIdCompany?.Adapt<uimT0Company>().IdCompany);
-            }
+            DrCmbIdCompany = company;
+            DtGrdBiayaRute.Adapt<IList<uimT4BiayaRute>>().ForEach(x => x.IdCompany = company.IdCompany);
+            StateHasChanged();
         }
         #endregion
 
