@@ -9,14 +9,14 @@
 	RfDetil = 
     @<DxFormLayout CssClass="custom-form-layout" Id="scRute">
         <DxFormLayout CssClass="sticky-row-1 w-100 sc" Id="sticky-row-1">
-            <DxFormLayoutItem @ref="@FliIdCompany" Caption="Kode" ColSpanMd="3">
-                <DxComboBox @ref="@CmbIdCompany"
-                            Data="@DtCmbIdCompany"
-                            Value="@DrCmbIdCompany"
+            <DxFormLayoutItem @ref="@FliCompany" Caption="Kode" ColSpanMd="3">
+                <DxComboBox @ref="@CmbCompany" ClearButtonDisplayMode = "DataEditorClearButtonDisplayMode.Never"
+                            Data="@DtCmbCompany"
+                            Value="@DrCmbCompany"
                             TextFieldName="IdCompany"
                             CssClass="cw-480 font_0" NullText=""
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                            ValueChanged="@((uimT0Company company) => CmbIdCompany_Dipilih(company))"
+                            ValueChanged="@((uimT0Company company) => CmbCompany_Dipilih(company))"
                             tabindex="1">
                     <DxListEditorColumn FieldName="IdCompany" Caption="IdCompany" />
                     <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
@@ -59,8 +59,8 @@
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
                             ValueChanged="@((uimT5ArmadaSopir sopir) => CmbSopir_Dipilih(sopir))"
                             tabindex="7">
-                    <DxListEditorColumn FieldName="NamaLengkap" Caption="Nama Panggilan" />
-                    <DxListEditorColumn FieldName="Seluler1" Caption="GSM Phone" />
+                    <DxListEditorColumn FieldName="NamaSopir" Caption="Nama Panggilan" />
+                    <DxListEditorColumn FieldName="Seluler1" Caption="Keterangan" />
                 </DxComboBox>
             </DxFormLayoutItem>
 
@@ -101,10 +101,9 @@
                             ValueChanged="@((uimT1CustomerInstansi customer) => CmbCustomer_Dipilih(customer))"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
                             tabindex="4">
-                    <DxListEditorColumn FieldName="Prefix" Caption="Prefix" />
-                    <DxListEditorColumn FieldName="Nama" Caption="Nama" />
-                    <DxListEditorColumn FieldName="Kode" Caption="Kode" />
-                    <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
+                    <DxListEditorColumn FieldName="Customer" Caption=""/>
+                    <DxListEditorColumn FieldName="Kota" Caption="" />
+                    <DxListEditorColumn FieldName="Inisial" Caption="" />
                 </DxComboBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliAlamatCustomer" Caption="Alamat" ColSpanMd="12">
