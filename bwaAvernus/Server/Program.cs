@@ -19,6 +19,7 @@ using bwaAvernus.Server._2._Transaksi;
 using bwaCrixalis.Server._2._Transaksi;
 using bwaCrixalis.Shared._2._Transaksi;
 using bwaAvernus.Client._2._Transaksi;
+using DevExpress.CodeParser;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -215,6 +216,14 @@ app.MapGrpcService<svsKasBankMasuk>().EnableGrpcWeb();
 app.MapGrpcService<svsKasBankKeluar>().EnableGrpcWeb();
 app.MapGrpcService<svsPiutangKaryawan>().EnableGrpcWeb();
 app.MapGrpcService<svsPelunasanPiutangKaryawan>().EnableGrpcWeb();
+
+// Svs Class Get Data
+app.MapGrpcService<svsClassGetDataAlamatSupplierStatusTrue>().EnableGrpcWeb();
+app.MapGrpcService<svsClassGetDataCompanyStatusTrue>().EnableGrpcWeb();
+app.MapGrpcService<svsClassGetDataJenisCustomerStatusTrue>().EnableGrpcWeb();
+app.MapGrpcService<svsClassGetDataJenisSupplierStatusTrue>().EnableGrpcWeb();
+app.MapGrpcService<svsClassGetDataKaryawanStatusTrue>().EnableGrpcWeb();
+app.MapGrpcService<svsClassGetDataSupplierStatusTrue>().EnableGrpcWeb();
 
 //Svs Avernus
 app.MapGrpcService<svsBBM>().EnableGrpcWeb();

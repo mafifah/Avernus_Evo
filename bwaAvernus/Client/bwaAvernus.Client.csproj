@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+	<BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
+	<AssemblyTitle Condition="'$(Configuration)' == 'debug'">$([System.DateTime]::Now.ToString("dd/MM/yy - hh\:mm"))</AssemblyTitle>
+	<Version>1.2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -79,6 +82,18 @@
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\uimT4NopolArmada.cs" Link="1. Master\Crixalis\107. Armada\uimT4NopolArmada.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\uimT5ArmadaCustomer.cs" Link="1. Master\Crixalis\107. Armada\uimT5ArmadaCustomer.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\uimT5ArmadaSopir.cs" Link="1. Master\Crixalis\107. Armada\uimT5ArmadaSopir.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Customer\svcClassGetDataJenisCustomerStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Customer\svcClassGetDataJenisCustomerStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Customer\uimClassGetDataJenisCustomerStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Customer\uimClassGetDataJenisCustomerStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Karyawan\svcClassGetDataKaryawanStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Karyawan\svcClassGetDataKaryawanStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Karyawan\uimClassGetDataKaryawanStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Karyawan\uimClassGetDataKaryawanStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Sistem\svcClassGetDataCompanyStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Sistem\svcClassGetDataCompanyStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Sistem\uimClassGetDataCompanyStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Sistem\uimClassGetDataCompanyStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\svcClassGetDataAlamatSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\svcClassGetDataAlamatSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\svcClassGetDataJenisSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\svcClassGetDataJenisSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\svcClassGetDataSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\svcClassGetDataSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\uimClassGetDataAlamatSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\uimClassGetDataAlamatSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\uimClassGetDataJenisSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\uimClassGetDataJenisSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\uimClassGetDataSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\uimClassGetDataSupplierStatusTrue.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Company\svcCompany.cs" Link="1. Master\Crixalis\199. Sistem\Company\svcCompany.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Company\uimT0Company.cs" Link="1. Master\Crixalis\199. Sistem\Company\uimT0Company.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Divisi Perusahaan\uimT0DivisiPerusahaan.cs" Link="1. Master\Crixalis\199. Sistem\Divisi Perusahaan\uimT0DivisiPerusahaan.cs" />
@@ -174,6 +189,7 @@
 		<PackageReference Include="StackExchange.Redis" Version="2.6.122" />
 		<PackageReference Include="Telegram.Bot" Version="19.0.0" />
 		<PackageReference Include="NewId" Version="4.0.1" />
+		<PackageReference Include="Toolbelt.Blazor.HotKeys2" Version="3.1.0" />
 		<PackageReference Include="Wisej-3-Html2Canvas" Version="3.2.2" />
 	</ItemGroup>
 	
@@ -204,6 +220,10 @@
     <Folder Include="1. Master\Crixalis\106. Inventori\Kategori Barang\" />
     <Folder Include="1. Master\Crixalis\106. Inventori\Barang\" />
     <Folder Include="1. Master\Crixalis\106. Inventori\Aset\" />
+    <Folder Include="1. Master\Crixalis\190. ClassGetData\Customer\" />
+    <Folder Include="1. Master\Crixalis\190. ClassGetData\Karyawan\" />
+    <Folder Include="1. Master\Crixalis\190. ClassGetData\Supplier\" />
+    <Folder Include="1. Master\Crixalis\190. ClassGetData\Sistem\" />
     <Folder Include="1. Master\Crixalis\199. Sistem\Company\" />
     <Folder Include="1. Master\Crixalis\199. Sistem\Divisi Perusahaan\" />
     <Folder Include="1. Master\Crixalis\199. Sistem\Lokasi\" />

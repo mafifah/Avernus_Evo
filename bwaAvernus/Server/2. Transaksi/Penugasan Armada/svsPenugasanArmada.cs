@@ -186,6 +186,7 @@ namespace bwaAvernus.Server._2._Transaksi
             var dtT7PenugasanArmada = dtT6PenugasanArmada.ListT7PenugasanArmada.FirstOrDefault();
             dtT6PenugasanArmada.IdCompany = dtT7PenugasanArmada.IdCompany;
             dtT7PenugasanArmada.NoPenugasan = await GenerateIdTransaksi(dtT7PenugasanArmada.IdCompany, "DO");
+            dtT6PenugasanArmada.IdTransaksi = dtT7PenugasanArmada.NoPenugasan;
             dtT6PenugasanArmada.ListT7PenugasanArmada.Clear();
             dtT6PenugasanArmada.ListT7PenugasanArmada.Add(dtT7PenugasanArmada);
             var hasil = await _svd.InsertTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, T7PenugasanArmada_SPBU, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6PenugasanArmada, request.IdForm);

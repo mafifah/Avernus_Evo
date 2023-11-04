@@ -83,7 +83,7 @@ namespace bwaAvernus._1._Master
             await base.ProsesMuat_Detil();
         }
 
-        public override async void ProsesPerbarui_Control(string namaControl, IList<dynamic> dtCmb, bool perbaruiMeskipunAda = false)
+        public override async void ProsesPerbarui_Control(string namaControl, object dtCmb, bool perbaruiMeskipunAda = false)
         {
             if (namaControl == nameof(CmbIdCompany))
             {

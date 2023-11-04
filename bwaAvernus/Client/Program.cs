@@ -12,6 +12,7 @@ using bwaCrixalis.Client._0._Utilitas;
 using bwaAvernus.Client._2._Transaksi;
 using Blazored.Modal;
 using bwaCrixalis.Client._2._Transaksi;
+using DevExpress.XtraCharts;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -67,6 +68,14 @@ builder.Services.AddScoped<svcOrderPembelian>();
 builder.Services.AddScoped<svcPembelianAset>();
 
 builder.Services.AddScoped<svcOrderPenjualan>();
+
+//Service Class Get Data
+builder.Services.AddSingleton<svcClassGetDataAlamatSupplierStatusTrue>();
+builder.Services.AddSingleton<svcClassGetDataCompanyStatusTrue>();
+builder.Services.AddSingleton<svcClassGetDataJenisCustomerStatusTrue>();
+builder.Services.AddSingleton<svcClassGetDataJenisSupplierStatusTrue>();
+builder.Services.AddSingleton<svcClassGetDataKaryawanStatusTrue>();
+builder.Services.AddSingleton<svcClassGetDataSupplierStatusTrue>();
 
 //svc Avernus
 builder.Services.AddSingleton<clsAvernusHandler>();

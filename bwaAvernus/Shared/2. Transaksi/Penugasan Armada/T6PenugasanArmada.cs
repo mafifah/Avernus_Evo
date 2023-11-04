@@ -68,7 +68,6 @@ namespace bwaAvernus.Shared._2._Transaksi
         {
             var t6PenugasanArmada = t6PA;
             t6PenugasanArmada.IdPenugasanArmada = NewId.NextGuid();
-            t6PenugasanArmada.IdTransaksi = idTransaksiGenerated;
             t6PenugasanArmada.Synchronise = "inserted";
             t6PenugasanArmada.WaktuInsert = DateTimeOffset.UtcNow;
 

@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNetCore.Components;
-using bwaAvernus.Client._0._Utilitas;
+﻿using bwaAvernus.Client._0._Utilitas;
 using bwaCrixalis.Client._1._Master;
 using bwaAvernus._1._Master;
 using bwaCrixalis.Client._0._Utilitas;
 using bwaAvernus.Shared._2._Transaksi;
-using Radzen;
 using System.Reflection;
-using bwaCrixalis.Shared._1._Master;
-using Microsoft.Ajax.Utilities;
-using Microsoft.JSInterop;
 using System.Collections.ObjectModel;
-using Mapster;
 using Pantheon.Shared.UIModels;
 using Pantheon.Client.Services.LogUser;
-using DevExpress.Xpo.DB;
+using Microsoft.AspNetCore.Components;
+using Radzen;
+using Microsoft.JSInterop;
+using Microsoft.Ajax.Utilities;
 
 namespace bwaAvernus.Client._2._Transaksi;
 public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, svcPenugasanArmada>
@@ -89,7 +86,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     #endregion
 
     #region Data List
-    public ObservableCollection<uimT0Company> DtCmbIdCompany { get; set; }
+    public IList<uimT0Company> DtCmbIdCompany { get; set; }
     public ObservableCollection<uimT1CustomerInstansi> DtCmbCustomer { get; set; }
     public ObservableCollection<uimT2AlamatCustomer> DtCmbAlamatCustomer { get; set; }
     public ObservableCollection<uimT3Rute> DtCmbRute { get; set; }
@@ -231,19 +228,19 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     {
         base.ProsesMuat_Detil();
     }
-    public override async void ProsesPerbarui_Control(string namaControl, IList<dynamic> dtCmb, bool perbaruiMeskipunAda = false)
+    public override async void ProsesPerbarui_Control(string namaControl, object dtCmb, bool perbaruiMeskipunAda = false)
     {
         if (namaControl == nameof(CmbIdCompany))
         {
-            dtCmb = (await _svcCompany.GetDataCompany()).Adapt<IList<dynamic>>();
+            dtCmb = await _svcCompany.GetDataCompany();
         }
         if (namaControl == nameof(CmbCustomer))
         {
-            dtCmb = (await ah.Get_Customer()).Adapt<IList<dynamic>>();
+            dtCmb = (await ah.Get_Customer());
         }
         if (namaControl == nameof(CmbArmada))
         {
-            dtCmb = (await ah.Get_Armada()).Adapt<IList<dynamic>>();
+            dtCmb = (await ah.Get_Armada());
         }
         if (namaControl == nameof(CmbBBMMetode))
         {
@@ -251,7 +248,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         }
         if (namaControl == nameof(CmbRekening))
         {
-            dtCmb = (await ah.Get_Rekening()).Adapt<IList<dynamic>>();
+            dtCmb = (await ah.Get_Rekening());
         }
         base.ProsesPerbarui_Control(namaControl, dtCmb, perbaruiMeskipunAda);
 
@@ -476,8 +473,8 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         DrCmbRekening = rekening;
         DtRekapitulasi_Terseleksi.IdRekening = rekening.IdRekening;
         DtRekapitulasi_Terseleksi.Rekening_Rekening = rekening.Rekening;
-        await ProsesSimpan_Draft("IdRekening", rekening.IdRekening);
-        await ProsesSimpan_Draft("Rekening_Rekening", rekening.Rekening);
+        //await ProsesSimpan_Draft("IdRekening", rekening.IdRekening);
+        //await ProsesSimpan_Draft("Rekening_Rekening", rekening.Rekening);
         await InvokeAsync(StateHasChanged);
     }
 
@@ -521,6 +518,10 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMVolume = 0;
         }
         if (DrCmbIdCompany is not null) DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCompany = DrCmbIdCompany.IdCompany;
+
+        DtRekapitulasi_Terseleksi.IdRekening = DrCmbRekening?.IdRekening;
+        DtRekapitulasi_Terseleksi.Rekening_Rekening = DrCmbRekening?.Rekening;
+        DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode = DrCmbBBMMetode?.DataOption;
         StateHasChanged();
     }
 

@@ -129,7 +129,7 @@ namespace bwaAvernus._1._Master
             //DtCmbCustomer = (await ah.Get_Customer()).Adapt<IList<uimuimT1CustomerInstansi>>();
         }
 
-        public override async void ProsesPerbarui_Control(string namaControl, IList<dynamic> dtCmb, bool perbaruiMeskipunAda = false)
+        public override async void ProsesPerbarui_Control(string namaControl, object dtCmb, bool perbaruiMeskipunAda = false)
         {
             if (namaControl == nameof(CmbJenisRute)) dtCmb = await ch.Get_DataOption("Jenis Rute");
             else if (namaControl == nameof(CmbJenisMuatan)) dtCmb = await ch.Get_DataOption("Jenis Muatan");

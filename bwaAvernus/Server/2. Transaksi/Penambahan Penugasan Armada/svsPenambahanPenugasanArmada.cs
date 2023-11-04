@@ -148,6 +148,7 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 	public override async Task<RplWritePenambahanPenugasanArmada> UpdatePenambahanPenugasanArmada(RqsUpdatePenambahanPenugasanArmada request, ServerCallContext context)
 	{
 		var dtT6PenambahanPenugasanArmada = request.Adapt<T6PenugasanArmada>();
+		dtT6PenambahanPenugasanArmada.StatusPerjalanan = $"Rute {dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.Count}";
 		var dtT7PenambahanPenugasanArmada = dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.FirstOrDefault(x => x.Urutan == dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.Count);
 		var dtT6Jurnal = (await _svd.GetEntitiesDenganSpec<pthT6Jurnal>(x => x.NoBukti == dtT7PenambahanPenugasanArmada.NoPenugasan))?.FirstOrDefault();
 		var dtT7Jurnal = new List<pthT7Jurnal>();
@@ -160,11 +161,11 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 
 			dtT6Jurnal.ListT7Jurnal = dtT7Jurnal.Adapt<ICollection<pthT7Jurnal>>();
 
-			await _svd.UpdateTransaksiHeader<pthT6Jurnal, pthT7Jurnal, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6Jurnal, 30200030);
+			//await _svd.UpdateTransaksiHeader<pthT6Jurnal, pthT7Jurnal, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6Jurnal, 30200030);
 		}
 		else if (dtT7PenambahanPenugasanArmada.SanguSementara > 0)
 		{
-			await GenerateJurnal(dtT7PenambahanPenugasanArmada.IdCompany, 30701020, dtT6PenambahanPenugasanArmada.IdTransaksi, dtT7PenambahanPenugasanArmada.NoPenugasan, $"{dtT6PenambahanPenugasanArmada.Nopol} ({dtT6PenambahanPenugasanArmada.Karyawan_Sopir_NamaPanggilan}): ({dtT7PenambahanPenugasanArmada.Customer_Inisial}) {dtT7PenambahanPenugasanArmada.Rute_Rute} [{dtT7PenambahanPenugasanArmada.Rute_Jenis}]", $"Sangu Sopir = {dtT7PenambahanPenugasanArmada.SanguSementara}", dtT7PenambahanPenugasanArmada.SanguSementara, dtT6PenambahanPenugasanArmada.IdRekening);
+			//await GenerateJurnal(dtT7PenambahanPenugasanArmada.IdCompany, 30701020, dtT6PenambahanPenugasanArmada.IdTransaksi, dtT7PenambahanPenugasanArmada.NoPenugasan, $"{dtT6PenambahanPenugasanArmada.Nopol} ({dtT6PenambahanPenugasanArmada.Karyawan_Sopir_NamaPanggilan}): ({dtT7PenambahanPenugasanArmada.Customer_Inisial}) {dtT7PenambahanPenugasanArmada.Rute_Rute} [{dtT7PenambahanPenugasanArmada.Rute_Jenis}]", $"Sangu Sopir = {dtT7PenambahanPenugasanArmada.SanguSementara}", dtT7PenambahanPenugasanArmada.SanguSementara, dtT6PenambahanPenugasanArmada.IdRekening);
 
 		}
 
