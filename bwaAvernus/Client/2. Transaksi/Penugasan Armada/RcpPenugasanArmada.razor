@@ -10,7 +10,7 @@
     @<DxFormLayout CssClass="custom-form-layout" Id="scRute">
         <DxFormLayout CssClass="sticky-row-1 w-100 sc" Id="sticky-row-1">
             <DxFormLayoutItem @ref="@FliCompany" Caption="Kode" ColSpanMd="3">
-                <DxComboBox @ref="@CmbCompany" ClearButtonDisplayMode = "DataEditorClearButtonDisplayMode.Never"
+                <DxComboBox @ref="@CmbCompany"
                             Data="@DtCmbCompany"
                             Value="@DrCmbCompany"
                             TextFieldName="IdCompany"
@@ -67,27 +67,27 @@
             <DxFormLayoutItem ColSpanMd="2">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Rute" Click="@(() => ProsesPilihTab_Detil("scRute"))" />
+                          Text="Rute" Click="@(() => ProsesPilihTab_Detil("scRute", "scRute"))" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="2">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="BBM + Sangu" Click="@(() => ProsesPilihTab_Detil("scBBM"))" />
+                          Text="BBM + Sangu" Click="@(() => ProsesPilihTab_Detil("scRute", "scBBM"))" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="3">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Detil Armada" Click="@(() => ProsesPilihTab_Detil("scArmada"))" />
+                          Text="Detil Armada" Click="@(() => ProsesPilihTab_Detil("scRute", "scArmada"))" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="3">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Detil Sopir" Click="@(() => ProsesPilihTab_Detil("scSopir"))" />
+                          Text="Detil Sopir" Click="@(() => ProsesPilihTab_Detil("scRute", "scSopir"))" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="2">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Aktivitas" Click="@(() => ProsesPilihTab_Detil("scAktifitas"))" />
+                          Text="Aktivitas" Click="@(() => ProsesPilihTab_Detil("scRute", "scAktifitas"))" />
             </DxFormLayoutItem>
         </DxFormLayout>
         
@@ -268,11 +268,11 @@
         </DxFormLayout>
         
         <DxFormLayout Id="scSopir" CssClass="sc">
-            <DxFormLayoutItem Caption="Seluler" ColSpanMd="8">
+            <DxFormLayoutItem Caption="Seluler" ColSpanMd="9">
                 <DxTextBox Text="@DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1" NullText="" ReadOnly=true>
                 </DxTextBox>
             </DxFormLayoutItem>
-            <DxFormLayoutItem Caption="Foto Sopir" ColSpanMd="4">
+            <DxFormLayoutItem Caption="Foto Sopir" ColSpanMd="3">
                 <RadzenImage Path="@UrlGambarSopir" Style="width:150px; height:150px;" />
             </DxFormLayoutItem>
         </DxFormLayout>
@@ -333,27 +333,31 @@
 </style>
 
 <style>
-    .dxbl-text-edit {
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit {
         border: none !important;
         border-radius: 0px !important;
     }
 
-    .dxbl-btn-group-right {
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-btn-group-right {
         visibility: hidden !important
     }
 
-    .dxbl-text-edit:hover > .dxbl-btn-group-right {
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit:hover > .dxbl-btn-group-right {
         visibility: visible !important;
         border: none !important;
         border-bottom: none !important;
     }
 
-    .dxbl-text-edit:hover {
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit:hover {
         border-bottom: 1px solid #AAAAAA !important;
     }
 
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit.dxbl-readonly:hover {
+        border-bottom : none !important;
+    }
 
-    .dxbl-text-edit > .dxbl-btn-group-vertical > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn-group > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon) {
+
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit > .dxbl-btn-group-vertical > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn-group > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon) {
         border: none !important;
     }
 </style>

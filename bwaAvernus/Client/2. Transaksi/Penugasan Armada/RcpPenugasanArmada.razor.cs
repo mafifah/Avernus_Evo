@@ -226,13 +226,13 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     #region Detil
     public override async Task ProsesMuat_Detil()
     {
-        /*ListCmb.AddRange(new BaseCmb[] {
+        ListCmb.AddRange(new BaseCmb[] {
             new BaseCmb
             {
                 Cmb = CmbCompany,
                 Wajib = true
             }
-        });*/
+        });
         await base.ProsesMuat_Detil();
 
     }
@@ -533,7 +533,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         StateHasChanged();
     }
 
-    public async void ProsesPilihTab_Detil(string idControl)
+    public async void ProsesPilihTab_Detil(string idParent, string idControl)
     {
         try
         {
