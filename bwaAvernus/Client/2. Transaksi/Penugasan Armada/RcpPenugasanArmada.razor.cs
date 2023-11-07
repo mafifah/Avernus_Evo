@@ -231,7 +231,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             new BaseCmb
             {
                 Cmb = CmbCompany,
-                Wajib = true
+                Wajib = true,
             }
         });
         await base.ProsesMuat_Detil();
