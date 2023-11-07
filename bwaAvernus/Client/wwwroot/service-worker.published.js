@@ -2,14 +2,14 @@
 // offline support. See https://aka.ms/blazor-offline-considerations
 
 self.importScripts('./service-worker-assets.js');
-self.addEventListener('install', event => event.waitUntil(onInstall(event)));
+//self.addEventListener('install', event => event.waitUntil(onInstall(event)));
 self.addEventListener('activate', event => event.waitUntil(onActivate(event)));
 self.addEventListener('fetch', event => event.respondWith(onFetch(event)));
 
 const cacheNamePrefix = 'offline-cache-';
 const cacheName = `${cacheNamePrefix}${self.assetsManifest.version}`;
-const offlineAssetsInclude = [ /\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /\.json$/, /\.css$/, /\.woff$/, /\.png$/, /\.jpe?g$/, /\.gif$/, /\.ico$/, /\.blat$/, /\.dat$/ ];
-const offlineAssetsExclude = [ /^service-worker\.js$/ ];
+const offlineAssetsInclude = [/\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /\.json$/, /\.css$/, /\.woff$/, /\.png$/, /\.jpe?g$/, /\.gif$/, /\.ico$/, /\.blat$/, /\.dat$/];
+const offlineAssetsExclude = [/^service-worker\.js$/];
 
 async function onInstall(event) {
     console.info('Service worker: Install');
@@ -46,3 +46,32 @@ async function onFetch(event) {
 
     return cachedResponse || fetch(event.request);
 }
+
+navigator.serviceWorker.register('/sw.js').then(reg => {
+    reg.installing; // the installing worker, or undefined
+    reg.waiting; // the waiting worker, or undefined
+    reg.active; // the active worker, or undefined
+
+    reg.addEventListener('updatefound', () => {
+        // A wild service worker has appeared in reg.installing!
+        const newWorker = reg.installing;
+
+        newWorker.state;
+        // "installing" - the install event has fired, but not yet complete
+        // "installed"  - install complete
+        // "activating" - the activate event has fired, but not yet complete
+        // "activated"  - fully active
+        // "redundant"  - discarded. Either failed install, or it's been
+        //                replaced by a newer version
+
+        newWorker.addEventListener('statechange', () => {
+            // newWorker.state has changed
+        });
+    });
+});
+
+navigator.serviceWorker.addEventListener('controllerchange', () => {
+    // This fires when the service worker controlling this page
+    // changes, eg a new worker has skipped waiting and become
+    // the new active worker.
+});

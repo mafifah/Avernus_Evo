@@ -142,12 +142,19 @@
         }
 
         function autoScrollKetikaPindahTab(idControl) {
-            //alert(idControl);
-            //console.log(idControl);
-            var targetElement = document.getElementById(idControl);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (ElementParent) {
+                var targetElement = ElementParent.querySelector('#' + idControl);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: "smooth"});
+                }
             }
+        }
+
+        var ElementParent = null;
+
+        function getElementParent(idParent)
+        {
+            ElementParent = document.getElementById(idParent);
         }
 
         function getLength() {

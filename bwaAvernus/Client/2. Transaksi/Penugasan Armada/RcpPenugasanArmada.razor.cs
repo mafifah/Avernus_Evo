@@ -171,6 +171,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         var outerHeader = await _js.InvokeAsync<int>("getLengthTopHeaderCaption");
         outerHeight = $"{outer + 89}px !important";
         outerHeightTopHeaderCaption = $"{outerHeader}px !important";
+        await _js.InvokeVoidAsync("getElementParent", "scRute");
     }
     /*public override void Inisialisasi_Filter()
     {
@@ -533,7 +534,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         StateHasChanged();
     }
 
-    public async void ProsesPilihTab_Detil(string idParent, string idControl)
+    public async void ProsesPilihTab_Detil(string idControl)
     {
         try
         {

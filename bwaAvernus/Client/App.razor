@@ -1,4 +1,5 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@inject Blazored.LocalStorage.ILocalStorageService _lss
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -13,3 +14,16 @@
     </NotFound>
 </Router>
 <MessageProvider></MessageProvider>
+
+@code {
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        AlamatAPI ??= await _lss.GetItemAsync<string>("APIAddress");
+        URL_AzureBlobStorage ??= await _lss.GetItemAsync<string>("CompanyBlob");
+        if (!string.IsNullOrEmpty(AlamatAPI))
+        {
+            SetClientChannel();
+        }
+        await base.SetParametersAsync(parameters);
+    }
+}
