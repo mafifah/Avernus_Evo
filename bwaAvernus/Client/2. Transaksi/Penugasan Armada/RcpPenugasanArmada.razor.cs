@@ -63,9 +63,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public DxTextBox TxbIdTransaksi { get; set; }
     public DxDateEdit<DateTimeOffset?> DteWaktuProses { get; set; }
 
-    public DxComboBox<uimT1CustomerInstansi, uimT1CustomerInstansi> CmbCustomer;
-    public DxComboBox<uimT2AlamatCustomer, uimT2AlamatCustomer> CmbAlamatCustomer;
-    public DxComboBox<uimT3Rute, uimT3Rute> CmbRute;
+    public DxComboBox<uimT1CustomerInstansi, uimT1CustomerInstansi> CmbCustomer { get; set; }
+    public DxComboBox<uimT2AlamatCustomer, uimT2AlamatCustomer> CmbAlamatCustomer {  get; set; }
+    public DxComboBox<uimT3Rute, uimT3Rute> CmbRute {  get; set; }
     public DxSpinEdit<decimal?> SpeSanguRitase { get; set; }
     public DxSpinEdit<decimal?> SpeTotalSangu { get; set; }
     public DxSpinEdit<decimal?> SpeBBMVolume { get; set; }
@@ -76,11 +76,11 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public DxSpinEdit<decimal?> SpeTotalAkhir { get; set; }
     public DxSpinEdit<decimal?> SpeSanguSementara { get; set; }
     
-    public DxComboBox<uimT1Armada, uimT1Armada> CmbArmada;
-    public DxComboBox<uimT5ArmadaSopir, uimT5ArmadaSopir> CmbSopir;
+    public DxComboBox<uimT1Armada, uimT1Armada> CmbArmada { get; set; }
+    public DxComboBox<uimT5ArmadaSopir, uimT5ArmadaSopir> CmbSopir { get; set; }
 
-    public DxComboBox<pthT9DataOption, pthT9DataOption> CmbBBMMetode;
-    public DxComboBox<pthT0Rekening, pthT0Rekening> CmbRekening;
+    public DxComboBox<uimT9DataOption, uimT9DataOption> CmbBBMMetode { get; set; }
+    public DxComboBox<pthT0Rekening, pthT0Rekening> CmbRekening { get; set; }
 
     public IGrid GrdT7PenugasanArmada_SPBU { get; set; }
     #endregion
@@ -92,8 +92,8 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public ObservableCollection<uimT3Rute> DtCmbRute { get; set; }
     public ObservableCollection<uimT1Armada> DtCmbArmada { get; set; }
     public ObservableCollection<uimT5ArmadaSopir> DtCmbSopir { get; set; }
-    public ObservableCollection<pthT9DataOption> DtCmbBBMMetode { get; set; }
-    public ObservableCollection<pthT0Rekening> DtCmbRekening { get; set; }
+    public IList<uimT9DataOption> DtCmbBBMMetode { get; set; }
+    public IList<pthT0Rekening> DtCmbRekening { get; set; }
     public IList<dynamic> DtGrdT7PenugasanArmada_SPBU { get; set; }
     public ObservableCollection<uimT3Rute> DtRute { get; set; }
     public ObservableCollection<uimT4BiayaRute> DtBiayaRute { get; set; }
@@ -108,7 +108,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public uimT3Rute? DrCmbRute { get; set; }
     public uimT1Armada? DrCmbArmada { get; set; }
     public uimT5ArmadaSopir? DrCmbSopir { get; set; }
-    public pthT9DataOption? DrCmbBBMMetode { get; set; }
+    public uimT9DataOption? DrCmbBBMMetode { get; set; }
     public pthT0Rekening? DrCmbRekening { get; set; }
     public decimal? Potongan { get; set; } = 0;
 
@@ -138,28 +138,28 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         base.OnInitialized();
         DtKota = await ch.Get_Kota();
         DtJenisArmada = (await _svcArmada.GetDataJenisArmada()).ToList();
-        if (DtCmbArmada is null) DtCmbArmada = await ah.Get_Armada();
-        if (DtCmbCustomer is null) DtCmbCustomer = await ah.Get_Customer();
-        if (DtCmbRekening is null) DtCmbRekening = await ah.Get_Rekening();
-        if (DtCmbBBMMetode is null) DtCmbBBMMetode = (await ah.Get_DataOption("Metode BBM")).Adapt<ObservableCollection<pthT9DataOption>>();
-        if (DtCmbCompany is null) DtCmbCompany = (await _svcCompany.GetDataCompany()).Adapt<ObservableCollection<uimT0Company>>();
+        //if (DtCmbArmada is null) DtCmbArmada = await ah.Get_Armada();
+        //if (DtCmbCustomer is null) DtCmbCustomer = await ah.Get_Customer();
+        //if (DtCmbRekening is null) DtCmbRekening = await ah.Get_Rekening();
+        //if (DtCmbBBMMetode is null) DtCmbBBMMetode = (await ah.Get_DataOption("Metode BBM")).Adapt<ObservableCollection<uimT9DataOption>>();
+        //if (DtCmbCompany is null) DtCmbCompany = (await _svcCompany.GetDataCompany()).Adapt<ObservableCollection<uimT0Company>>();
         //if (DtCmbSopir is null) DtCmbSopir = (await ah.Get_ArmadaSopir()).Adapt<IList<dynamic>>();
         //if (DtCmbRute is null) DtCmbRute = (await ah.Get_RuteByIdAlamatCustomer()).Adapt<IList<dynamic>>();
         //if (DtBiayaRute.Count() < 1) DtBiayaRute = (await ah.Get_BiayaRute()).Adapt<IList<uimT4BiayaRute>>();
         DtRute = (await ah.Get_RuteByIdAlamatCustomer()).Adapt<ObservableCollection<uimT3Rute>>();
         if (DtCmbRute is null) DtCmbRute = DtRute;
 
-        var updatedCustomer = DtCmbCustomer;
-        updatedCustomer.ForEach(x => x.T2Kota = DtKota.FirstOrDefault(y => y.IdKota == x.IdKota));
-        DtCmbCustomer = updatedCustomer;
+        //var updatedCustomer = DtCmbCustomer;
+        //updatedCustomer.ForEach(x => x.T2Kota = DtKota.FirstOrDefault(y => y.IdKota == x.IdKota));
+        //DtCmbCustomer = updatedCustomer;
 
 
         dtPropertiesT6 = DtRekapitulasi_Terseleksi.GetType().GetProperties();
         dtPropertiesT7 = DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.GetType().GetProperties();
 
-        DrCmbCompany = DtCmbCompany?.FirstOrDefault(x => x.IdCompany == IdCompany);
-        DrCmbBBMMetode = DtCmbBBMMetode?.FirstOrDefault(x => x.DataOption == "Voucher");
-        DrCmbRekening = DtCmbRekening?.FirstOrDefault(x => x.Rekening == "Kas Pak Antok");
+        //DrCmbCompany = DtCmbCompany?.FirstOrDefault(x => x.IdCompany == IdCompany);
+        //DrCmbBBMMetode = DtCmbBBMMetode?.FirstOrDefault(x => x.DataOption == "Voucher");
+        //DrCmbRekening = DtCmbRekening?.FirstOrDefault(x => x.Rekening == "Kas Pak Antok");
 
         SedangProsesRefreshDetil = false;
         StateHasChanged();
@@ -194,8 +194,8 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         base.ProsesSeleksiData(data);
         if (data != null)
         {
-			SedangProsesRefreshDetil = true;
-			DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
+			//SedangProsesRefreshDetil = true;
+			/*DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
 			var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
 			var baseUrlKaryawan = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Karyawan/";
 			var armada = DrCmbArmada?.Adapt<uimT1Armada>();
@@ -215,7 +215,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 			var dtBBM = DtCmbBBMMetode;
 			DrCmbBBMMetode = dtBBM.FirstOrDefault(x => x.DataOption == DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode);
 			DrCmbRekening = DtCmbRekening.FirstOrDefault(x => x.IdRekening == DtRekapitulasi_Terseleksi.IdRekening);
-			SedangProsesRefreshDetil = false;
+			SedangProsesRefreshDetil = false;*/
 			DtGrdInformasi = await _svc.GetDataLog(DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString() ?? "");
 		}
 
@@ -232,7 +232,28 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             {
                 Cmb = CmbCompany,
                 Wajib = true,
-            }
+                TampilHeader = false,
+            },
+            new BaseCmb
+            {
+                Cmb = CmbSopir,
+                TampilHeader = false,
+            },
+            new BaseCmb
+            {
+                Cmb = CmbCustomer,
+                TampilHeader = false,
+            },
+            new BaseCmb
+            {
+                Cmb = CmbAlamatCustomer,
+                TampilHeader = false,
+            },
+            new BaseCmb
+            {
+                Cmb = CmbRute,
+                TampilHeader = false,
+            },
         });
         await base.ProsesMuat_Detil();
 
@@ -262,12 +283,14 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         base.ProsesPerbarui_Control(namaControl, dtCmb, perbaruiMeskipunAda);
 
         DrCmbCompany = DtCmbCompany?.FirstOrDefault(x => x.IdCompany == IdCompany);
+        DrCmbBBMMetode = DtCmbBBMMetode?.FirstOrDefault(x => x.DataOption == "Voucher");
+        DrCmbRekening = DtCmbRekening?.FirstOrDefault(x => x.Rekening == "Kas Pak Antok");
         await InvokeAsync(StateHasChanged);
     }
     public async void CmbCompany_Dipilih(uimT0Company company)
     {
-        DrCmbCompany = company;
-        DtRekapitulasi_Terseleksi.IdCompany = company.IdCompany;
+        //DrCmbCompany = company;
+        //DtRekapitulasi_Terseleksi.IdCompany = company.IdCompany;
         StateHasChanged();
 
     }
@@ -305,9 +328,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer = alamatCustomer.IdAlamatCustomer;
         DtRekapitulasi_Terseleksi.T7PenugasanArmada.WaktuPenugasan = DtRekapitulasi_Terseleksi.WaktuProses;
         DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute = DrCmbRute?.IdRute;
-        DtRekapitulasi_Terseleksi.BBM_BBM = "Solar";
-        DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga = 6800;
-        DtRekapitulasi_Terseleksi.IdBBM = Guid.Parse("22357F57-9ECC-405F-8481-F9DC5E2FE3E2");
+        
         PropertyInfo[] alamatCustomerProperties = alamatCustomer.GetType().GetProperties();
         foreach (var property in alamatCustomerProperties)
         {
@@ -406,23 +427,13 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
             var baseUrlKaryawan = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Karyawan/";
             DrCmbArmada = armada;
-            //var armada = DrCmbArmada?.Adapt<uimT1Armada>();
+            DtRekapitulasi_Terseleksi.IdJenisArmada = armada.IdJenisArmada;
+            DtRekapitulasi_Terseleksi.Nopol = armada.Nopol;
             DtRekapitulasi_Terseleksi.JenisArmada_Jenis = DtJenisArmada.FirstOrDefault(x => x.IdJenisArmada == armada.IdJenisArmada).Jenis;
             DtRekapitulasi_Terseleksi.JenisArmada_Alias = DtJenisArmada.FirstOrDefault(x => x.IdJenisArmada == armada.IdJenisArmada).Alias;
             var nopol = armada?.Nopol?.Replace(" ", "%20");
             UrlGambarArmada = $"{baseUrl}{nopol}.jpg";
-            
-        PropertyInfo[] customerProperties = armada?.GetType().GetProperties();
-            foreach (var property in customerProperties)
-            {
-                var propertyValue = property.GetValue(armada);
-                var propertyToUpdate = dtPropertiesT6.FirstOrDefault(x => x.Name == $"Armada_{property.Name}");
-                if (propertyToUpdate is not null)
-                {
-                    dtPropertiesT6?.FirstOrDefault(x => x.Name == $"Armada_{property.Name}").SetValue(DtRekapitulasi_Terseleksi, propertyValue);
-                }
 
-            }
 
             /*ValidasiRute = (await Svc.GetValidasiRute(armada.Nopol)).Adapt<uimValidasiRute>();
             if (!string.IsNullOrWhiteSpace(ValidasiRute.IdPenugasanArmada))
@@ -433,10 +444,11 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
                 await InvokeAsync(StateHasChanged);
                 return;
             }*/
-            DtRekapitulasi_Terseleksi.IdArmada = armada.IdArmada;
-            DtRekapitulasi_Terseleksi.IdJenisArmada = armada.IdJenisArmada;
-            DtRekapitulasi_Terseleksi.Nopol = armada.Nopol;
-            DtRekapitulasi_Terseleksi.Armada_Nopol = armada.Nopol;
+
+            //Setup BBM
+            DtRekapitulasi_Terseleksi.BBM_BBM = "Solar";
+            DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga = 6800;
+            DtRekapitulasi_Terseleksi.IdBBM = Guid.Parse("22357F57-9ECC-405F-8481-F9DC5E2FE3E2");
 
 
             //Setup Sopir
@@ -460,17 +472,10 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public async void CmbSopir_Dipilih(uimT5ArmadaSopir sopir)
     {
         DrCmbSopir = sopir;
-        //var sopir = DrCmbSopir;
-        DtRekapitulasi_Terseleksi.IdKaryawan_Sopir = sopir?.IdKaryawan_Sopir;
-        DtRekapitulasi_Terseleksi.Karyawan_Sopir_NamaPanggilan = sopir?.NamaSopir;
-        DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1 = sopir?.Seluler1;
-        await ProsesSimpan_Draft("IdKaryawan_Sopir", sopir?.IdKaryawan_Sopir);
-        await ProsesSimpan_Draft("Karyawan_Sopir_NamaPanggilan", sopir?.NamaSopir);
-        await ProsesSimpan_Draft("Karyawan_Sopir_Seluler1", sopir?.Seluler1);
         await InvokeAsync(StateHasChanged);
     }
 
-    public async void CmbBBMMetode_Dipilih(pthT9DataOption metodeBBM)
+    public async void CmbBBMMetode_Dipilih(uimT9DataOption metodeBBM)
     {
         DrCmbBBMMetode = metodeBBM;
         DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode = metodeBBM.DataOption;
@@ -480,10 +485,6 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public async void CmbRekening_Dipilih(pthT0Rekening rekening)
     {
         DrCmbRekening = rekening;
-        DtRekapitulasi_Terseleksi.IdRekening = rekening.IdRekening;
-        DtRekapitulasi_Terseleksi.Rekening_Rekening = rekening.Rekening;
-        //await ProsesSimpan_Draft("IdRekening", rekening.IdRekening);
-        //await ProsesSimpan_Draft("Rekening_Rekening", rekening.Rekening);
         await InvokeAsync(StateHasChanged);
     }
 

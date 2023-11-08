@@ -42,7 +42,7 @@
                 <DxComboBox @ref="@CmbArmada" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbArmada"
                             Value="@DrCmbArmada"
-                            TextFieldName="Nopol"
+                            TextFieldName="Nopol" NullText=""
                             CssClass="cw-480 font_0"
                             ValueChanged="@((uimT1Armada armada) => CmbArmada_Dipilih(armada))"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
@@ -52,9 +52,9 @@
                 </DxComboBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliSopir" Caption="Sopir" ColSpanMd="6">
-                <DxComboBox @ref="@CmbSopir" FilteringMode="DataGridFilteringMode.Contains" Id="cmbSopir"
+                <DxComboBox @ref="@CmbSopir" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbSopir"
-                            Value="@DrCmbSopir"
+                            Value="@DrCmbSopir" NullText=""
                             TextFieldName="NamaSopir"
                             CssClass="cw-480 font_0"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
@@ -94,9 +94,8 @@
         
         <DxFormLayout CssClass="sc">
             <DxFormLayoutItem @ref="@FliCustomer" Caption="Customer" ColSpanMd="12">
-                <DxComboBox @ref="@CmbCustomer" FilteringMode="DataGridFilteringMode.Contains"
+                <DxComboBox @ref="@CmbCustomer" FilteringMode="DataGridFilteringMode.Contains" NullText=""
                             Data="@DtCmbCustomer"
-                            Id="cmbCustomer"
                             Value="@DrCmbCustomer"
                             TextFieldName="Nama"
                             CssClass="cw-480 font_0"
@@ -110,8 +109,8 @@
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliAlamatCustomer" Caption="Alamat" ColSpanMd="12">
                 <DxComboBox @ref="@CmbAlamatCustomer" FilteringMode="DataGridFilteringMode.Contains"
-                            Data="@DtCmbAlamatCustomer"
-                            Value="@DrCmbAlamatCustomer" Id="cmbAlamatCustomer"
+                            Data="@DtCmbAlamatCustomer" NullText=""
+                            Value="@DrCmbAlamatCustomer"
                             TextFieldName="Alamat"
                             CssClass="cw-480 font_0"
                             ValueChanged="@((uimT2AlamatCustomer alamatCustomer) => CmbAlamatCustomer_Dipilih(alamatCustomer))"
@@ -122,9 +121,9 @@
                 </DxComboBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliRute" Caption="Rute" ColSpanMd="12">
-                <DxComboBox @ref="@CmbRute" FilteringMode="DataGridFilteringMode.Contains" Id="cmbRute"
+                <DxComboBox @ref="@CmbRute" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbRute"
-                            Value="@DrCmbRute"
+                            Value="@DrCmbRute" NullText=""
                             TextFieldName="Rute"
                             CssClass="cw-480 font_0"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
@@ -243,7 +242,7 @@
             <DxFormLayoutItem @ref="FliBBMMetode" Caption="BBM Metode" ColSpanMd="12">
                 <DxComboBox @ref="@CmbBBMMetode" Data="@DtCmbBBMMetode" Value="@DrCmbBBMMetode"
                             tabindex="16" TextFieldName="DataOption"
-                            ValueChanged="@((pthT9DataOption metodeBBM) => CmbBBMMetode_Dipilih(metodeBBM))"
+                            ValueChanged="@((uimT9DataOption metodeBBM) => CmbBBMMetode_Dipilih(metodeBBM))"
                             CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
                 </DxComboBox>
             </DxFormLayoutItem>
@@ -358,21 +357,13 @@
         color: transparent !important;
     }
 
-        .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit.dxbl-readonly:hover {
-            border-bottom: none !important;
-        }
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit.dxbl-readonly:hover {
+        border-bottom: none !important;
+    }
 
 
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit > .dxbl-btn-group-vertical > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn-group > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon) {
         border: none !important;
-    }
-
-    .dxbl-dropdown[placement-target="#cmbSopir"] > .dxbl-dropdown-dialog.dxbl-edit-dropdown > .dxbl-edit-dropdown-body .dxbl-listbox .dxbs-gridview > .card > .dxgvHSDC {
-        display: none;
-    }
-
-    .dxbl-dropdown[placement-target="#cmbCustomer"] > .dxbl-dropdown-dialog.dxbl-edit-dropdown > .dxbl-edit-dropdown-body .dxbl-listbox .dxbs-gridview > .card > .dxgvHSDC {
-        display: none;
     }
 
 </style>

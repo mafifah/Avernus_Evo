@@ -10,5 +10,12 @@ namespace bwaAvernus.Client._2._Transaksi
         public string AlamatCustomer => T7PenugasanArmada?.Customer_Alamat ?? "";
         public string Rute => T7PenugasanArmada?.Rute_Rute ?? "";
         public T7PenugasanArmada? T7PenugasanArmada { get; set; } = new();
-	}
+
+
+        //Modifikasi agar tidak error di Pantheon
+        public Guid? IdCustomer { get; set; }
+        public Guid? IdAlamatCustomer { get; set; }
+        public Guid? IdRute { get; set; }
+        public string? IdBBMMetode { get; set; }
+    }
 }
