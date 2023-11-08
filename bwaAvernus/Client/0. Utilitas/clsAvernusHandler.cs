@@ -48,11 +48,11 @@ namespace bwaAvernus.Client._0._Utilitas
             return data.Adapt<ObservableCollection<uimT1Armada>>();
         }
 
-        public async Task<IList<dynamic>> Get_ArmadaSopir(Guid? idArmada = null, bool perbaruiMeskipunAda = false)
+        public async Task<ObservableCollection<uimT5ArmadaSopir>> Get_ArmadaSopir(Guid? idArmada = null, bool perbaruiMeskipunAda = false)
         {
-            var data = new List<dynamic>();
-            if (idArmada is not null) data = (await _svcArmada.GetDataArmadaSopirById((Guid)idArmada)).Adapt<List<dynamic>>();
-            else data = (await _svcArmada.GetDataArmada()).Adapt<List<dynamic>>();
+            var data = new ObservableCollection<uimT5ArmadaSopir>();
+            if (idArmada is not null) data = (await _svcArmada.GetDataArmadaSopirById((Guid)idArmada)).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
+            else data = (await _svcArmada.GetDataArmada()).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
             return data;
         }
 

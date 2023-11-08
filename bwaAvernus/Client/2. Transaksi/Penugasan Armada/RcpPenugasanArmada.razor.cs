@@ -197,14 +197,15 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 			SedangProsesRefreshDetil = true;
 			var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
 			var baseUrlKaryawan = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Karyawan/";
-			var armada = DrCmbArmada;
-			var nopol = armada.Nopol.Replace(" ", "%20");
-            var namaSopir = DtRekapitulasi_Terseleksi.Karyawan_Sopir_NamaPanggilan.Replace(" ", "%20");
+			var nopol = DtRekapitulasi_Terseleksi?.Nopol?.Replace(" ", "%20");
+            var namaSopir = DtRekapitulasi_Terseleksi?.Karyawan_Sopir_NamaPanggilan?.Replace(" ", "%20");
             UrlGambarArmada = $"{baseUrl}{nopol}.jpg";
 			UrlGambarSopir = $"{baseUrlKaryawan}{namaSopir}.JPG";
 
-			DrCmbCustomer = DtCmbCustomer.FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer);
-			DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer)).Adapt<ObservableCollection<uimT2AlamatCustomer>>();
+            DtCmbSopir = await ah.Get_ArmadaSopir(DtRekapitulasi_Terseleksi?.IdArmada);
+
+            DrCmbCustomer = DtCmbCustomer.FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.IdCustomer);
+			DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.IdCustomer)).Adapt<ObservableCollection<uimT2AlamatCustomer>>();
 			DrCmbAlamatCustomer = DtCmbAlamatCustomer.FirstOrDefault(x => x.IdAlamatCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer);
 			DrCmbRute = DtCmbRute.FirstOrDefault(x => x.IdRute == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute);
 			
