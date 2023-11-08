@@ -6,16 +6,16 @@ self.addEventListener('install', event => event.waitUntil(onInstall(event)));
 self.addEventListener('activate', event => event.waitUntil(onActivate(event)));
 self.addEventListener('fetch', event => event.respondWith(onFetch(event)));
 
-const cacheVersion = "2023.11.05.001";
+const cacheVersion = "2023.11.08.001";
 const cacheNamePrefix = 'offline-cache-';
 const cacheName = `${cacheNamePrefix}${cacheVersion}`;
 const offlineAssetsInclude = [/\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /\.json$/, /\.css$/, /\.woff$/, /\.png$/, /\.jpe?g$/, /\.gif$/, /\.ico$/, /\.blat$/, /\.dat$/];
 const offlineAssetsExclude = [/^service-worker\.js$/];
 
 async function onInstall(event) {
-    self.skipWaiting();
-
     console.info('Service worker: Install');
+
+    self.skipWaiting();
     // Fetch and cache all matching items from the assets manifest
     const assetsRequests = self.assetsManifest.assets
         .filter(asset => offlineAssetsInclude.some(pattern => pattern.test(asset.url)))
