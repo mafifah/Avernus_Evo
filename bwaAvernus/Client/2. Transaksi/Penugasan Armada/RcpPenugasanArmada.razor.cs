@@ -203,6 +203,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 			UrlGambarSopir = $"{baseUrlKaryawan}{namaSopir}.JPG";
 
             DtCmbSopir = await ah.Get_ArmadaSopir(DtRekapitulasi_Terseleksi?.IdArmada);
+            DrCmbSopir = DtCmbSopir.FirstOrDefault( x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi?.IdKaryawan_Sopir);
+
+            DtRekapitulasi_Terseleksi.T7PenugasanArmada = (await Svc.GetDataT7PenugasanArmadaById(DtRekapitulasi_Terseleksi.IdPenugasanArmada)).Adapt<IList<uimT7PenugasanArmada>>().FirstOrDefault(x => x.Urutan == 1);
 
             DrCmbCustomer = DtCmbCustomer.FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.IdCustomer);
 			DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.IdCustomer)).Adapt<ObservableCollection<uimT2AlamatCustomer>>();
@@ -212,8 +215,6 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 			SedangProsesRefreshDetil = false;
 			DtGrdInformasi = await _svc.GetDataLog(DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString() ?? "");
 		}
-
-       
         StateHasChanged();
     }
     #endregion
