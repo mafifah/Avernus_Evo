@@ -158,9 +158,7 @@
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliBBMHarga" Caption="BBM Harga " ColSpanMd="12">
                 <DxSpinEdit @ref="SpeBBMHarga" InputId="0.0, 8.0" tabindex="10"
-                            Value="@DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga" ReadOnly="true"
-                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga)"
-                            ValueChanged="@(async (decimal? valueBaru) => DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga = (int?)valueBaru)" />
+                            Value="@DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.BBMHarga" ReadOnly="true"/>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliBBMSangu" Caption="BBM + Sangu" ColSpanMd="12">
                 <DxSpinEdit @ref="SpeBBMSangu" InputId="0.0, 8.0" tabindex="11"
@@ -260,7 +258,7 @@
 
         <DxFormLayout Id="scArmada" CssClass="sc">
             <DxFormLayoutItem Caption="Jenis Armada" ColSpanMd="8">
-                <DxTextBox Text="@DtRekapitulasi_Terseleksi.JenisArmada_Jenis" NullText="" ReadOnly=true>
+                <DxTextBox @bind-Text="@DtRekapitulasi_Terseleksi.JenisArmada_Jenis" NullText="" ReadOnly=true>
                 </DxTextBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem Caption="Foto Armada" ColSpanMd="4">
@@ -270,7 +268,7 @@
         
         <DxFormLayout Id="scSopir" CssClass="sc">
             <DxFormLayoutItem Caption="Seluler" ColSpanMd="9">
-                <DxTextBox Text="@DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1" NullText="" ReadOnly=true>
+                <DxTextBox @bind-Text="@DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1" NullText="" ReadOnly=true>
                 </DxTextBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem Caption="Foto Sopir" ColSpanMd="3">

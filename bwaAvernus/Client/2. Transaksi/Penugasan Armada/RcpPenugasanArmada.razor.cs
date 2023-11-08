@@ -214,8 +214,10 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 			
 			SedangProsesRefreshDetil = false;
 			DtGrdInformasi = await _svc.GetDataLog(DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString() ?? "");
-		}
-        StateHasChanged();
+
+
+            StateHasChanged();
+        }
     }
     #endregion
 
