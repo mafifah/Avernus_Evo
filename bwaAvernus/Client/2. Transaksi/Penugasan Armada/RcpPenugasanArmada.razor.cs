@@ -194,28 +194,21 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         base.ProsesSeleksiData(data);
         if (data != null)
         {
-			//SedangProsesRefreshDetil = true;
-			/*DrCmbArmada = DtCmbArmada.Adapt<IList<uimT1Armada>>().FirstOrDefault(x => x.IdArmada == DtRekapitulasi_Terseleksi.IdArmada);
+			SedangProsesRefreshDetil = true;
 			var baseUrl = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Armada/";
 			var baseUrlKaryawan = "https://sdatafile.blob.core.windows.net/gajahmasantarniaga/Gambar/Karyawan/";
-			var armada = DrCmbArmada?.Adapt<uimT1Armada>();
+			var armada = DrCmbArmada;
 			var nopol = armada.Nopol.Replace(" ", "%20");
             var namaSopir = DtRekapitulasi_Terseleksi.Karyawan_Sopir_NamaPanggilan.Replace(" ", "%20");
             UrlGambarArmada = $"{baseUrl}{nopol}.jpg";
 			UrlGambarSopir = $"{baseUrlKaryawan}{namaSopir}.JPG";
 
-			DtCmbSopir = (await ah.Get_ArmadaSopir(DrCmbArmada?.IdArmada)).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
-			DrCmbSopir = DtCmbSopir.FirstOrDefault(x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi.IdKaryawan_Sopir);
-			DtRekapitulasi_Terseleksi.T7PenugasanArmada = (await Svc.GetDataT7PenugasanArmadaById(DtRekapitulasi_Terseleksi.IdPenugasanArmada)).Adapt<IList<uimT7PenugasanArmada>>().FirstOrDefault(x => x.Urutan == 1);
-
 			DrCmbCustomer = DtCmbCustomer.FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer);
 			DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdCustomer)).Adapt<ObservableCollection<uimT2AlamatCustomer>>();
 			DrCmbAlamatCustomer = DtCmbAlamatCustomer.FirstOrDefault(x => x.IdAlamatCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer);
 			DrCmbRute = DtCmbRute.FirstOrDefault(x => x.IdRute == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute);
-			var dtBBM = DtCmbBBMMetode;
-			DrCmbBBMMetode = dtBBM.FirstOrDefault(x => x.DataOption == DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMMetode);
-			DrCmbRekening = DtCmbRekening.FirstOrDefault(x => x.IdRekening == DtRekapitulasi_Terseleksi.IdRekening);
-			SedangProsesRefreshDetil = false;*/
+			
+			SedangProsesRefreshDetil = false;
 			DtGrdInformasi = await _svc.GetDataLog(DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString() ?? "");
 		}
 
