@@ -13,8 +13,9 @@ const offlineAssetsInclude = [/\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /
 const offlineAssetsExclude = [/^service-worker\.js$/];
 
 async function onInstall(event) {
-    console.info('Service worker: Install');
     self.skipWaiting();
+
+    console.info('Service worker: Install');
     // Fetch and cache all matching items from the assets manifest
     const assetsRequests = self.assetsManifest.assets
         .filter(asset => offlineAssetsInclude.some(pattern => pattern.test(asset.url)))
@@ -25,7 +26,7 @@ async function onInstall(event) {
 
 async function onActivate(event) {
     console.info('Service worker: Activate');
-    self.skipWaiting();
+    //self.skipWaiting();
     // Delete unused caches
     const cacheKeys = await caches.keys();
     await Promise.all(cacheKeys
@@ -34,7 +35,7 @@ async function onActivate(event) {
 }
 
 async function onFetch(event) {
-    self.skipWaiting();
+    //self.skipWaiting();
 
     let cachedResponse = null;
     if (event.request.method === 'GET') {
