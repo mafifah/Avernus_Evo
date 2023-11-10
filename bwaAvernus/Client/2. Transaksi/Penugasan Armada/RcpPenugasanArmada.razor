@@ -332,10 +332,6 @@
 </style>
 
 <style>
-    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit {
-        border: none !important;
-        border-radius: 0px !important;
-    }
 
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit > .dxbl-btn-group-right {
         visibility: hidden !important
@@ -345,10 +341,6 @@
         visibility: visible !important;
         border: none !important;
         border-bottom: none !important;
-    }
-
-    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit:hover {
-        border-bottom: 1px solid #AAAAAA !important;
     }
 
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit.dxbl-readonly {
@@ -362,6 +354,29 @@
 
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit > .dxbl-btn-group-vertical > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn-group > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon) {
         border: none !important;
+    }
+
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit {
+        position: relative;
+        border: none;
+    }
+
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: #AAAAAA;
+        visibility: hidden;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit:hover::before {
+        visibility: visible;
+        transform: scaleX(1);
     }
 
 </style>
