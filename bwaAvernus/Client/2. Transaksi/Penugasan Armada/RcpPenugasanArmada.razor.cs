@@ -122,6 +122,14 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     #endregion
 
 
+    #region 'IdTabsControl'
+    public string? P_Control { get; set; } = "";
+    public string? Tabs_Rute { get; set; } = "";
+    public string? Tabs_BBM { get; set; } = "";
+    public string? Tabs_Armada { get; set; } = "";
+    public string? Tabs_Sopir { get; set; } = "";
+    public string? Tabs_Aktivitas { get; set; } = "";
+    #endregion
     private readonly clsCrixalisHandler ch = new();
     private readonly clsAvernusHandler ah = new();
     PropertyInfo[]? dtPropertiesT7;
@@ -133,9 +141,17 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public IEnumerable<uimLog>? DtGrdInformasi { get; set; }
     protected override async void OnInitialized()
     {
-        SedangProsesRefreshDetil = true;
+        //SedangProsesRefreshDetil = true;
         PrimaryText = "IdTransaksi";
+        var idTabControl = new Random().Next();
+        P_Control = $"scP-{idTabControl}";
+        Tabs_Rute = $"scRute-{idTabControl}";
+        Tabs_BBM = $"scBBM-{idTabControl}";
+        Tabs_Armada = $"scArmada-{idTabControl}";
+        Tabs_Sopir = $"scSopir-{idTabControl}";
+        Tabs_Aktivitas = $"scAktivitas-{idTabControl}";
         base.OnInitialized();
+
         DtKota = await ch.Get_Kota();
         DtJenisArmada = (await _svcArmada.GetDataJenisArmada()).ToList();
         //if (DtCmbArmada is null) DtCmbArmada = await ah.Get_Armada();
@@ -161,7 +177,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         //DrCmbBBMMetode = DtCmbBBMMetode?.FirstOrDefault(x => x.DataOption == "Voucher");
         //DrCmbRekening = DtCmbRekening?.FirstOrDefault(x => x.Rekening == "Kas Pak Antok");
 
-        SedangProsesRefreshDetil = false;
+        //SedangProsesRefreshDetil = false;
         StateHasChanged();
     }
     protected override async void OnAfterRender(bool firstRender)
@@ -171,7 +187,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
         var outerHeader = await _js.InvokeAsync<int>("getLengthTopHeaderCaption");
         outerHeight = $"{outer + 89}px !important";
         outerHeightTopHeaderCaption = $"{outerHeader}px !important";
-        await _js.InvokeVoidAsync("getElementParent", "scRute");
+        await _js.InvokeVoidAsync("getElementParent", Tabs_Rute);
     }
     /*public override void Inisialisasi_Filter()
     {

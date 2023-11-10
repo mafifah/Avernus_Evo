@@ -7,8 +7,8 @@
 @{
 	base.BuildRenderTree(__builder);
 	RfDetil = 
-    @<DxFormLayout CssClass="custom-form-layout" Id="scRute">
-        <p id="idTest"></p>
+    @<DxFormLayout CssClass="custom-form-layout" Id="@Tabs_Rute">
+        <p id="@P_Control"></p>
         <DxFormLayout CssClass="sticky-row-1 w-100 sc" Id="sticky-row-1">
             <DxFormLayoutItem @ref="@FliCompany" Caption="Kode" ColSpanMd="3">
                 <DxComboBox @ref="@CmbCompany"
@@ -68,27 +68,27 @@
             <DxFormLayoutItem ColSpanMd="2">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Rute" Click="@(() => ProsesPilihTab_Detil("idTest"))" />
+                          Text="Rute" Click="@(() => ProsesPilihTab_Detil(Tabs_Rute))" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="2">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="BBM + Sangu" Click="@(() => ProsesPilihTab_Detil("scBBM"))" />
+                          Text="BBM + Sangu" Click="@(() => ProsesPilihTab_Detil(Tabs_BBM))" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="3">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Detil Armada" Click="@(() => ProsesPilihTab_Detil("scArmada"))" />
+                          Text="Detil Armada" Click="@(() => ProsesPilihTab_Detil(Tabs_Armada))" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="3">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Detil Sopir" Click="@(() => ProsesPilihTab_Detil("scSopir"))" />
+                          Text="Detil Sopir" Click="@(() => ProsesPilihTab_Detil(Tabs_Sopir))" />
             </DxFormLayoutItem>
             <DxFormLayoutItem ColSpanMd="2">
                 <DxButton CssClass="w-100"
                           RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Aktivitas" Click="@(() => ProsesPilihTab_Detil("scAktifitas"))" />
+                          Text="Aktivitas" Click="@(() => ProsesPilihTab_Detil(Tabs_Aktivitas))" />
             </DxFormLayoutItem>
         </DxFormLayout>
         
@@ -135,7 +135,7 @@
             </DxFormLayoutItem>
         </DxFormLayout>
 
-        <DxFormLayout Id="scBBM" CssClass="sc">
+        <DxFormLayout Id="@Tabs_BBM" CssClass="sc">
 
             <DxFormLayoutItem @ref="FliSanguRitase" Caption="Sangu Ritase" ColSpanMd="12">
                 <DxSpinEdit @ref="SpeSanguRitase" InputId="0.0, 8.0" tabindex="7"
@@ -256,7 +256,7 @@
             
         </DxFormLayout>
 
-        <DxFormLayout Id="scArmada" CssClass="sc">
+        <DxFormLayout Id="@Tabs_Armada" CssClass="sc">
             <DxFormLayoutItem Caption="Jenis Armada" ColSpanMd="8">
                 <DxTextBox @bind-Text="@DtRekapitulasi_Terseleksi.JenisArmada_Jenis" NullText="" ReadOnly=true>
                 </DxTextBox>
@@ -265,8 +265,8 @@
                 <RadzenImage Path="@UrlGambarArmada" Style="width:150px; height:150px;" />
             </DxFormLayoutItem>
         </DxFormLayout>
-        
-        <DxFormLayout Id="scSopir" CssClass="sc">
+
+        <DxFormLayout Id="@Tabs_Sopir" CssClass="sc">
             <DxFormLayoutItem Caption="Seluler" ColSpanMd="9">
                 <DxTextBox @bind-Text="@DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1" NullText="" ReadOnly=true>
                 </DxTextBox>
@@ -275,7 +275,7 @@
                 <RadzenImage Path="@UrlGambarSopir" Style="width:150px; height:150px;" />
             </DxFormLayoutItem>
         </DxFormLayout>
-        <DxFormLayout Id="scAktifitas" CssClass="sc">
+        <DxFormLayout Id="@Tabs_Aktivitas" CssClass="sc">
             <DxGrid Data="@DtGrdInformasi"
                     ColumnResizeMode="GridColumnResizeMode.NextColumn"
                     SelectionMode="GridSelectionMode.Single"
