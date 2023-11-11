@@ -358,7 +358,9 @@
 
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit {
         position: relative;
-        border: none;
+        border-top: none;
+        border-right: none;
+        border-left: none;
     }
 
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit::before {
@@ -368,10 +370,10 @@
         left: 0;
         right: 0;
         height: 1px;
-        background-color: #AAAAAA;
+        background-color: aliceblue;
         visibility: hidden;
         transform: scaleX(0);
-        transition: transform 0.3s ease-in-out;
+        transition: none;
     }
 
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit:hover::before {
