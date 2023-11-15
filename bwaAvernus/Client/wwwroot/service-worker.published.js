@@ -6,7 +6,7 @@ self.addEventListener('install', event => event.waitUntil(onInstall(event)));
 self.addEventListener('activate', event => event.waitUntil(onActivate(event)));
 self.addEventListener('fetch', event => event.respondWith(onFetch(event)));
 
-const cacheVersion = "2023.11.14.001";
+const cacheVersion = "2023.11.08.003";
 const cacheNamePrefix = 'offline-cache-';
 const cacheName = `${cacheNamePrefix}${cacheVersion}`;
 const offlineAssetsInclude = [/\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /\.json$/, /\.css$/, /\.woff$/, /\.png$/, /\.jpe?g$/, /\.gif$/, /\.ico$/, /\.blat$/, /\.dat$/];
@@ -26,7 +26,7 @@ async function onInstall(event) {
 
 async function onActivate(event) {
     console.info('Service worker: Activate');
-    //self.skipWaiting();x
+    //self.skipWaiting();
     // Delete unused caches
     const cacheKeys = await caches.keys();
     await Promise.all(cacheKeys
