@@ -358,7 +358,9 @@
 
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit {
         position: relative;
-        border: none;
+        border-top: none;
+        border-right: none;
+        border-left: none;
     }
 
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit::before {
@@ -368,7 +370,7 @@
         left: 0;
         right: 0;
         height: 1px;
-        background-color: #AAAA;
+        background-color: aliceblue;
         visibility: hidden;
         transform: scaleX(0);
         transition: none;
@@ -377,13 +379,6 @@
     .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit:hover::before {
         visibility: visible;
         transform: scaleX(1);
-    }
-
-    .sc > .dxbl-row > .dxbl-fl-item > .dxbl-fl-ctrl > .dxbl-text-edit:has(:focus) {
-        border-right:none;
-        border-left:none;
-        border-top:none;
-        border-bottom: 1px solid blue;
     }
 
 </style>
