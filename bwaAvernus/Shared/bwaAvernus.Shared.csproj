@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -19,29 +19,28 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Google.Protobuf" Version="3.24.2" />
-		<PackageReference Include="Grpc.Net.Client" Version="2.55.0" />
-		<PackageReference Include="Grpc.Tools" Version="2.57.0">
+		<PackageReference Include="Azure.Identity" Version="1.10.4" />
+		<PackageReference Include="Google.Protobuf" Version="3.25.0" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.59.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.59.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Mapster" Version="7.3.0" />
 		<PackageReference Include="MediatR" Version="12.1.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.10" />
-		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="7.0.10" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="NewId" Version="4.0.1" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-		<PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Protobuf Include="1. Master\BBM\MasterBBM.proto" GrpcServices="Both" />
@@ -53,7 +52,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="bwaCrixalis.Shared">
-	    <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net7.0\bwaCrixalis.Shared.dll</HintPath>
+	    <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net8.0\bwaCrixalis.Shared.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Pantheon.Shared">
 	    <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
