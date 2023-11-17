@@ -55,7 +55,7 @@
 	    <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net8.0\bwaCrixalis.Shared.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Pantheon.Shared">
-	    <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
+	    <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net8.0\Pantheon.Shared.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 </Project>

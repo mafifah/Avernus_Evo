@@ -7,7 +7,7 @@
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 	<BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
 	<AssemblyTitle Condition="'$(Configuration)' == 'debug'">$([System.DateTime]::Now.ToString("dd/MM/yy - hh\:mm"))</AssemblyTitle>
-	<Version>1.1.1.1</Version>
+	<Version>5.0.5.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -288,10 +288,10 @@
       <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net8.0\bwaCrixalis.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Pantheon.Client">
-      <HintPath>..\..\..\DevOps\Pantheon\Client\bin\Debug\net7.0\Pantheon.Client.dll</HintPath>
+      <HintPath>..\..\..\DevOps\Pantheon\Client\bin\Debug\net8.0\Pantheon.Client.dll</HintPath>
     </Reference>
     <Reference Include="Pantheon.Shared">
-      <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
+      <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net8.0\Pantheon.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 

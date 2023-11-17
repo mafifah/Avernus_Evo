@@ -19,8 +19,8 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-NotifikasiSimpan_SignalR = true;
-URL_SignalR = "https://assignalr.azurewebsites.net/chathub";
+//NotifikasiSimpan_SignalR = true;
+//URL_SignalR = "https://assignalr.azurewebsites.net/chathub";
 NamaDatabase = "dbAvernus";
 AssemblyProject = Assembly.GetExecutingAssembly();
 IdCompany = "GMA";

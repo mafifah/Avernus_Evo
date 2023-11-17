@@ -83,6 +83,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="8.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.Json" Version="8.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -133,13 +134,13 @@
       <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net8.0\bwaCrixalis.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Pantheon.Client">
-      <HintPath>..\..\..\DevOps\Pantheon\Client\bin\Debug\net7.0\Pantheon.Client.dll</HintPath>
+      <HintPath>..\..\..\DevOps\Pantheon\Client\bin\Debug\net8.0\Pantheon.Client.dll</HintPath>
     </Reference>
     <Reference Include="Pantheon.Server">
-      <HintPath>..\..\..\DevOps\Pantheon\Server\bin\Debug\net7.0\Pantheon.Server.dll</HintPath>
+      <HintPath>..\..\..\DevOps\Pantheon\Server\bin\Debug\net8.0\Pantheon.Server.dll</HintPath>
     </Reference>
     <Reference Include="Pantheon.Shared">
-      <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
+      <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net8.0\Pantheon.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 

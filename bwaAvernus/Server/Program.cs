@@ -11,6 +11,7 @@ using bwaAvernus.Server._1._Master;
 using Pantheon.Server.Utility;
 using DevExpress.AspNetCore;
 using static Pantheon.Shared.Utility.modBaseExtensions;
+using static Pantheon.Server.Utility.modExtensions;
 using Pantheon.Server.BackgroundServices;
 using bwaCrixalis.Server.Controllers;
 using DevExpress.XtraReports.Web.WebDocumentViewer;
@@ -24,8 +25,8 @@ using DevExpress.CodeParser;
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
-NotifikasiSimpan_SignalR = true;
-URL_SignalR = "https://asSignalRServer.azurewebsites.net/chathub";
+//NotifikasiSimpan_SignalR = false;
+//URL_SignalR = "https://asSignalRServer.azurewebsites.net/chathub";
 AlamatAPI = "https://localhost:7243/";
 // Add services to the container.
 services.AddGrpc(options =>

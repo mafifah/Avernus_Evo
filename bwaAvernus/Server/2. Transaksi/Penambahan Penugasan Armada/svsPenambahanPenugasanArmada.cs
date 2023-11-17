@@ -66,7 +66,7 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 		var dtT6PenambahanPenugasanArmada = (await _svd.GetEntitiesDenganSpec<T7PenugasanArmada>(x => x.IdPenugasanArmada.ToString() == request.IdPenugasanArmada, $"{nameof(T6PenugasanArmada)}.{nameof(T1Armada)}.{nameof(T0JenisArmada)}")).FirstOrDefault();
 		var dtCompany = (await _svd.GetEntities<pthT0Company>()).FirstOrDefault(x => x.IdCompany == dtT6PenambahanPenugasanArmada.T6PenugasanArmada.T1Armada.IdCompany_Pemilik);
 		var reply = dtT6PenambahanPenugasanArmada.T6PenugasanArmada.Adapt<RplPenambahanPenugasanArmada_Cetak>();
-		reply.CompanyPemilik = $"{dtCompany.Prefix} {R.DecryptString(dtCompany.Nama)}";
+		reply.CompanyPemilik = $"{dtCompany.Prefix} {dtCompany.Nama}";
 		reply.JenisArmadaJenis = dtT6PenambahanPenugasanArmada.T6PenugasanArmada.T1Armada.T0JenisArmada.Jenis;
 		reply.RuteRute = dtT6PenambahanPenugasanArmada.Rute_Rute;
 		reply.CustomerNama = dtT6PenambahanPenugasanArmada.Customer_Nama;
