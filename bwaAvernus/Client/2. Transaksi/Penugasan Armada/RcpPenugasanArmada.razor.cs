@@ -219,8 +219,15 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 			UrlGambarSopir = $"{baseUrlKaryawan}{namaSopir}.JPG";
 
             DtCmbSopir = await ah.Get_ArmadaSopir(DtRekapitulasi_Terseleksi?.IdArmada);
-            DrCmbSopir = DtCmbSopir.FirstOrDefault( x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi?.IdKaryawan_Sopir);
+            var dtSopir = DtCmbSopir.Where(x => x.IdKaryawan_Sopir != DtRekapitulasi_Terseleksi?.IdKaryawan_Sopir).OrderByDescending(x => x.IsDefault).ToList();
+            var sopirTerakhir = DtCmbSopir.FirstOrDefault( x => x.IdKaryawan_Sopir == DtRekapitulasi_Terseleksi?.IdKaryawan_Sopir);
+            sopirTerakhir.Keterangan = "Sopir Terakhir";
+            DrCmbSopir = sopirTerakhir;
 
+            DtCmbSopir.Clear();
+            DtCmbSopir = dtSopir.Adapt<ObservableCollection<uimT5ArmadaSopir>>();
+            DtCmbSopir.Insert(0, sopirTerakhir);
+            
             DtRekapitulasi_Terseleksi.T7PenugasanArmada = (await Svc.GetDataT7PenugasanArmadaById(DtRekapitulasi_Terseleksi.IdPenugasanArmada)).Adapt<IList<uimT7PenugasanArmada>>().FirstOrDefault(x => x.Urutan == 1);
 
             DrCmbCustomer = DtCmbCustomer.FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.IdCustomer);
@@ -465,9 +472,17 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
 
 
             //Setup Sopir
-            DtCmbSopir = (await ah.Get_ArmadaSopir(armada.IdArmada)).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
-            DrCmbSopir = DtCmbSopir?.FirstOrDefault(x => x.IdArmada == armada.IdArmada);
-            var sopir = DrCmbSopir;
+            DtCmbSopir = await ah.Get_ArmadaSopir(armada.IdArmada);
+            var sopir = new uimT5ArmadaSopir();
+            var sopirUtama = DtCmbSopir?.FirstOrDefault(x => x.IdArmada == armada.IdArmada && x.IsDefault == true);
+            if(sopirUtama is not null)
+                DrCmbSopir = sopirUtama;
+            else
+            {
+                DrCmbSopir = DtCmbSopir?.FirstOrDefault(x => x.IdArmada == armada.IdArmada && x.IsDefault == false);
+            }
+
+            sopir = DrCmbSopir;
             UrlGambarSopir = $"{baseUrlKaryawan}{sopir?.NamaSopir.Replace(" ","%20")}.JPG";
             DtRekapitulasi_Terseleksi.IdKaryawan_Sopir = sopir.IdKaryawan_Sopir;
             DtRekapitulasi_Terseleksi.Karyawan_Sopir_NamaPanggilan = sopir.NamaSopir;
@@ -485,6 +500,9 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     public async void CmbSopir_Dipilih(uimT5ArmadaSopir sopir)
     {
         DrCmbSopir = sopir;
+        DtRekapitulasi_Terseleksi.IdKaryawan_Sopir = sopir.IdKaryawan_Sopir;
+        DtRekapitulasi_Terseleksi.Karyawan_Sopir_NamaPanggilan = sopir.NamaSopir;
+        DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1 = sopir.Seluler1;
         await InvokeAsync(StateHasChanged);
     }
 

@@ -19,8 +19,8 @@
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
                             ValueChanged="@((uimT0Company company) => CmbCompany_Dipilih(company))"
                             tabindex="1">
-                    <DxListEditorColumn FieldName="IdCompany" Caption="IdCompany" />
-                    <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
+                    <DxListEditorColumn FieldName="Nama" Caption="Company" />
+                    <DxListEditorColumn FieldName="IdCompany" Caption="Inisial" />
                 </DxComboBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliIdTransaksi" Caption="" ColSpanMd="3">
@@ -61,7 +61,7 @@
                             ValueChanged="@((uimT5ArmadaSopir sopir) => CmbSopir_Dipilih(sopir))"
                             tabindex="7">
                     <DxListEditorColumn FieldName="NamaSopir" Caption="Nama Panggilan" />
-                    <DxListEditorColumn FieldName="Seluler1" Caption="Keterangan" />
+                    <DxListEditorColumn FieldName="Keterangan" Caption="Keterangan" />
                 </DxComboBox>
             </DxFormLayoutItem>
 

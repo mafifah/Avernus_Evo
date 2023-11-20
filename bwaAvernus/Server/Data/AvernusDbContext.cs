@@ -1,4 +1,5 @@
 ﻿using bwaAvernus.Shared._1._Master;
+using bwaAvernus.Shared._1._Master.Armada_Sopir;
 using bwaAvernus.Shared._2._Transaksi;
 using bwaCrixalis.Shared._2._Transaksi;
 
@@ -73,6 +74,7 @@ namespace bwaAvernus.Server.Data
         public DbSet<T7PelunasanPiutangKaryawan> T7PelunasanPiutangKaryawan { get; set; }
 
         #region Avernus
+        public DbSet<T2ArmadaSopir> T2ArmadaSopir { get; set; }
         public DbSet<T3Rute> T3Rute { get; set; }
         public DbSet<T4TujuanBongkar> T4TujuanBongkar { get; set; }
         public DbSet<T5DokumenRute> T5DokumenRute { get; set; }

@@ -7,7 +7,7 @@
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 	<BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
 	<AssemblyTitle Condition="'$(Configuration)' == 'debug'">$([System.DateTime]::Now.ToString("dd/MM/yy - hh\:mm"))</AssemblyTitle>
-	<Version>5.0.5.0</Version>
+	<Version>6.0.6.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

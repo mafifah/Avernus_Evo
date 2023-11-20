@@ -15,6 +15,7 @@ namespace bwaAvernus.Client._0._Utilitas
         private readonly svcRute _svcRute = new svcRute();
         private readonly svcBiayaRute _svcBiayaRute = new svcBiayaRute();
         private readonly svcArmada _svcArmada = new svcArmada();
+        private readonly svcArmadaSopir _svcArmadaSopir = new svcArmadaSopir();
         private readonly pthSvcRekening _svcRekening = new pthSvcRekening();
         private readonly svcPenugasanArmada _svcPenugasanArmada = new svcPenugasanArmada();
         public clsAvernusHandler()
@@ -51,8 +52,15 @@ namespace bwaAvernus.Client._0._Utilitas
         public async Task<ObservableCollection<uimT5ArmadaSopir>> Get_ArmadaSopir(Guid? idArmada = null, bool perbaruiMeskipunAda = false)
         {
             var data = new ObservableCollection<uimT5ArmadaSopir>();
-            if (idArmada is not null) data = (await _svcArmada.GetDataArmadaSopirById((Guid)idArmada)).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
+            if (idArmada is not null) data = (await _svcArmadaSopir.GetDataArmadaSopirById((Guid)idArmada)).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
             else data = (await _svcArmada.GetDataArmada()).Adapt<ObservableCollection<uimT5ArmadaSopir>>();
+
+            foreach (var item in data)
+            {
+                if (item.IsDefault == true) item.Keterangan = "Sopir Utama";
+                else item.Keterangan = "Sopir Cadangan";
+            }
+
             return data;
         }
 

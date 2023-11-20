@@ -80,6 +80,7 @@ builder.Services.AddSingleton<svcClassGetDataSupplierStatusTrue>();
 //svc Avernus
 builder.Services.AddSingleton<clsAvernusHandler>();
 builder.Services.AddSingleton<clsCrixalisHandler>();
+builder.Services.AddSingleton<svcArmadaSopir>();
 builder.Services.AddSingleton<svcBBM>();
 builder.Services.AddSingleton<svcRute>();
 builder.Services.AddSingleton<svcBiayaRute>();

@@ -37,8 +37,8 @@ services.AddGrpc(options =>
 var allow = "AllowAll";
 services.AddCors(o => o.AddPolicy(allow, builder =>
 {
-	builder.WithOrigins("https://localhost:7272",
-						"http://localhost:5004")
+	builder.WithOrigins("https://localhost:7243",
+						"http://localhost:5114")
 						.AllowAnyHeader()
 						.AllowAnyMethod();
 }));
@@ -227,6 +227,7 @@ app.MapGrpcService<svsClassGetDataKaryawanStatusTrue>().EnableGrpcWeb();
 app.MapGrpcService<svsClassGetDataSupplierStatusTrue>().EnableGrpcWeb();
 
 //Svs Avernus
+app.MapGrpcService<svsArmadaSopir>().EnableGrpcWeb();
 app.MapGrpcService<svsBBM>().EnableGrpcWeb();
 app.MapGrpcService<svsRute>().EnableGrpcWeb();
 app.MapGrpcService<svsBiayaRute>().EnableGrpcWeb();

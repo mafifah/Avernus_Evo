@@ -1,0 +1,88 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "bwaAvernus.Shared._1._Master";
+package MasterSopirArmadaPackage;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service svpArmadaSopir
+{
+	rpc GetDataArmadaSopir (RqsArmadaSopir) returns (RplArmadaSopir);
+}
+
+message RqsArmadaSopir
+{
+	string IdArmada=1;
+}
+
+message Ptm_KaryawanSopir{
+    optional string IdKaryawan = 1;
+    optional string NamaLengkap = 5;
+    optional string NamaPanggilan = 6;
+    optional string NomorIdentitas1 = 7;
+    optional string NomorIdentitas2 = 8;
+    optional string JenisKelamin = 9;
+    optional string TempatLahir = 10;
+    optional string TanggalLahir = 11;
+    optional string TanggalRekrut = 12;
+    optional string TanggalBerhenti = 13;
+    optional string AlamatAsal = 14;
+    optional int64 IdKotaAsal = 15;
+    optional int64 IdKecamatanAsal = 16;
+    optional int64 IdKelurahanAsal = 17;
+    optional string KodePosAsal = 18;
+    optional string AlamatTinggal = 19;
+    optional int64 IdKotaTinggal = 20;
+    optional int64 IdKecamatanTinggal = 21;
+    optional int64 IdKelurahanTinggal = 22;
+    optional string KodePosTinggal = 23;
+    optional string Telepon = 24;
+    optional string Seluler1 = 25;
+    optional string Seluler2 = 26;
+    optional string Email = 27;
+    optional string KomunikasiLain = 28;
+    optional string NamaKerabat = 29;
+    optional string HubunganKerabat = 30;
+    optional string AlamatKerabat = 31;
+    optional string TeleponKerabat = 32;
+    optional string Rekening = 33;
+    optional string BPJS = 34;
+    optional string NPWP = 35;
+    optional string DokumenJaminan = 36;
+    optional string Keterangan = 37;
+    optional string UserName = 38;
+    optional string UserPassword = 39;
+    optional string PasswordHint = 40;
+    optional bool StatusLogin = 41;
+    optional string NIK = 42;
+    optional string FingerPrint0 = 43;
+    optional string FingerPrint1 = 44;
+    optional string FingerPrint2 = 45;
+    optional string FingerPrint3 = 46;
+    optional string FingerPrint4 = 47;
+    optional string FingerPrint5 = 48;
+    optional string FingerPrint6 = 49;
+    optional string FingerPrint7 = 50;
+    optional string FingerPrint8 = 51;
+    optional string FingerPrint9 = 52;
+    optional string CardIdNumber = 53;
+    optional string CardIdPin = 54;
+}
+
+message Ptm_ArmadaSopir
+{
+  optional string IdArmada = 1;
+  optional string IdKaryawanSopir = 2;
+  optional bool IsDefault = 3;
+  optional string IdOperator = 4;
+  optional string Synchronise = 5;
+
+  optional Ptm_KaryawanSopir T1Karyawan_Sopir = 301;
+}
+
+message RplArmadaSopir
+{
+    repeated Ptm_ArmadaSopir ListT5ArmadaSopir=1;
+}

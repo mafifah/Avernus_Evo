@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -10,7 +10,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Mapster" Version="7.3.0" />
+		<PackageReference Include="Mapster" Version="7.4.0" />
 		<PackageReference Include="bunit.core" Version="1.20.8" />
 		<PackageReference Include="bunit.web" Version="1.20.8" />
 		<PackageReference Include="DevExpress.Blazor" Version="23.1.4" />
@@ -41,16 +41,16 @@
 
 	<ItemGroup>
 	  <Reference Include="bwaCrixalis.Shared">
-	    <HintPath>..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net7.0\bwaCrixalis.Shared.dll</HintPath>
+	    <HintPath>..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net8.0\bwaCrixalis.Shared.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Pantheon.Client">
-	    <HintPath>..\..\DevOps\Pantheon\Tests\UnitTest\Client\bin\Debug\net7.0\Pantheon.Client.dll</HintPath>
+	    <HintPath>..\..\DevOps\Pantheon\Tests\UnitTest\Client\bin\Debug\net8.0\Pantheon.Client.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Pantheon.Client.Test">
-	    <HintPath>..\..\DevOps\Pantheon\Tests\UnitTest\Client\bin\Debug\net7.0\Pantheon.Client.Test.dll</HintPath>
+	    <HintPath>..\..\DevOps\Pantheon\Tests\UnitTest\Client\bin\Debug\net8.0\Pantheon.Client.Test.dll</HintPath>
 	  </Reference>
 	  <Reference Include="Pantheon.Shared">
-	    <HintPath>..\..\DevOps\Pantheon\Tests\UnitTest\Client\bin\Debug\net7.0\Pantheon.Shared.dll</HintPath>
+	    <HintPath>..\..\DevOps\Pantheon\Tests\UnitTest\Client\bin\Debug\net8.0\Pantheon.Shared.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 
