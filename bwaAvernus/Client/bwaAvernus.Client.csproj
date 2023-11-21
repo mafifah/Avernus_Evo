@@ -7,7 +7,7 @@
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 	<BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
 	<AssemblyTitle Condition="'$(Configuration)' == 'debug'">$([System.DateTime]::Now.ToString("dd/MM/yy - hh\:mm"))</AssemblyTitle>
-	<Version>6.0.6.0</Version>
+	<Version>5.0.5.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -274,12 +274,12 @@
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Aset\RcpAset.razor" Link="1. Master\Crixalis\106. Inventori\Aset\RcpAset.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Karyawan\RcpKaryawan.razor" Link="1. Master\Crixalis\101. Karyawan\Karyawan\RcpKaryawan.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\RcpDivisiBarang.razor" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\RcpDivisiBarang.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" />
     <None Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Masuk\RcpKasBankMasuk.razor" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Masuk\RcpKasBankMasuk.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\209. Penjualan\Order Penjualan\RcpOrderPenjualan.razor" Link="2. Transaksi\Crixalis\209. Penjualan\Order Penjualan\RcpOrderPenjualan.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Usaha\RcpPiutangUsaha.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Usaha\RcpPiutangUsaha.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Karyawan\RcpPiutangKaryawan.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Karyawan\RcpPiutangKaryawan.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Giro\RcpPiutangGiro.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Giro\RcpPiutangGiro.razor" />
-    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\RcpArmada.razor" Link="1. Master\Crixalis\107. Armada\RcpArmada.razor" />
   </ItemGroup>
 
