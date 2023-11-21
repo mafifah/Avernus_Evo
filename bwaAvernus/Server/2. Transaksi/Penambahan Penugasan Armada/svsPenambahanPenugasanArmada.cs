@@ -21,18 +21,15 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 	public async override Task<RplPenambahanPenugasanArmada> GetPenambahanPenugasanArmada(RqsPenambahanPenugasanArmada request, ServerCallContext context)
 	{
 		IEnumerable<T6PenugasanArmada>? listPenambahanPenugasanArmada;
-		if (string.IsNullOrEmpty(request.TanggalFilterAwal))
-		{
-			listPenambahanPenugasanArmada = await _svd.GetEntities<T6PenugasanArmada>();
-		}
-		else
-		{
-			listPenambahanPenugasanArmada = await _svd.GetEntitiesDenganSpec<T6PenugasanArmada>(x => x.WaktuProses >= request.TanggalFilterAwal.ToDateTimeOffset() && x.WaktuProses <= request.TanggalFilterAkhir.ToDateTimeOffset());
-		}
-		//await _svdPenambahanPenugasanArmada.GetPenambahanPenugasanArmada();
-		var rplPenambahanPenugasanArmada = new RplPenambahanPenugasanArmada();
+        listPenambahanPenugasanArmada = await _svd.GetEntitiesDenganSpec<T6PenugasanArmada>(x => x.StatusPerjalanan != "Kembali");
+        var rplPenambahanPenugasanArmada = new RplPenambahanPenugasanArmada();
 		rplPenambahanPenugasanArmada.ListT6PenugasanArmada.AddRange(listPenambahanPenugasanArmada.Adapt<IEnumerable<RplPenambahanPenugasanArmadaById>>());
-		return rplPenambahanPenugasanArmada;
+        foreach (var item in rplPenambahanPenugasanArmada.ListT6PenugasanArmada)
+        {
+            var dtT7 = (await _svd.GetEntitiesDenganSpec<T7PenugasanArmada>(x => x.IdPenugasanArmada == Guid.Parse(item.IdPenugasanArmada) && x.Urutan == 1)).FirstOrDefault();
+            item.T7PenugasanArmada = dtT7?.Adapt<PtmT7PenambahanPenugasanArmada>();
+        }
+        return rplPenambahanPenugasanArmada;
 	}
 	public async override Task<RplPenambahanPenugasanArmadaById> GetPenambahanPenugasanArmadaById(RqsPenambahanPenugasanArmadaById request, ServerCallContext context)
 	{
@@ -43,7 +40,7 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 	public async override Task<RplT7PenambahanPenugasanArmadaById> GetT7PenambahanPenugasanArmadaById(RqsT7PenambahanPenugasanArmadaById request, ServerCallContext context)
 	{
 		var rplDetilPenambahanPenugasanArmada = new RplT7PenambahanPenugasanArmadaById();
-		var listDetilPenambahanPenugasanArmada = await _svd.GetEntitiesDenganSpec<T7PenugasanArmada>(x => x.IdPenugasanArmada.ToString() == request.IdPenugasanArmada);
+		var listDetilPenambahanPenugasanArmada = (await _svd.GetEntitiesDenganSpec<T7PenugasanArmada>(x => x.IdPenugasanArmada.ToString() == request.IdPenugasanArmada)).OrderBy(x => x.Urutan).ToList();
 		if (listDetilPenambahanPenugasanArmada is null) return rplDetilPenambahanPenugasanArmada;
 		rplDetilPenambahanPenugasanArmada.ListT7PenugasanArmada.AddRange(listDetilPenambahanPenugasanArmada.Adapt<IEnumerable<PtmT7PenambahanPenugasanArmada>>());
         return rplDetilPenambahanPenugasanArmada;
@@ -78,36 +75,36 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 		return reply;
 
 	}
-	#endregion
+    #endregion
 
-	#region Procedure
-	protected async Task<string> GenerateIdTransaksi(string idCompany, string kodeForm)
-	{
-		var kodeTahunBulan = DateTime.Now.ToString("yyMM");
-		string sequenceGenerated = await GetSequenceTerbaruIdTransaksi(kodeTahunBulan, idCompany);
+    #region Procedure
+    protected async Task<string> GenerateIdTransaksi(string idCompany, string kodeForm)
+    {
+        var kodeTahunBulan = DateTime.Now.ToString("yyMM");
+        string sequenceGenerated = await GetSequenceTerbaruIdTransaksi(kodeTahunBulan, idCompany);
 
-		var idTransaksiGenerated = $"{kodeForm}-{kodeTahunBulan}-{idCompany}-{sequenceGenerated}";
-		return idTransaksiGenerated;
-	}
+        var idTransaksiGenerated = $"{kodeForm}-{kodeTahunBulan}-{idCompany}-{sequenceGenerated}";
+        return idTransaksiGenerated;
+    }
 
-	private async Task<string> GetSequenceTerbaruIdTransaksi(string kodeTahunBulan, string idCompany)
-	{
-		var idTransaksiTerakhir = await _dbContext.Set<T7PenugasanArmada>()
-									.Where(dbSet => dbSet.NoPenugasan.Substring(3, 8) == $"{kodeTahunBulan}-{idCompany}")
-									.Select(d => d.NoPenugasan)
-									.OrderByDescending(t => t)
-									.FirstOrDefaultAsync();
+    private async Task<string> GetSequenceTerbaruIdTransaksi(string kodeTahunBulan, string idCompany)
+    {
+        var idTransaksiTerakhir = await _dbContext.Set<T7PenugasanArmada>()
+                                    .Where(dbSet => dbSet.NoPenugasan.Substring(3, 8) == $"{kodeTahunBulan}-{idCompany}")
+                                    .Select(d => d.NoPenugasan)
+                                    .OrderByDescending(t => t)
+                                    .FirstOrDefaultAsync();
 
-		if (idTransaksiTerakhir is null)
-		{
-			return "0001";
-		}
-		var stringSequenceTerakhir = idTransaksiTerakhir.Substring(12);
-		var intSequence = int.Parse(stringSequenceTerakhir);
-		return (intSequence + 1).ToString().PadLeft(4, '0');
-	}
+        if (idTransaksiTerakhir is null)
+        {
+            return "0001";
+        }
+        var stringSequenceTerakhir = idTransaksiTerakhir.Substring(12);
+        var intSequence = int.Parse(stringSequenceTerakhir);
+        return (intSequence + 1).ToString().PadLeft(4, '0');
+    }
 
-	private async Task GenerateJurnal(string idCompany, long idForm, string referensi, string noBukti, string keterangan, string deskripsi, decimal? grandtotal, string idRekening)
+    private async Task GenerateJurnal(string idCompany, long idForm, string referensi, string noBukti, string keterangan, string deskripsi, decimal? grandtotal, string idRekening)
 	{
 		var dtT6Jurnal = new pthT6Jurnal();
 		dtT6Jurnal.IdCompany = idCompany;
@@ -150,26 +147,12 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 		var dtT6PenambahanPenugasanArmada = request.Adapt<T6PenugasanArmada>();
 		dtT6PenambahanPenugasanArmada.StatusPerjalanan = $"Rute {dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.Count}";
 		var dtT7PenambahanPenugasanArmada = dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.FirstOrDefault(x => x.Urutan == dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.Count);
-		var dtT6Jurnal = (await _svd.GetEntitiesDenganSpec<pthT6Jurnal>(x => x.NoBukti == dtT7PenambahanPenugasanArmada.NoPenugasan))?.FirstOrDefault();
-		var dtT7Jurnal = new List<pthT7Jurnal>();
-		if (dtT6Jurnal != null)
+		if(dtT7PenambahanPenugasanArmada.IdDetilPenugasanArmada == Guid.Parse("00000000-0000-0000-0000-000000000000") && dtT7PenambahanPenugasanArmada.Synchronise == "inserted")
 		{
-			dtT7Jurnal = (_svd.GetEntitiesDenganSpec<pthT7Jurnal>(x => x.IdJurnal == dtT6Jurnal.IdJurnal)).Adapt<List<pthT7Jurnal>>();
-			dtT6Jurnal.GrandTotal = (decimal)dtT7PenambahanPenugasanArmada.SanguSementara;
-			dtT7Jurnal.ForEach(x => x.NominalAkuntansi = dtT6Jurnal.GrandTotal);
-			dtT7Jurnal.ForEach(x => x.NominalTransaksi = dtT6Jurnal.GrandTotal);
+            dtT7PenambahanPenugasanArmada.NoPenugasan = await GenerateIdTransaksi(dtT7PenambahanPenugasanArmada.IdCompany, "DO");
+        }
 
-			dtT6Jurnal.ListT7Jurnal = dtT7Jurnal.Adapt<ICollection<pthT7Jurnal>>();
-
-			//await _svd.UpdateTransaksiHeader<pthT6Jurnal, pthT7Jurnal, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6Jurnal, 30200030);
-		}
-		else if (dtT7PenambahanPenugasanArmada.SanguSementara > 0)
-		{
-			//await GenerateJurnal(dtT7PenambahanPenugasanArmada.IdCompany, 30701020, dtT6PenambahanPenugasanArmada.IdTransaksi, dtT7PenambahanPenugasanArmada.NoPenugasan, $"{dtT6PenambahanPenugasanArmada.Nopol} ({dtT6PenambahanPenugasanArmada.Karyawan_Sopir_NamaPanggilan}): ({dtT7PenambahanPenugasanArmada.Customer_Inisial}) {dtT7PenambahanPenugasanArmada.Rute_Rute} [{dtT7PenambahanPenugasanArmada.Rute_Jenis}]", $"Sangu Sopir = {dtT7PenambahanPenugasanArmada.SanguSementara}", dtT7PenambahanPenugasanArmada.SanguSementara, dtT6PenambahanPenugasanArmada.IdRekening);
-
-		}
-
-		var hasil = await _svd.UpdateTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, T7PenugasanArmada_SPBU, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(request.Adapt<T6PenugasanArmada>(), request.IdForm);
+        var hasil = await _svd.UpdateTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, T7PenugasanArmada_SPBU, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6PenambahanPenugasanArmada, request.IdForm);
 		return new RplWritePenambahanPenugasanArmada { IsOK = true, Result = hasil };
 	}
 	public override async Task<RplGetDraftPenambahanPenugasanArmada> GetDraftPenambahanPenugasanArmada(RqsGetDraftPenambahanPenugasanArmada request, ServerCallContext context)

@@ -233,7 +233,8 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
             DrCmbCustomer = DtCmbCustomer.FirstOrDefault(x => x.IdCustomer == DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.IdCustomer);
 			DtCmbAlamatCustomer = (await ah.Get_AlamatCustomer((Guid)DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.IdCustomer)).Adapt<ObservableCollection<uimT2AlamatCustomer>>();
 			DrCmbAlamatCustomer = DtCmbAlamatCustomer.FirstOrDefault(x => x.IdAlamatCustomer == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdAlamatCustomer);
-			DrCmbRute = DtCmbRute.FirstOrDefault(x => x.IdRute == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute);
+            DtCmbRute = (await ah.Get_RuteByIdAlamatCustomer(DrCmbAlamatCustomer.IdAlamatCustomer)).Adapt<ObservableCollection<uimT3Rute>>();
+            DrCmbRute = DtCmbRute.FirstOrDefault(x => x.IdRute == DtRekapitulasi_Terseleksi.T7PenugasanArmada.IdRute);
 			
 			SedangProsesRefreshDetil = false;
 			DtGrdInformasi = await _svc.GetDataLog(DtRekapitulasi_Terseleksi.IdPenugasanArmada.ToString() ?? "");
@@ -309,7 +310,7 @@ public partial class RcpPenugasanArmada : ConTransaksi_1<uimT6PenugasanArmada, s
     }
     public async void CmbCompany_Dipilih(uimT0Company company)
     {
-        //DrCmbCompany = company;
+        DrCmbCompany = company;
         //DtRekapitulasi_Terseleksi.IdCompany = company.IdCompany;
         StateHasChanged();
 

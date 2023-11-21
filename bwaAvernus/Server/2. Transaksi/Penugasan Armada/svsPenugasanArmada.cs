@@ -1,6 +1,7 @@
 ﻿using bwaAvernus.Server.Data;
 using bwaAvernus.Shared._1._Master;
 using bwaAvernus.Shared._2._Transaksi;
+using Pantheon.Shared.Utility;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -190,6 +191,7 @@ namespace bwaAvernus.Server._2._Transaksi
             dtT6PenugasanArmada.ListT7PenugasanArmada.Clear();
             dtT6PenugasanArmada.ListT7PenugasanArmada.Add(dtT7PenugasanArmada);
             var hasil = await _svd.InsertTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, T7PenugasanArmada_SPBU, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6PenugasanArmada, request.IdForm);
+
             if (dtT7PenugasanArmada.SanguSementara > 0)
             {
                 //await GenerateJurnal(dtT7PenugasanArmada.IdCompany, 30701020, dtT6PenugasanArmada.IdTransaksi, dtT7PenugasanArmada.NoPenugasan, $"{dtT6PenugasanArmada.Nopol} ({dtT6PenugasanArmada.Karyawan_Sopir_NamaPanggilan}): ({dtT7PenugasanArmada.Customer_Inisial}) {dtT7PenugasanArmada.Rute_Rute} [{dtT7PenugasanArmada.Rute_Jenis}]", $"Sangu Sopir = {dtT7PenugasanArmada.SanguSementara}", dtT7PenugasanArmada.SanguSementara, dtT6PenugasanArmada.IdRekening);

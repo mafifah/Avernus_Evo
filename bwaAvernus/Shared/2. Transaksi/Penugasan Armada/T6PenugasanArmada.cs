@@ -64,7 +64,7 @@ namespace bwaAvernus.Shared._2._Transaksi
         public ICollection<T7PenugasanArmada>? ListT7PenugasanArmada { get; set; }
         public ICollection<T7PenugasanArmada_SPBU>? ListT7PenugasanArmada_SPBU { get; set; }
 
-        public static T6PenugasanArmada BuatBaru(T6PenugasanArmada t6PA, string idTransaksiGenerated)
+        public static T6PenugasanArmada BuatBaru(T6PenugasanArmada t6PA)
         {
             var t6PenugasanArmada = t6PA;
             t6PenugasanArmada.IdPenugasanArmada = NewId.NextGuid();

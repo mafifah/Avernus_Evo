@@ -91,6 +91,8 @@ message RplPenambahanPenugasanArmadaById
     optional string Catatan = 225;
     optional string Preview = 226;
     optional string Synchronise = 227;
+
+    PtmT7PenambahanPenugasanArmada T7PenugasanArmada = 301;
 }
 message RplPenambahanPenugasanArmada_Cetak
 {
@@ -194,6 +196,8 @@ message PtmT7PenambahanPenugasanArmada
     
 	//Default BaseModelTransaksiDetil
     optional string Synchronise = 201;
+
+    
 }
 message PtmT7PenambahanPenugasanArmada_SPBU {
     optional string IdDetilPenugasanArmada = 1;

@@ -67,11 +67,6 @@ namespace bwaAvernus._1._Master
         {
             base.ProsesUpdateDatabase();
         }
-
-        public override void CtmNavigasiShortcut_Press(KeyboardEventArgs e)
-        {
-            base.CtmNavigasiShortcut_Press(e);
-        }
         #endregion
 
 

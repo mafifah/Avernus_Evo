@@ -7,99 +7,27 @@
 @using bwaCrixalis.Client._1._Master;
 @{
 	base.BuildRenderTree(__builder);
-	RfDetil = 
-    @<DxFormLayout CssClass="custom-form-layout">
-        
+	RfDetil =
+    @<DxFormLayout CssClass="custom-form-layout" Id="@Tabs_Rute">
+        <p id="@P_Control"></p>
         <DxFormLayout CssClass="sticky-row-1 w-100 sc" Id="sticky-row-1">
-            <DxFormLayoutItem @ref="@FliArmada" Caption="Armada" ColSpanMd="6">
-                <DxTextBox ReadOnly="true" @bind-Text=@DtRekapitulasi_Terseleksi.Nopol></DxTextBox>
-            </DxFormLayoutItem>
-            <DxFormLayoutItem @ref="@FliSopir" Caption="Sopir" ColSpanMd="6">
-                <DxTextBox ReadOnly="true" @bind-Text=@DtRekapitulasi_Terseleksi.Karyawan_Sopir_NamaPanggilan></DxTextBox>
-            </DxFormLayoutItem>
-
-            <DxFormLayoutItem ColSpanMd="2">
-                <DxButton CssClass="w-100"
-                          RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Rute" Click="@(() => ProsesPilihTab_Detil("scRute"))" />
-            </DxFormLayoutItem>
-            <DxFormLayoutItem ColSpanMd="2">
-                <DxButton CssClass="w-100"
-                          RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="BBM + Sangu" Click="@(() => ProsesPilihTab_Detil("scBBM"))" />
-            </DxFormLayoutItem>
-
-            <DxFormLayoutItem ColSpanMd="3">
-                <DxButton CssClass="w-100"
-                          RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Detil Armada" Click="@(() => ProsesPilihTab_Detil("scArmada"))" />
-            </DxFormLayoutItem>
-
-            <DxFormLayoutItem ColSpanMd="3">
-                <DxButton CssClass="w-100"
-                          RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Detil Sopir" Click="@(() => ProsesPilihTab_Detil("scSopir"))" />
-            </DxFormLayoutItem>
-            <DxFormLayoutItem ColSpanMd="2">
-                <DxButton CssClass="w-100"
-                          RenderStyleMode="@ButtonRenderStyleMode.Text"
-                          Text="Aktivitas" Click="@(() => ProsesPilihTab_Detil("scAktifitas"))" />
-            </DxFormLayoutItem>
-        </DxFormLayout>
-
-        <DxFormLayoutGroup ColSpanMd="12">
-            <DxGrid @ref="@GrdT7PenugasanArmada"
-                    AllowSelectRowByClick="true"
-                    SelectedDataItem="@SelectedDataItemT7PenugasanArmada"
-                    SelectedDataItemChanged="OnSelectedDataItemT7PenugasanArmadaChanged"
-                    Data="@(DtGrdT7PenugasanArmada.Adapt<IList<uimT7PenugasanArmada>>())"
-                    KeyFieldName="@nameof(uimT7PenugasanArmada.IdDetilPenugasanArmada)"
-                    CustomizeElement="GrdDetil_CustomizeElement"
-                    CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT7PenugasanArmada>)"
-                    EditModelSaving="@(GrdDetil_EditModelSaving<uimT7PenugasanArmada, T7PenugasanArmada>)"
-                    EditMode="GridEditMode.EditForm"
-                    EditNewRowPosition="GridEditNewRowPosition.Bottom"
-                    SelectionMode="GridSelectionMode.Single"
-                    @oncontextmenu:preventDefault>
-                <Columns>
-                    <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
-                        <CellDisplayTemplate>
-                            @(context.VisibleIndex + 1)
-                        </CellDisplayTemplate>
-                    </DxGridDataColumn>
-                    <DxGridDataColumn FieldName="Customer_Nama" Caption="Customer" />
-                    <DxGridDataColumn FieldName="IdDetilPenugasanArmada" Caption="IdDetilPenugasanArmada" />
-                    <DxGridDataColumn FieldName="IdRute" Caption="IdRute" />
-                    <DxGridDataColumn FieldName="Urutan" Caption="Urutan" />
-                    <DxGridDataColumn FieldName="WaktuPenugasan" Caption="WaktuPenugasan" />
-                    <DxGridDataColumn FieldName="AlamatCustomer_Alamat" Caption="Alamat Customer" />
-                    <DxGridDataColumn FieldName="Rute_Rute" Caption="Rute" />
-                    <DxGridDataColumn FieldName="Synchronise" Caption="Status Rute" />
-                </Columns>
-            </DxGrid>
-            <PthContextMenuHeaderGrid Grid="@GrdT7PenugasanArmada" @ref="@CtmDetil" />
-        </DxFormLayoutGroup>
-
-        <DxFormLayoutItem ColSpanMd="6">
-            <DxButton Click="@ProsesPenugasanBaru" Text="Penugasan Baru" />
-        </DxFormLayoutItem>
-        <DxFormLayoutItem ColSpanMd="6">
-            <DxButton Text="Hapus Penugasan" />
-        </DxFormLayoutItem>
-
-        <DxFormLayout CssClass="sc" Id="scRute">
-            <DxFormLayoutItem @ref="@FliIdCompany" Caption="Kode" ColSpanMd="3">
-                <DxComboBox @ref="@CmbIdCompany"
-                            Data="@DtCmbIdCompany"
-                            Value="@DrCmbIdCompany"
+            <DxFormLayoutItem @ref="@FliCompany" Caption="Kode" ColSpanMd="3">
+                <DxComboBox @ref="@CmbCompany"
+                            Data="@DtCmbCompany"
+                            Value="@DrCmbCompany"
                             TextFieldName="IdCompany"
                             CssClass="cw-480 font_0" NullText=""
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
-                            ValueChanged="@((uimT0Company company) => CmbIdCompany_Dipilih(company))"
+                            ValueChanged="@((uimT0Company company) => CmbCompany_Dipilih(company))"
                             tabindex="1">
-                    <DxListEditorColumn FieldName="IdCompany" Caption="IdCompany" />
-                    <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
+                    <DxListEditorColumn FieldName="Nama" Caption="Company" />
+                    <DxListEditorColumn FieldName="IdCompany" Caption="Inisial" />
                 </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="@FliIdTransaksi" Caption="" ColSpanMd="3">
+                <DxTextBox @ref="@TxbIdTransaksi" @bind-Text="DtRekapitulasi_Terseleksi.IdTransaksi" NullText="tampil setelah simpan" ReadOnly=true
+                           tabindex="2">
+                </DxTextBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliWaktuProses" Caption="Proses" ColSpanMd="6">
                 <DxDateEdit @ref="@DteWaktuProses"
@@ -111,8 +39,102 @@
                             tabindex="3">
                 </DxDateEdit>
             </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="@FliArmada" Caption="Armada" ColSpanMd="6">
+                <DxComboBox @ref="@CmbArmada" FilteringMode="DataGridFilteringMode.Contains"
+                            Data="@DtCmbArmada"
+                            Value="@DrCmbArmada"
+                            TextFieldName="Nopol" NullText=""
+                            CssClass="cw-480 font_0"
+                            ValueChanged="@((uimT1Armada armada) => CmbArmada_Dipilih(armada))"
+                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            tabindex="6">
+                    <DxListEditorColumn FieldName="Nopol" Caption="Nopol" />
+                    <DxListEditorColumn FieldName="Merk" Caption="Merk" />
+                </DxComboBox>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem @ref="@FliSopir" Caption="Sopir" ColSpanMd="6">
+                <DxComboBox @ref="@CmbSopir" FilteringMode="DataGridFilteringMode.Contains"
+                            Data="@DtCmbSopir"
+                            Value="@DrCmbSopir" NullText=""
+                            TextFieldName="NamaSopir"
+                            CssClass="cw-480 font_0"
+                            DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
+                            ValueChanged="@((uimT5ArmadaSopir sopir) => CmbSopir_Dipilih(sopir))"
+                            tabindex="7">
+                    <DxListEditorColumn FieldName="NamaSopir" Caption="Nama Panggilan" />
+                    <DxListEditorColumn FieldName="Keterangan" Caption="Keterangan" />
+                </DxComboBox>
+            </DxFormLayoutItem>
+
+            <DxFormLayoutGroup ColSpanMd="12" HeaderCssClass="header-hidden">
+                <DxGrid @ref="@GrdT7PenugasanArmada"
+                        AllowSelectRowByClick="true"
+                        SelectedDataItem="@SelectedDataItemT7PenugasanArmada"
+                        SelectedDataItemChanged="OnSelectedDataItemT7PenugasanArmadaChanged"
+                        Data="@(DtGrdT7PenugasanArmada.Adapt<IList<uimT7PenugasanArmada>>())"
+                        KeyFieldName="@nameof(uimT7PenugasanArmada.IdDetilPenugasanArmada)"
+                        CustomizeElement="GrdDetil_CustomizeElement"
+                        CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT7PenugasanArmada>)"
+                        EditModelSaving="@(GrdDetil_EditModelSaving<uimT7PenugasanArmada, T7PenugasanArmada>)"
+                        EditMode="GridEditMode.EditForm"
+                        EditNewRowPosition="GridEditNewRowPosition.Bottom"
+                        SelectionMode="GridSelectionMode.Single"
+                        @oncontextmenu:preventDefault>
+                    <Columns>
+                        <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
+                            <CellDisplayTemplate>
+                                @(context.VisibleIndex + 1)
+                            </CellDisplayTemplate>
+                        </DxGridDataColumn>
+                        <DxGridDataColumn FieldName="Customer_Nama" Caption="Customer" />
+                        <DxGridDataColumn FieldName="IdDetilPenugasanArmada" Caption="IdDetilPenugasanArmada" />
+                        <DxGridDataColumn FieldName="IdRute" Caption="IdRute" />
+                        <DxGridDataColumn FieldName="Urutan" Caption="Urutan" />
+                        <DxGridDataColumn FieldName="WaktuPenugasan" Caption="WaktuPenugasan" />
+                        <DxGridDataColumn FieldName="AlamatCustomer_Alamat" Caption="Alamat Customer" />
+                        <DxGridDataColumn FieldName="Rute_Rute" Caption="Rute" />
+                        <DxGridDataColumn FieldName="Synchronise" Caption="Status Rute" />
+                    </Columns>
+                </DxGrid>
+                <PthContextMenuHeaderGrid Grid="@GrdT7PenugasanArmada" @ref="@CtmDetil" />
+            </DxFormLayoutGroup>
+
+            <DxFormLayoutItem ColSpanMd="2">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="Rute" Click="@(() => ProsesPilihTab_Detil(Tabs_Rute))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="2">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="BBM + Sangu" Click="@(() => ProsesPilihTab_Detil(Tabs_BBM))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="3">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="Detil Armada" Click="@(() => ProsesPilihTab_Detil(Tabs_Armada))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="3">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="Detil Sopir" Click="@(() => ProsesPilihTab_Detil(Tabs_Sopir))" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="2">
+                <DxButton CssClass="w-100"
+                          RenderStyleMode="@ButtonRenderStyleMode.Text"
+                          Text="Aktivitas" Click="@(() => ProsesPilihTab_Detil(Tabs_Aktivitas))" />
+            </DxFormLayoutItem>
+        </DxFormLayout>
+
+        <DxFormLayout CssClass="sc">
+            <DxFormLayoutItem ColSpanMd="6">
+                <DxButton Click="@ProsesPenugasanBaru" Text="Penugasan Baru" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="6">
+                <DxButton Text="Hapus Penugasan" />
+            </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliCustomer" Caption="Customer" ColSpanMd="12">
-                <DxComboBox @ref="@CmbCustomer" FilteringMode="DataGridFilteringMode.Contains"
+                <DxComboBox @ref="@CmbCustomer" FilteringMode="DataGridFilteringMode.Contains" NullText=""
                             Data="@DtCmbCustomer"
                             Value="@DrCmbCustomer"
                             TextFieldName="Nama"
@@ -120,15 +142,14 @@
                             ValueChanged="@((uimT1CustomerInstansi customer) => CmbCustomer_Dipilih(customer))"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
                             tabindex="4">
-                    <DxListEditorColumn FieldName="Prefix" Caption="Prefix" />
-                    <DxListEditorColumn FieldName="Nama" Caption="Nama" />
-                    <DxListEditorColumn FieldName="Kode" Caption="Kode" />
-                    <DxListEditorColumn FieldName="Inisial" Caption="Inisial" />
+                    <DxListEditorColumn FieldName="Customer" Caption="" />
+                    <DxListEditorColumn FieldName="Kota" Caption="" />
+                    <DxListEditorColumn FieldName="Inisial" Caption="" />
                 </DxComboBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="@FliAlamatCustomer" Caption="Alamat" ColSpanMd="12">
                 <DxComboBox @ref="@CmbAlamatCustomer" FilteringMode="DataGridFilteringMode.Contains"
-                            Data="@DtCmbAlamatCustomer"
+                            Data="@DtCmbAlamatCustomer" NullText=""
                             Value="@DrCmbAlamatCustomer"
                             TextFieldName="Alamat"
                             CssClass="cw-480 font_0"
@@ -142,7 +163,7 @@
             <DxFormLayoutItem @ref="@FliRute" Caption="Rute" ColSpanMd="12">
                 <DxComboBox @ref="@CmbRute" FilteringMode="DataGridFilteringMode.Contains"
                             Data="@DtCmbRute"
-                            Value="@DrCmbRute"
+                            Value="@DrCmbRute" NullText=""
                             TextFieldName="Rute"
                             CssClass="cw-480 font_0"
                             DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0"
@@ -152,11 +173,9 @@
                     <DxListEditorColumn FieldName="Jenis" Caption="Jenis" />
                 </DxComboBox>
             </DxFormLayoutItem>
-            
         </DxFormLayout>
-        <br />
 
-        <DxFormLayout Id="scBBM" CssClass="sc">
+        <DxFormLayout Id="@Tabs_BBM" CssClass="sc">
 
             <DxFormLayoutItem @ref="FliSanguRitase" Caption="Sangu Ritase" ColSpanMd="12">
                 <DxSpinEdit @ref="SpeSanguRitase" InputId="0.0, 8.0" tabindex="7"
@@ -179,9 +198,7 @@
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliBBMHarga" Caption="BBM Harga " ColSpanMd="12">
                 <DxSpinEdit @ref="SpeBBMHarga" InputId="0.0, 8.0" tabindex="10"
-                            Value="@DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga" ReadOnly="true"
-                            ValueExpression="@(() => (decimal?)DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga)"
-                            ValueChanged="@(async (decimal? valueBaru) => DtRekapitulasi_Terseleksi.T7PenugasanArmada.BBMHarga = (int?)valueBaru)" />
+                            Value="@DtRekapitulasi_Terseleksi?.T7PenugasanArmada?.BBMHarga" ReadOnly="true" />
             </DxFormLayoutItem>
             <DxFormLayoutItem @ref="FliBBMSangu" Caption="BBM + Sangu" ColSpanMd="12">
                 <DxSpinEdit @ref="SpeBBMSangu" InputId="0.0, 8.0" tabindex="11"
@@ -214,9 +231,10 @@
                             ValueChanged="@(async (decimal? valueBaru) => DtRekapitulasi_Terseleksi.T7PenugasanArmada.SanguSementara = (int?)valueBaru)" />
             </DxFormLayoutItem>
 
-            <br>
-            <DxGrid style="margin-left:15px !important; margin-right:15px !important;" @ref="@GrdT7PenambahanPenugasan_SPBU"
-                    Data="@(GrdT7PenambahanPenugasan_SPBU.Adapt<IList<uimT7PenugasanArmada_SPBU>>())"
+            <br />
+            <br />
+            <DxGrid style="margin:15px !important;" @ref="@GrdT7PenugasanArmada_SPBU"
+                    Data="@(DtGrdT7PenugasanArmada_SPBU.Adapt<IList<uimT7PenugasanArmada_SPBU>>())"
                     KeyFieldName="@nameof(uimT7PenugasanArmada_SPBU.IdDetilPenugasanArmada)"
                     CustomizeElement="GrdDetil_CustomizeElement"
                     CustomizeEditModel="@(GrdDetil_CustomizeEditModel<uimT7PenugasanArmada_SPBU>)"
@@ -224,14 +242,14 @@
                     EditMode="GridEditMode.EditForm"
                     EditNewRowPosition="GridEditNewRowPosition.Bottom"
                     SelectionMode="GridSelectionMode.Single"
-                    @oncontextmenu:preventDefault>
+            @oncontextmenu:preventDefault>
                 <Columns>
                     <DxGridCommandColumn Width="10px">
                         <HeaderTemplate>
-                            <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdT7PenambahanPenugasan_SPBU.StartEditNewRowAsync())"></a>
+                            <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdT7PenugasanArmada_SPBU.StartEditNewRowAsync())"></a>
                         </HeaderTemplate>
                         <CellDisplayTemplate>
-                            <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdT7PenambahanPenugasan_SPBU.StartEditRowAsync(context.VisibleIndex))"></a>
+                            <a class="fa-solid fa-pencil text-decoration-none pr-1" @onclick="@(() => GrdT7PenugasanArmada_SPBU.StartEditRowAsync(context.VisibleIndex))"></a>
                             <a class="fa-solid fa-trash-can text-decoration-none" @onclick="@(() =>  GrdDetil_OnHapus<uimT7PenugasanArmada_SPBU, T7PenugasanArmada_SPBU>((uimT7PenugasanArmada_SPBU)context.DataItem))"></a>
                         </CellDisplayTemplate>
                     </DxGridCommandColumn>
@@ -247,7 +265,7 @@
                 </Columns>
                 <EditFormTemplate Context="ctxT7PenugasanArmada_SPBU">
                     @{
-                            var edm = (uimT7PenugasanArmada_SPBU)ctxT7PenugasanArmada_SPBU.EditModel;
+                        var edm = (uimT7PenugasanArmada_SPBU)ctxT7PenugasanArmada_SPBU.EditModel;
                     }
                     <DxFormLayout>
                         <DxFormLayoutItem Caption="BBM Volume" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
@@ -262,7 +280,7 @@
             <DxFormLayoutItem @ref="FliBBMMetode" Caption="BBM Metode" ColSpanMd="12">
                 <DxComboBox @ref="@CmbBBMMetode" Data="@DtCmbBBMMetode" Value="@DrCmbBBMMetode"
                             tabindex="16" TextFieldName="DataOption"
-                            ValueChanged="@((pthT9DataOption metodeBBM) => CmbBBMMetode_Dipilih(metodeBBM))"
+                            ValueChanged="@((uimT9DataOption metodeBBM) => CmbBBMMetode_Dipilih(metodeBBM))"
                             CssClass="cw-480 font_0" DropDownBodyCssClass="font_0" DropDownCssClass="font_0" InputCssClass="font_0">
                 </DxComboBox>
             </DxFormLayoutItem>
@@ -278,9 +296,9 @@
 
         </DxFormLayout>
 
-        <DxFormLayout Id="scArmada" CssClass="sc">
+        <DxFormLayout Id="@Tabs_Armada" CssClass="sc">
             <DxFormLayoutItem Caption="Jenis Armada" ColSpanMd="8">
-                <DxTextBox Text="@DtRekapitulasi_Terseleksi.JenisArmada_Jenis" NullText="" ReadOnly=true>
+                <DxTextBox @bind-Text="@DtRekapitulasi_Terseleksi.JenisArmada_Jenis" NullText="" ReadOnly=true>
                 </DxTextBox>
             </DxFormLayoutItem>
             <DxFormLayoutItem Caption="Foto Armada" ColSpanMd="4">
@@ -288,17 +306,44 @@
             </DxFormLayoutItem>
         </DxFormLayout>
 
-        <DxFormLayout Id="scSopir" CssClass="sc">
-            <DxFormLayoutItem Caption="Seluler" ColSpanMd="8">
-                <DxTextBox Text="@DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1" NullText="" ReadOnly=true>
+        <DxFormLayout Id="@Tabs_Sopir" CssClass="sc">
+            <DxFormLayoutItem Caption="Seluler" ColSpanMd="9">
+                <DxTextBox @bind-Text="@DtRekapitulasi_Terseleksi.Karyawan_Sopir_Seluler1" NullText="" ReadOnly=true>
                 </DxTextBox>
             </DxFormLayoutItem>
-            <DxFormLayoutItem Caption="Foto Sopir" ColSpanMd="4">
+            <DxFormLayoutItem Caption="Foto Sopir" ColSpanMd="3">
                 <RadzenImage Path="@UrlGambarSopir" Style="width:150px; height:150px;" />
             </DxFormLayoutItem>
         </DxFormLayout>
-        
-	</DxFormLayout>;
+        <DxFormLayout Id="@Tabs_Aktivitas" CssClass="sc">
+            <DxGrid Data="@DtGrdInformasi"
+                    ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                    SelectionMode="GridSelectionMode.Single"
+                    PageSize="1000"
+            @oncontextmenu:preventDefault>
+                <Columns>
+                    <DxGridDataColumn FieldName="@nameof(uimLog.NamaPanggilan)" Caption="User" Width="8em" />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Aktivitas)" Caption="@FH.SplitPascalCase(nameof(uimLog.Aktivitas))" />/>
+                    <DxGridDataColumn FieldName="@nameof(uimLog.ApplicationName)" Caption="@FH.SplitPascalCase(nameof(uimLog.ApplicationName))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Client)" Caption="@FH.SplitPascalCase(nameof(uimLog.Client))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.ExecutablePath)" Caption="@FH.SplitPascalCase(nameof(uimLog.ExecutablePath))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IdCompany)" Caption="@FH.SplitPascalCase(nameof(uimLog.IdCompany))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IdKaryawan)" Caption="@FH.SplitPascalCase(nameof(uimLog.IdKaryawan))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IdLog)" Caption="@FH.SplitPascalCase(nameof(uimLog.IdLog))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Inisial)" Caption="@FH.SplitPascalCase(nameof(uimLog.Inisial))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IPv4)" Caption="@FH.SplitPascalCase(nameof(uimLog.IPv4))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IPv6)" Caption="@FH.SplitPascalCase(nameof(uimLog.IPv6))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Jabatan)" Caption="@FH.SplitPascalCase(nameof(uimLog.Jabatan))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Kolom)" Caption="@FH.SplitPascalCase(nameof(uimLog.Kolom))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.MacAddress)" Caption="@FH.SplitPascalCase(nameof(uimLog.MacAddress))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.IdPrimaryKey)" Caption="@FH.SplitPascalCase(nameof(uimLog.IdPrimaryKey))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.Tabel)" Caption="@FH.SplitPascalCase(nameof(uimLog.Tabel))" Visible=false />
+                    <DxGridDataColumn FieldName="@nameof(uimLog.WaktuInsert)" Caption="Proses" DisplayFormat="dd MMM yy - hh\:mm" GroupIndex="0" GroupInterval="GridColumnGroupInterval.Custom" />
+                </Columns>
+            </DxGrid>
+        </DxFormLayout>
+    </DxFormLayout>;
+    
 }
 <style>
     .sticky-row-1 {
@@ -319,33 +364,7 @@
         background-color: white !important;
     }
 
-    .sc {
-        margin: 2vh !important;
-    }
-</style>
-
-<style>
-    .dxbl-text-edit {
-        border: none !important;
-        border-radius: 0px !important;
-    }
-
-    .dxbl-btn-group-right {
-        visibility: hidden !important
-    }
-
-    .dxbl-text-edit:hover > .dxbl-btn-group-right {
-        visibility: visible !important;
-        border: none !important;
-        border-bottom: none !important;
-    }
-
-    .dxbl-text-edit:hover {
-        border-bottom: 1px solid #AAAAAA !important;
-    }
-
-
-    .dxbl-text-edit > .dxbl-btn-group-vertical > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn-group > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon), .dxbl-text-edit > .dxbl-btn:not(.dxbl-btn.dxbl-edit-btn-clear,.dxbl-btn.dxbl-btn-icon) {
-        border: none !important;
+    .header-hidden{
+        visibility: hidden;
     }
 </style>
