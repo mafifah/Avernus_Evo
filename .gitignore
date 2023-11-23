@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/bwaAvernus/Client/wwwroot/service-worker.published.js
+/bwaAvernus/Client/bwaAvernus.Client.csproj
