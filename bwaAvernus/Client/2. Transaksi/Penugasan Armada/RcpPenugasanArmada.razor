@@ -32,6 +32,7 @@
                 <DxDateEdit @ref="@DteWaktuProses"
                             Date="@DtRekapitulasi_Terseleksi.WaktuProses"
                             DateExpression="@(() => DtRekapitulasi_Terseleksi.WaktuProses)"
+                            DateChanged="@(async (DateTimeOffset? valueBaru) => await ProsesSimpan_Draft(nameof(DtRekapitulasi_Terseleksi.WaktuProses), valueBaru))"
                             Mask="dddd, dd MMMM yyyy  HH:mm"
                             CssClass="dteCustom"
                             tabindex="3">

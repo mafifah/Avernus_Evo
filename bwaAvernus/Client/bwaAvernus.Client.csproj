@@ -1,0 +1,298 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+	<BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
+	<AssemblyTitle Condition="'$(Configuration)' == 'debug'">$([System.DateTime]::Now.ToString("dd/MM/yy - hh\:mm"))</AssemblyTitle>
+	<Version>6.0.6.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\0. Utilitas\clsCrixalisHandler.cs" Link="0. Utilitas\Crixalis\clsCrixalisHandler.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Jabatan\RcpJabatan.razor.cs" Link="1. Master\Crixalis\101. Karyawan\Jabatan\RcpJabatan.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Jabatan\svcJabatan.cs" Link="1. Master\Crixalis\101. Karyawan\Jabatan\svcJabatan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Jabatan\uimT0Jabatan.cs" Link="1. Master\Crixalis\101. Karyawan\Jabatan\uimT0Jabatan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Jadwal Kerja Karyawan\svcJadwalKerjaKaryawan.cs" Link="1. Master\Crixalis\101. Karyawan\Jadwal Kerja Karyawan\svcJadwalKerjaKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Jadwal Kerja Karyawan\uimT0KategoriJadwalKerjaKaryawan.cs" Link="1. Master\Crixalis\101. Karyawan\Jadwal Kerja Karyawan\uimT0KategoriJadwalKerjaKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Jadwal Kerja Karyawan\uimT1JadwalKerjaKaryawan.cs" Link="1. Master\Crixalis\101. Karyawan\Jadwal Kerja Karyawan\uimT1JadwalKerjaKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Karyawan\RcpKaryawan.razor.cs" Link="1. Master\Crixalis\101. Karyawan\Karyawan\RcpKaryawan.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Karyawan\svcKaryawan.cs" Link="1. Master\Crixalis\101. Karyawan\Karyawan\svcKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Karyawan\uimT1Karyawan.cs" Link="1. Master\Crixalis\101. Karyawan\Karyawan\uimT1Karyawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Karyawan\uimT5JabatanKaryawan.cs" Link="1. Master\Crixalis\101. Karyawan\Karyawan\uimT5JabatanKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\102. Accounting\Akun\svcAkun.cs" Link="1. Master\Crixalis\102. Accounting\Akun\svcAkun.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\102. Accounting\Akun\uimT0Akun.cs" Link="1. Master\Crixalis\102. Accounting\Akun\uimT0Akun.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\102. Accounting\JenisAset\svcJenisAset.cs" Link="1. Master\Crixalis\102. Accounting\Jenis Aset\svcJenisAset.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\102. Accounting\JenisAset\uimT0JenisAset.cs" Link="1. Master\Crixalis\102. Accounting\Jenis Aset\uimT0JenisAset.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\102. Accounting\SetJurnal\svcSetJurnal.cs" Link="1. Master\Crixalis\102. Accounting\Set Jurnal\svcSetJurnal.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\102. Accounting\SetJurnal\uimT0SetJurnal.cs" Link="1. Master\Crixalis\102. Accounting\Set Jurnal\uimT0SetJurnal.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\102. Accounting\SetJurnal\uimT1SetJurnal.cs" Link="1. Master\Crixalis\102. Accounting\Set Jurnal\uimT1SetJurnal.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\102. Accounting\SetJurnal\uimWhereClauseField.cs" Link="1. Master\Crixalis\102. Accounting\Set Jurnal\uimWhereClauseField.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\JenisSupplier\RcpJenisSupplier.razor.cs" Link="1. Master\Crixalis\103. Supplier\JenisSupplier\RcpJenisSupplier.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\JenisSupplier\svcJenisSupplier.cs" Link="1. Master\Crixalis\103. Supplier\JenisSupplier\svcJenisSupplier.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\JenisSupplier\uimT0JenisSupplier.cs" Link="1. Master\Crixalis\103. Supplier\JenisSupplier\uimT0JenisSupplier.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\JenisSupplier\uimT1Supplier.cs" Link="1. Master\Crixalis\103. Supplier\JenisSupplier\uimT1Supplier.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\JenisVendor\svcJenisVendor.cs" Link="1. Master\Crixalis\103. Supplier\JenisVendor\svcJenisVendor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\JenisVendor\uimT0JenisVendor.cs" Link="1. Master\Crixalis\103. Supplier\JenisVendor\uimT0JenisVendor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Supplier\RcpSupplierInstansi.razor.cs" Link="1. Master\Crixalis\103. Supplier\Supplier\RcpSupplierInstansi.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Supplier\svcSupplierInstansi.cs" Link="1. Master\Crixalis\103. Supplier\Supplier\svcSupplierInstansi.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Supplier\uimT1SupplierInstansi.cs" Link="1. Master\Crixalis\103. Supplier\Supplier\uimT1SupplierInstansi.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Supplier\uimT2AlamatSupplier.cs" Link="1. Master\Crixalis\103. Supplier\Supplier\uimT2AlamatSupplier.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Supplier\uimT2PenyeliaSupplier.cs" Link="1. Master\Crixalis\103. Supplier\Supplier\uimT2PenyeliaSupplier.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Supplier\uimT5VendorSupplier.cs" Link="1. Master\Crixalis\103. Supplier\Supplier\uimT5VendorSupplier.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Vendor\svcVendor.cs" Link="1. Master\Crixalis\103. Supplier\Vendor\svcVendor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Vendor\uimT1Vendor.cs" Link="1. Master\Crixalis\103. Supplier\Vendor\uimT1Vendor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Vendor\uimT2AlamatVendor.cs" Link="1. Master\Crixalis\103. Supplier\Vendor\uimT2AlamatVendor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Vendor\uimT2PenyeliaVendor.cs" Link="1. Master\Crixalis\103. Supplier\Vendor\uimT2PenyeliaVendor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\Customer\RcpCustomerInstansi.razor.cs" Link="1. Master\Crixalis\104. Customer\Customer\RcpCustomerInstansi.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\Customer\svcCustomerInstansi.cs" Link="1. Master\Crixalis\104. Customer\Customer\svcCustomerInstansi.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\Customer\uimT1CustomerInstansi.cs" Link="1. Master\Crixalis\104. Customer\Customer\uimT1CustomerInstansi.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\Customer\uimT2AlamatCustomer.cs" Link="1. Master\Crixalis\104. Customer\Customer\uimT2AlamatCustomer.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\Customer\uimT2PenyeliaCustomer.cs" Link="1. Master\Crixalis\104. Customer\Customer\uimT2PenyeliaCustomer.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\Customer\uimT5KaryawanCustomer.cs" Link="1. Master\Crixalis\104. Customer\Customer\uimT5KaryawanCustomer.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\JenisCustomer\RcpJenisCustomer.razor.cs" Link="1. Master\Crixalis\104. Customer\JenisCustomer\RcpJenisCustomer.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\JenisCustomer\svcJenisCustomer.cs" Link="1. Master\Crixalis\104. Customer\JenisCustomer\svcJenisCustomer.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\JenisCustomer\uimT0JenisCustomer.cs" Link="1. Master\Crixalis\104. Customer\JenisCustomer\uimT0JenisCustomer.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\JenisCustomer\uimT1Customer.cs" Link="1. Master\Crixalis\104. Customer\JenisCustomer\uimT1Customer.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Aset\RcpAset.razor.cs" Link="1. Master\Crixalis\106. Inventori\Aset\RcpAset.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Aset\svcAset.cs" Link="1. Master\Crixalis\106. Inventori\Aset\svcAset.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Aset\uimT1Aset.cs" Link="1. Master\Crixalis\106. Inventori\Aset\uimT1Aset.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Barang\RcpBarang.razor.cs" Link="1. Master\Crixalis\106. Inventori\Barang\RcpBarang.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Barang\svcBarang.cs" Link="1. Master\Crixalis\106. Inventori\Barang\svcBarang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Barang\uimT1Warna.cs" Link="1. Master\Crixalis\106. Inventori\Barang\uimT1Warna.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Barang\uimT2Barang.cs" Link="1. Master\Crixalis\106. Inventori\Barang\uimT2Barang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Barang\uimT3Satuan.cs" Link="1. Master\Crixalis\106. Inventori\Barang\uimT3Satuan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\RcpDivisiBarang.razor.cs" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\RcpDivisiBarang.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\svcDivisiBarang.cs" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\svcDivisiBarang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\uimT0DivisiBarang.cs" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\uimT0DivisiBarang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\uimT1SubDivisiBarang.cs" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\uimT1SubDivisiBarang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Gudang\svcGudang.cs" Link="1. Master\Crixalis\106. Inventori\Gudang\svcGudang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Gudang\uimT0Gudang.cs" Link="1. Master\Crixalis\106. Inventori\Gudang\uimT0Gudang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Gudang\uimT5CompanyGudang.cs" Link="1. Master\Crixalis\106. Inventori\Gudang\uimT5CompanyGudang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Kategori Barang\svcKategoriBarang.cs" Link="1. Master\Crixalis\106. Inventori\Kategori Barang\svcKategoriBarang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Kategori Barang\uimT0KategoriBarang.cs" Link="1. Master\Crixalis\106. Inventori\Kategori Barang\uimT0KategoriBarang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Kategori Barang\uimT1SubKategoriBarang.cs" Link="1. Master\Crixalis\106. Inventori\Kategori Barang\uimT1SubKategoriBarang.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\RcpArmada.razor.cs" Link="1. Master\Crixalis\107. Armada\RcpArmada.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\svcArmada.cs" Link="1. Master\Crixalis\107. Armada\svcArmada.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\uimT0BBM.cs" Link="1. Master\Crixalis\107. Armada\uimT0BBM.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\uimT0JenisArmada.cs" Link="1. Master\Crixalis\107. Armada\uimT0JenisArmada.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\uimT1Armada.cs" Link="1. Master\Crixalis\107. Armada\uimT1Armada.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\uimT4NopolArmada.cs" Link="1. Master\Crixalis\107. Armada\uimT4NopolArmada.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\uimT5ArmadaCustomer.cs" Link="1. Master\Crixalis\107. Armada\uimT5ArmadaCustomer.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\uimT5ArmadaSopir.cs" Link="1. Master\Crixalis\107. Armada\uimT5ArmadaSopir.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Customer\svcClassGetDataJenisCustomerStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Customer\svcClassGetDataJenisCustomerStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Customer\uimClassGetDataJenisCustomerStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Customer\uimClassGetDataJenisCustomerStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Karyawan\svcClassGetDataKaryawanStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Karyawan\svcClassGetDataKaryawanStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Karyawan\uimClassGetDataKaryawanStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Karyawan\uimClassGetDataKaryawanStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Sistem\svcClassGetDataCompanyStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Sistem\svcClassGetDataCompanyStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Sistem\uimClassGetDataCompanyStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Sistem\uimClassGetDataCompanyStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\svcClassGetDataAlamatSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\svcClassGetDataAlamatSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\svcClassGetDataJenisSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\svcClassGetDataJenisSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\svcClassGetDataSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\svcClassGetDataSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\uimClassGetDataAlamatSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\uimClassGetDataAlamatSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\uimClassGetDataJenisSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\uimClassGetDataJenisSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\190. ClassGetData\Supplier\uimClassGetDataSupplierStatusTrue.cs" Link="1. Master\Crixalis\190. ClassGetData\Supplier\uimClassGetDataSupplierStatusTrue.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Company\svcCompany.cs" Link="1. Master\Crixalis\199. Sistem\Company\svcCompany.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Company\uimT0Company.cs" Link="1. Master\Crixalis\199. Sistem\Company\uimT0Company.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Divisi Perusahaan\uimT0DivisiPerusahaan.cs" Link="1. Master\Crixalis\199. Sistem\Divisi Perusahaan\uimT0DivisiPerusahaan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Lokasi\uimT0Negara.cs" Link="1. Master\Crixalis\199. Sistem\Lokasi\uimT0Negara.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Lokasi\uimT0SektorKota.cs" Link="1. Master\Crixalis\199. Sistem\Lokasi\uimT0SektorKota.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Lokasi\uimT0SektorNegara.cs" Link="1. Master\Crixalis\199. Sistem\Lokasi\uimT0SektorNegara.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Lokasi\uimT1Provinsi.cs" Link="1. Master\Crixalis\199. Sistem\Lokasi\uimT1Provinsi.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Lokasi\uimT2Kota.cs" Link="1. Master\Crixalis\199. Sistem\Lokasi\uimT2Kota.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Lokasi\uimT3Kecamatan.cs" Link="1. Master\Crixalis\199. Sistem\Lokasi\uimT3Kecamatan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Lokasi\uimT3Pelabuhan.cs" Link="1. Master\Crixalis\199. Sistem\Lokasi\uimT3Pelabuhan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\199. Sistem\Lokasi\uimT4Kelurahan.cs" Link="1. Master\Crixalis\199. Sistem\Lokasi\uimT4Kelurahan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Hutang Giro\svcHutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Hutang Giro\svcHutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Hutang Giro\uimT6HutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Hutang Giro\uimT6HutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Hutang Usaha\svcHutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Hutang Usaha\svcHutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Hutang Usaha\uimT6HutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Hutang Usaha\uimT6HutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\svcKasBankKeluar.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\svcKasBankKeluar.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\uimT6KasBankKeluar.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\uimT6KasBankKeluar.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\uimT7KasBankKeluar.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\uimT7KasBankKeluar.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Masuk\RcpKasBankMasuk.razor.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Masuk\RcpKasBankMasuk.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Masuk\svcKasBankMasuk.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Masuk\svcKasBankMasuk.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Masuk\uimT6KasBankMasuk.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Masuk\uimT6KasBankMasuk.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Masuk\uimT7KasBankMasuk.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Masuk\uimT7KasBankMasuk.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pelunasan Hutang Usaha\svcPelunasanHutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pelunasan Hutang Usaha\svcPelunasanHutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pelunasan Hutang Usaha\uimT6PelunasanHutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pelunasan Hutang Usaha\uimT6PelunasanHutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pelunasan Hutang Usaha\uimT7PelunasanHutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pelunasan Hutang Usaha\uimT7PelunasanHutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pelunasan Piutang Usaha\svcPelunasanPiutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pelunasan Piutang Usaha\svcPelunasanPiutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pelunasan Piutang Usaha\uimT6PelunasanPiutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pelunasan Piutang Usaha\uimT6PelunasanPiutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pelunasan Piutang Usaha\uimT7PelunasanPiutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pelunasan Piutang Usaha\uimT7PelunasanPiutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\PelunasanPiutangKaryawan\svcPelunasanPiutangKaryawan.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pelunasan Piutang Karyawan\svcPelunasanPiutangKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\PelunasanPiutangKaryawan\uimT6PelunasanPiutangKaryawan.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pelunasan Piutang Karyawan\uimT6PelunasanPiutangKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\PelunasanPiutangKaryawan\uimT7PelunasanPiutangKaryawan.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pelunasan Piutang Karyawan\uimT7PelunasanPiutangKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pencairan Hutang Giro\svcPencairanHutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pencairan Hutang Giro\svcPencairanHutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pencairan Hutang Giro\uimT6PencairanHutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pencairan Hutang Giro\uimT6PencairanHutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pencairan Hutang Giro\uimT7PencairanHutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pencairan Hutang Giro\uimT7PencairanHutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pencairan Piutang Giro\svcPencairanPiutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pencairan Piutang Giro\svcPencairanPiutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pencairan Piutang Giro\uimT6PencairanPiutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pencairan Piutang Giro\uimT6PencairanPiutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Pencairan Piutang Giro\uimT7PencairanPiutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Pencairan Piutang Giro\uimT7PencairanPiutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Giro\RcpPiutangGiro.razor.cs" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Giro\RcpPiutangGiro.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Giro\svcPiutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Giro\svcPiutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Giro\uimT6PiutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Giro\uimT6PiutangGiro.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Karyawan\RcpPiutangKaryawan.razor.cs" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Karyawan\RcpPiutangKaryawan.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Karyawan\svcPiutangKaryawan.cs" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Karyawan\svcPiutangKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Karyawan\uimT6PiutangKaryawan.cs" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Karyawan\uimT6PiutangKaryawan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Usaha\RcpPiutangUsaha.razor.cs" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Usaha\RcpPiutangUsaha.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Usaha\svcPiutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Usaha\svcPiutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Usaha\uimT6PiutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Usaha\uimT6PiutangUsaha.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\208. Pembelian\Order Pembelian\svcOrderPembelian.cs" Link="2. Transaksi\Crixalis\208. Pembelian\Order Pembelian\svcOrderPembelian.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\208. Pembelian\Order Pembelian\uimT6OrderPembelian.cs" Link="2. Transaksi\Crixalis\208. Pembelian\Order Pembelian\uimT6OrderPembelian.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\208. Pembelian\Order Pembelian\uimT7OrderPembelian.cs" Link="2. Transaksi\Crixalis\208. Pembelian\Order Pembelian\uimT7OrderPembelian.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\208. Pembelian\Pembelian Aset\svcPembelianAset.cs" Link="2. Transaksi\Crixalis\208. Pembelian\Pembelian Aset\svcPembelianAset.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\208. Pembelian\Pembelian Aset\uimT6PembelianAset.cs" Link="2. Transaksi\Crixalis\208. Pembelian\Pembelian Aset\uimT6PembelianAset.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\208. Pembelian\Pembelian Aset\uimT7PembelianAset.cs" Link="2. Transaksi\Crixalis\208. Pembelian\Pembelian Aset\uimT7PembelianAset.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\209. Penjualan\Order Penjualan\RcpOrderPenjualan.razor.cs" Link="2. Transaksi\Crixalis\209. Penjualan\Order Penjualan\RcpOrderPenjualan.razor.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\209. Penjualan\Order Penjualan\svcOrderPenjualan.cs" Link="2. Transaksi\Crixalis\209. Penjualan\Order Penjualan\svcOrderPenjualan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\209. Penjualan\Order Penjualan\uimT6OrderPenjualan.cs" Link="2. Transaksi\Crixalis\209. Penjualan\Order Penjualan\uimT6OrderPenjualan.cs" />
+    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\209. Penjualan\Order Penjualan\uimT7OrderPenjualan.cs" Link="2. Transaksi\Crixalis\209. Penjualan\Order Penjualan\uimT7OrderPenjualan.cs" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Core" Version="1.36.0" />
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+		<PackageReference Include="Azure.Storage.Common" Version="12.18.1" />
+		<PackageReference Include="Azure.Storage.Files.DataLake" Version="12.17.1" />
+		<PackageReference Include="Betalgo.OpenAI" Version="7.4.0" />
+		<PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+		<PackageReference Include="Blazored.Modal" Version="7.1.0" />
+		<PackageReference Include="Blazored.Toast" Version="4.1.0" />
+		<PackageReference Include="DevExpress.Blazor" Version="23.1.6" />
+		<PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls.WebAssembly" Version="23.1.6" />
+		<PackageReference Include="DevExpress.Reporting.Core" Version="23.1.6" />
+		<PackageReference Include="Google.Protobuf" Version="3.25.0" />
+		<PackageReference Include="Grpc.Net.Client.Web" Version="2.59.0" />
+		<PackageReference Include="Grpc.Net.ClientFactory" Version="2.59.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.59.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Mapster" Version="7.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.Json" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+		<PackageReference Include="Neodynamic.Blazor.JSPrintManager" Version="6.0.23.823" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Radzen.Blazor" Version="4.21.1" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="StackExchange.Redis" Version="2.7.4" />
+		<PackageReference Include="Telegram.Bot" Version="19.0.0" />
+		<PackageReference Include="Toolbelt.Blazor.HotKeys2" Version="3.1.0" />
+		<PackageReference Include="Wisej-3-Html2Canvas" Version="3.2.7" />
+		<PackageReference Include="NewId" Version="4.0.1" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\bwaAvernus.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="0. Utilitas\Crixalis\" />
+    <Folder Include="1. Master\Crixalis\101. Karyawan\Jabatan\" />
+    <Folder Include="1. Master\Crixalis\101. Karyawan\Jadwal Kerja Karyawan\" />
+    <Folder Include="1. Master\Crixalis\101. Karyawan\Karyawan\" />
+    <Folder Include="1. Master\Crixalis\102. Accounting\Akun\" />
+    <Folder Include="1. Master\Crixalis\102. Accounting\Jenis Aset\" />
+    <Folder Include="1. Master\Crixalis\102. Accounting\Set Jurnal\" />
+    <Folder Include="1. Master\Crixalis\103. Supplier\JenisSupplier\" />
+    <Folder Include="1. Master\Crixalis\103. Supplier\JenisVendor\" />
+    <Folder Include="1. Master\Crixalis\103. Supplier\Supplier\" />
+    <Folder Include="1. Master\Crixalis\103. Supplier\Vendor\" />
+    <Folder Include="1. Master\Crixalis\104. Customer\Customer\" />
+    <Folder Include="1. Master\Crixalis\104. Customer\JenisCustomer\" />
+    <Folder Include="1. Master\Crixalis\106. Inventori\Divisi Barang\" />
+    <Folder Include="1. Master\Crixalis\106. Inventori\Gudang\" />
+    <Folder Include="1. Master\Crixalis\106. Inventori\Kategori Barang\" />
+    <Folder Include="1. Master\Crixalis\106. Inventori\Barang\" />
+    <Folder Include="1. Master\Crixalis\106. Inventori\Aset\" />
+    <Folder Include="1. Master\Crixalis\190. ClassGetData\Customer\" />
+    <Folder Include="1. Master\Crixalis\190. ClassGetData\Karyawan\" />
+    <Folder Include="1. Master\Crixalis\190. ClassGetData\Supplier\" />
+    <Folder Include="1. Master\Crixalis\190. ClassGetData\Sistem\" />
+    <Folder Include="1. Master\Crixalis\199. Sistem\Company\" />
+    <Folder Include="1. Master\Crixalis\199. Sistem\Divisi Perusahaan\" />
+    <Folder Include="1. Master\Crixalis\199. Sistem\Lokasi\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Hutang Giro\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Hutang Usaha\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Kas Bank Masuk\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Pencairan Piutang Giro\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Pencairan Hutang Giro\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Piutang Usaha\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Piutang Karyawan\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Piutang Giro\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Pelunasan Piutang Karyawan\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Pelunasan Piutang Usaha\" />
+    <Folder Include="2. Transaksi\Crixalis\202. Accounting\Pelunasan Hutang Usaha\" />
+    <Folder Include="2. Transaksi\Crixalis\208. Pembelian\Penerimaan Barang\" />
+    <Folder Include="2. Transaksi\Crixalis\208. Pembelian\Order Pembelian\" />
+    <Folder Include="2. Transaksi\Crixalis\208. Pembelian\Pembelian Aset\" />
+    <Folder Include="2. Transaksi\Crixalis\209. Penjualan\Order Penjualan\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Jabatan\RcpJabatan.razor" Link="1. Master\Crixalis\101. Karyawan\Jabatan\RcpJabatan.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\JenisSupplier\RcpJenisSupplier.razor" Link="1. Master\Crixalis\103. Supplier\JenisSupplier\RcpJenisSupplier.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\103. Supplier\Supplier\RcpSupplierInstansi.razor" Link="1. Master\Crixalis\103. Supplier\Supplier\RcpSupplierInstansi.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\Customer\RcpCustomerInstansi.razor" Link="1. Master\Crixalis\104. Customer\Customer\RcpCustomerInstansi.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\104. Customer\JenisCustomer\RcpJenisCustomer.razor" Link="1. Master\Crixalis\104. Customer\JenisCustomer\RcpJenisCustomer.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Barang\RcpBarang.razor" Link="1. Master\Crixalis\106. Inventori\Barang\RcpBarang.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\0. Utilitas\RcpKonfigurasiHakAkses.razor" Link="0. Utilitas\Crixalis\RcpKonfigurasiHakAkses.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\0. Utilitas\RcpLihatRekamanAktivitas.razor" Link="0. Utilitas\Crixalis\RcpLihatRekamanAktivitas.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\RcpDivisiBarang.razor.css" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\RcpDivisiBarang.razor.css" />
+    <None Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\0. Utilitas\RcpProfil.razor" Link="0. Utilitas\Crixalis\RcpProfil.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Aset\RcpAset.razor" Link="1. Master\Crixalis\106. Inventori\Aset\RcpAset.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\101. Karyawan\Karyawan\RcpKaryawan.razor" Link="1. Master\Crixalis\101. Karyawan\Karyawan\RcpKaryawan.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\105. Inventori\Divisi Barang\RcpDivisiBarang.razor" Link="1. Master\Crixalis\106. Inventori\Divisi Barang\RcpDivisiBarang.razor" />
+    <None Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Masuk\RcpKasBankMasuk.razor" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Masuk\RcpKasBankMasuk.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\209. Penjualan\Order Penjualan\RcpOrderPenjualan.razor" Link="2. Transaksi\Crixalis\209. Penjualan\Order Penjualan\RcpOrderPenjualan.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Usaha\RcpPiutangUsaha.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Usaha\RcpPiutangUsaha.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Karyawan\RcpPiutangKaryawan.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Karyawan\RcpPiutangKaryawan.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Giro\RcpPiutangGiro.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Giro\RcpPiutangGiro.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" />
+    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\RcpArmada.razor" Link="1. Master\Crixalis\107. Armada\RcpArmada.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="bwaCrixalis.Shared">
+      <HintPath>..\..\..\DevOps\Crixalis\bwaCrixalis\Shared\bin\Debug\net8.0\bwaCrixalis.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Pantheon.Client">
+      <HintPath>..\..\..\DevOps\Pantheon\Client\bin\Debug\net8.0\Pantheon.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Pantheon.Shared">
+      <HintPath>..\..\..\DevOps\Pantheon\Shared\bin\Debug\net8.0\Pantheon.Shared.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
