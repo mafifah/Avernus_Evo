@@ -145,11 +145,16 @@ public class svsPenambahanPenugasanArmada : svpTransaksiPenambahanPenugasanArmad
 	public override async Task<RplWritePenambahanPenugasanArmada> UpdatePenambahanPenugasanArmada(RqsUpdatePenambahanPenugasanArmada request, ServerCallContext context)
 	{
 		var dtT6PenambahanPenugasanArmada = request.Adapt<T6PenugasanArmada>();
+		var deletedT7PenambahanPenugasanArmada = dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.Where(x => x.Synchronise == "deleted");
+		if(deletedT7PenambahanPenugasanArmada.Count() > 0)
+		{
+			//Untuk delete jurnal
+		}
 		dtT6PenambahanPenugasanArmada.StatusPerjalanan = $"Rute {dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.Count}";
 		var dtT7PenambahanPenugasanArmada = dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.FirstOrDefault(x => x.Urutan == dtT6PenambahanPenugasanArmada.ListT7PenugasanArmada.Count);
-		if(dtT7PenambahanPenugasanArmada.IdDetilPenugasanArmada == Guid.Parse("00000000-0000-0000-0000-000000000000") && dtT7PenambahanPenugasanArmada.Synchronise == "inserted")
+        if (dtT7PenambahanPenugasanArmada.IdDetilPenugasanArmada == Guid.Parse("00000000-0000-0000-0000-000000000000") && dtT7PenambahanPenugasanArmada.Synchronise == "inserted")
 		{
-            dtT7PenambahanPenugasanArmada.NoPenugasan = await GenerateIdTransaksi(dtT7PenambahanPenugasanArmada.IdCompany, "DO");
+            dtT7PenambahanPenugasanArmada.NoPenugasan = await GenerateIdTransaksi(dtT7PenambahanPenugasanArmada.IdCompany, "DB");
         }
 
         var hasil = await _svd.UpdateTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, T7PenugasanArmada_SPBU, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6PenambahanPenugasanArmada, request.IdForm);

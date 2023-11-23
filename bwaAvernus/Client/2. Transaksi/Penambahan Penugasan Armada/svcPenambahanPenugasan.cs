@@ -38,23 +38,28 @@ public class svcPenambahanPenugasan: pthBaseService
 	public async Task<string> UpdatePenambahanPenugasan(uimT6PenugasanArmada drPenugasanArmada)
 	{
         drPenugasanArmada.Synchronise = "updated";
-		if(drPenugasanArmada.T7PenugasanArmada.IdDetilPenugasanArmada == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+		var deletedT7PenugasanArmada = drPenugasanArmada.ListT7PenugasanArmada.Where(x => x.Synchronise == "deleted").ToList();
+		if(deletedT7PenugasanArmada.Count < 1)
 		{
-            drPenugasanArmada.T7PenugasanArmada.Synchronise = "inserted";
-            drPenugasanArmada.T7PenugasanArmada.IdPenugasanArmada = drPenugasanArmada.IdPenugasanArmada;
-            drPenugasanArmada.T7PenugasanArmada.Urutan = drPenugasanArmada.ListT7PenugasanArmada.Count + 1;
-            drPenugasanArmada.T7PenugasanArmada.IdOperator = IdUser;
-            drPenugasanArmada.ListT7PenugasanArmada.Add(drPenugasanArmada.T7PenugasanArmada);
-		}
-		else
-		{
-			var drLama = drPenugasanArmada.ListT7PenugasanArmada.FirstOrDefault(x => x.IdDetilPenugasanArmada == drPenugasanArmada.T7PenugasanArmada.IdDetilPenugasanArmada);
-			drPenugasanArmada.ListT7PenugasanArmada.Remove(drLama);
-			drPenugasanArmada.T7PenugasanArmada.IdDetilPenugasanArmada = drLama.IdDetilPenugasanArmada;
-            drPenugasanArmada.T7PenugasanArmada.Synchronise = "updated";
-            drPenugasanArmada.ListT7PenugasanArmada.Add(drPenugasanArmada.T7PenugasanArmada);
+            if (drPenugasanArmada.T7PenugasanArmada.IdDetilPenugasanArmada == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                drPenugasanArmada.T7PenugasanArmada.Synchronise = "inserted";
+                drPenugasanArmada.T7PenugasanArmada.IdPenugasanArmada = drPenugasanArmada.IdPenugasanArmada;
+                drPenugasanArmada.T7PenugasanArmada.Urutan = drPenugasanArmada.ListT7PenugasanArmada.Count + 1;
+                drPenugasanArmada.T7PenugasanArmada.IdOperator = IdUser;
+                drPenugasanArmada.ListT7PenugasanArmada.Add(drPenugasanArmada.T7PenugasanArmada);
+            }
+            else
+            {
+                var drLama = drPenugasanArmada.ListT7PenugasanArmada.FirstOrDefault(x => x.IdDetilPenugasanArmada == drPenugasanArmada.T7PenugasanArmada.IdDetilPenugasanArmada);
+                drPenugasanArmada.ListT7PenugasanArmada.Remove(drLama);
+                drPenugasanArmada.T7PenugasanArmada.IdDetilPenugasanArmada = drLama.IdDetilPenugasanArmada;
+                drPenugasanArmada.T7PenugasanArmada.Synchronise = "updated";
+                drPenugasanArmada.ListT7PenugasanArmada.Add(drPenugasanArmada.T7PenugasanArmada);
 
+            }
         }
+		
 
         var rqsPenugasanArmada = drPenugasanArmada.Adapt<RqsUpdatePenambahanPenugasanArmada>();
 		rqsPenugasanArmada.IdForm = 30701020;

@@ -81,6 +81,14 @@
                         SelectionMode="GridSelectionMode.Single"
                         @oncontextmenu:preventDefault>
                     <Columns>
+                        <DxGridCommandColumn Width="10px">
+                            <HeaderTemplate>
+                                <a class="fa-solid fa-plus text-decoration-none" @onclick="@(() => GrdT7PenugasanArmada_SPBU.StartEditNewRowAsync())" style="visibility:hidden"></a>
+                            </HeaderTemplate>
+                            <CellDisplayTemplate>
+                                <a class="fa-solid fa-trash-can text-decoration-none" @onclick="@(() =>  GrdDetil_OnHapus<uimT7PenugasanArmada, T7PenugasanArmada>((uimT7PenugasanArmada)context.DataItem))"></a>
+                            </CellDisplayTemplate>
+                        </DxGridCommandColumn>
                         <DxGridDataColumn FilterRowEditorVisible="false" ShowInColumnChooser="false" Width="10px">
                             <CellDisplayTemplate>
                                 @(context.VisibleIndex + 1)

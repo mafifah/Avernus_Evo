@@ -129,9 +129,9 @@ namespace bwaAvernus.Server._2._Transaksi
 
         private async Task<string> GetSequenceTerbaruIdTransaksi(string kodeTahunBulan, string idCompany)
         {
-            var idTransaksiTerakhir = await _dbContext.Set<T7PenugasanArmada>()
-                                        .Where(dbSet => dbSet.NoPenugasan.Substring(3, 8) == $"{kodeTahunBulan}-{idCompany}")
-                                        .Select(d => d.NoPenugasan)
+            var idTransaksiTerakhir = await _dbContext.Set<T6PenugasanArmada>()
+                                        .Where(dbSet => dbSet.IdTransaksi.Substring(3, 8) == $"{kodeTahunBulan}-{idCompany}")
+                                        .Select(d => d.IdTransaksi)
                                         .OrderByDescending(t => t)
                                         .FirstOrDefaultAsync();
 
@@ -187,7 +187,6 @@ namespace bwaAvernus.Server._2._Transaksi
             var dtT7PenugasanArmada = dtT6PenugasanArmada.ListT7PenugasanArmada.FirstOrDefault();
             dtT6PenugasanArmada.IdCompany = dtT7PenugasanArmada.IdCompany;
             dtT7PenugasanArmada.NoPenugasan = await GenerateIdTransaksi(dtT7PenugasanArmada.IdCompany, "DO");
-            dtT6PenugasanArmada.IdTransaksi = dtT7PenugasanArmada.NoPenugasan;
             dtT6PenugasanArmada.ListT7PenugasanArmada.Clear();
             dtT6PenugasanArmada.ListT7PenugasanArmada.Add(dtT7PenugasanArmada);
             var hasil = await _svd.InsertTransaksiHeader<T6PenugasanArmada, T7PenugasanArmada, T7PenugasanArmada_SPBU, BaseModelTransaksiDetil, BaseModelTransaksiDetil, BaseModelTransaksiDetil>(dtT6PenugasanArmada, request.IdForm);

@@ -109,7 +109,6 @@
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Hutang Giro\uimT6HutangGiro.cs" Link="2. Transaksi\Crixalis\202. Accounting\Hutang Giro\uimT6HutangGiro.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Hutang Usaha\svcHutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Hutang Usaha\svcHutangUsaha.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Hutang Usaha\uimT6HutangUsaha.cs" Link="2. Transaksi\Crixalis\202. Accounting\Hutang Usaha\uimT6HutangUsaha.cs" />
-    <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\svcKasBankKeluar.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\svcKasBankKeluar.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\uimT6KasBankKeluar.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\uimT6KasBankKeluar.cs" />
     <Compile Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\uimT7KasBankKeluar.cs" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\uimT7KasBankKeluar.cs" />
@@ -279,7 +278,6 @@
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Usaha\RcpPiutangUsaha.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Usaha\RcpPiutangUsaha.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Karyawan\RcpPiutangKaryawan.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Karyawan\RcpPiutangKaryawan.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Piutang Giro\RcpPiutangGiro.razor" Link="2. Transaksi\Crixalis\202. Accounting\Piutang Giro\RcpPiutangGiro.razor" />
-    <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\2. Transaksi\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" Link="2. Transaksi\Crixalis\202. Accounting\Kas Bank Keluar\RcpKasBankKeluar.razor" />
     <Content Include="..\..\..\DevOps\Crixalis\bwaCrixalis\Client\1. Master\107. Armada\Armada\RcpArmada.razor" Link="1. Master\Crixalis\107. Armada\RcpArmada.razor" />
   </ItemGroup>
 
